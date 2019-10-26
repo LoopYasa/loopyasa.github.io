@@ -3,19 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://loopyasa.github.io/archives/</loc>
+    <loc>https://loopyasa.github.io/categories/</loc>
+    <lastmod>2019-10-26T20:55:46+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://loopyasa.github.io/categories/</loc>
+    <loc>https://loopyasa.github.io/tags/hugo/</loc>
+    <lastmod>2019-10-26T20:55:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2019-10-26T20:55:46+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://loopyasa.github.io/</loc>
+    <lastmod>2019-10-26T20:55:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loopyasa.github.io/post/</loc>
+    <lastmod>2019-10-26T20:55:46+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://loopyasa.github.io/tags/</loc>
+    <lastmod>2019-10-26T20:55:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loopyasa.github.io/categories/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2019-10-26T20:55:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loopyasa.github.io/archives/</loc>
   </url>
   
 </urlset>

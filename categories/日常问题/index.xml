@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>MaGent Blog</title>
-    <link>https://loopyasa.github.io/</link>
-    <description>Recent content on MaGent Blog</description>
+    <title>日常问题 on MaGent Blog</title>
+    <link>https://loopyasa.github.io/categories/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98/</link>
+    <description>Recent content in 日常问题 on MaGent Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 26 Oct 2019 20:55:46 +0800</lastBuildDate>
     
-	<atom:link href="https://loopyasa.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://loopyasa.github.io/categories/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
