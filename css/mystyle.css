@@ -1,0 +1,11 @@
+body {
+	cursor: url(cur/NormalSelect.cur), default!important;
+}
+a:hover{
+	cursor: url(cur/LinkSelect.cur), pointer!important;
+}
+a.link-unstyled, a.link-unstyled:active, a.link-unstyled:hover {
+    cursor: url(cur/LinkSelect.cur), pointer!important;
+    color: inherit!important;
+    text-decoration: none!important;
+}
