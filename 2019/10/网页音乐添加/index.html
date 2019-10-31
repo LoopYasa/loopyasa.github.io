@@ -13,30 +13,30 @@
 
 <meta property="og:description" content="">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hugo博客搭建问题">
-<meta name="twitter:title" content="Hugo博客搭建问题">
-<meta property="og:url" content="https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/">
-<meta property="twitter:url" content="https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/">
+<meta property="og:title" content="网页音乐添加">
+<meta name="twitter:title" content="网页音乐添加">
+<meta property="og:url" content="https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/">
+<meta property="twitter:url" content="https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/">
 <meta property="og:site_name" content="MaGent Blog">
 <meta property="og:description" content="">
 <meta name="twitter:description" content="">
 <meta property="og:locale" content="zh-cn">
 
   
-    <meta property="article:published_time" content="2019-10-26T20:55:46">
+    <meta property="article:published_time" content="2019-10-31T17:30:32">
   
   
-    <meta property="article:modified_time" content="2019-10-26T20:55:46">
+    <meta property="article:modified_time" content="2019-10-31T17:30:32">
   
-  
-  
-    
-      <meta property="article:section" content="日常问题">
-    
   
   
     
-      <meta property="article:tag" content="Hugo">
+      <meta property="article:section" content="知识拓展">
+    
+  
+  
+    
+      <meta property="article:tag" content="前端">
     
   
 
@@ -57,7 +57,7 @@
   <meta property="twitter:image" content="https://i2.hdslb.com/bfs/face/57a69bde79a932038ac851e4fa03a612722b2cfe.jpg">
 
 
-    <title>Hugo博客搭建问题</title>
+    <title>网页音乐添加</title>
 
     <link rel="icon" href="images/favicon.ico">
     
@@ -68,7 +68,7 @@
 
     
 
-    <link rel="canonical" href="https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/">
+    <link rel="canonical" href="https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -239,15 +239,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Hugo博客搭建问题
+      网页音乐添加
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-10-26T20:55:46&#43;08:00">
+      <time itemprop="datePublished" datetime="2019-10-31T17:30:32&#43;08:00">
         
-  十月 26, 2019
+  十月 31, 2019
 
       </time>
     
@@ -256,7 +256,7 @@
   
     <span>发布在</span>
     
-      <a class="category-link" href="https://loopyasa.github.io/categories/%e6%97%a5%e5%b8%b8%e9%97%ae%e9%a2%98">日常问题</a>
+      <a class="category-link" href="https://loopyasa.github.io/categories/%e7%9f%a5%e8%af%86%e6%8b%93%e5%b1%95">知识拓展</a>
     
   
 
@@ -266,40 +266,28 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>总结一下初次尝试遇到的一些问题</p>
+              <p>试着给自己的网站添加个背景音乐</p>
 
 <hr />
 
-<h2 id="config-toml文件">config.toml文件</h2>
+<p>比较喜欢用网易云，所以就内嵌了一个网易云，用的是内联iframe</p>
 
-<p>拿我用的主题<a href="https://themes.gohugo.io/hugo-tranquilpeak-theme/">hugo-tranquilpeak-theme</a>为例，首先很容易的将它git到本地，然后打开了该主题的<a href="https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md">用户手册</a>并阅读，找到了用户自定义的方法(修改/exampleSite/config.toml)，通过修改该toml文件来配置自己
-  主题功能。但在配置后发现了问题，主题样式并不会发生改变，在翻阅找到了解决方法。</p>
+<pre><code>&lt;iframe frameborder=&quot;0&quot; border=&quot;1&quot;
+		marginwidth=&quot;0&quot; marginheight=&quot;0&quot;
+		width=280 height=77 
+		src=&quot;//music.163.com/outchain/playertype=2&amp;id=ID&amp;auto=0&amp;height=66&quot;&gt;
+&lt;/iframe&gt;
+</code></pre>
 
-<p><font color=#DC143C>将根目录的下的congfig.toml用exampleSite/config.toml文件替换即可。</font></p>
+<p>auto有两个值:1自动播放  0不自动播放
+src里的ID是一个变量，用的是这首歌在网易云中的id，这个在网页版中看url就知道了。
+例如:<a href="https://music.163.com/#/song?id=">https://music.163.com/#/song?id=</a><font color=#e84118>34078196</font>
+这样就可以设置自己想设置在网页里的歌了。</p>
 
 <hr />
 
-<h2 id="config-toml配置">config.toml配置</h2>
-
-<p>主要配置:</p>
-
-<ul>
-<li>baseURL</li>
-<li>author</li>
-<li>Menu Configuration</li>
-<li>coverImage</li>
-<li>favicon<br /></li>
-</ul>
-
-<p>配置方案:</p>
-
-<ol>
-<li>baseURL配置为自己博客部署的url。</li>
-<li>author配置依照给的提示很简单，值得注意的是gravatarEmail覆盖用户picture，所以想要一个指定的头像的话还是在gravatarEmail前面加&rdquo;#&ldquo;注释掉吧。</li>
-<li>Menu Configuration中的配置也可以给的提示配置，注意点是pre的值，也就是在边栏显示的图标，用的是font-awesome4,需要更换图标的可以去翻翻。</li>
-<li>coverImage更换的是背景图，注意存放位置static\images\下。</li>
-<li>favicon是网站图标，放于static\images\下，值得注意的在我翻阅github的时候发现了反馈的问题是图标只能在主页面显示，自己亲测确实如此，也得到了解决方法:在代码layouts/partials/head.html中的35行<code>{{ with .Site.Params.favicon }} &lt;link rel=&quot;icon&quot; href=&quot;{{ . | absURL }}&quot;&gt; {{ end }}</code></li>
-</ol>
+<p>网易云的使用教程和方法
+<img src="https://images.cnblogs.com/cnblogs_com/MaGnet/1579760/o_wy_music.png" alt="avatar" /></p>
               
             </div>
           </div>
@@ -311,13 +299,13 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://loopyasa.github.io/tags/hugo/">Hugo</a>
+  <a class="tag tag--primary tag--small" href="https://loopyasa.github.io/tags/%E5%89%8D%E7%AB%AF/">前端</a>
 
                   </div>
                 
               
             
-              <span id="/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/" class="leancloud_visitors" data-flag-title="Hugo博客搭建问题">
+              <span id="/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/" class="leancloud_visitors" data-flag-title="网页音乐添加">
                 <span class="post-meta-item-text">文章阅读量 </span>
                 <span class="leancloud-visitors-count">1000000</span>
                 <p></p>
@@ -345,7 +333,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/" data-tooltip="网页音乐添加">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -353,7 +341,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/" data-tooltip="Hugo博客搭建问题">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -371,19 +359,19 @@
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -431,7 +419,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/" data-tooltip="网页音乐添加">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -439,7 +427,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/" data-tooltip="Hugo博客搭建问题">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -457,19 +445,19 @@
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -499,19 +487,19 @@
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Floopyasa.github.io%2F2019%2F10%2Fhugo%25E5%258D%259A%25E5%25AE%25A2%25E6%2590%25AD%25E5%25BB%25BA%25E9%2597%25AE%25E9%25A2%2598%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Floopyasa.github.io%2F2019%2F10%2F%25E7%25BD%2591%25E9%25A1%25B5%25E9%259F%25B3%25E4%25B9%2590%25E6%25B7%25BB%25E5%258A%25A0%2F">
           <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Floopyasa.github.io%2F2019%2F10%2Fhugo%25E5%258D%259A%25E5%25AE%25A2%25E6%2590%25AD%25E5%25BB%25BA%25E9%2597%25AE%25E9%25A2%2598%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Floopyasa.github.io%2F2019%2F10%2F%25E7%25BD%2591%25E9%25A1%25B5%25E9%259F%25B3%25E4%25B9%2590%25E6%25B7%25BB%25E5%258A%25A0%2F">
           <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Floopyasa.github.io%2F2019%2F10%2Fhugo%25E5%258D%259A%25E5%25AE%25A2%25E6%2590%25AD%25E5%25BB%25BA%25E9%2597%25AE%25E9%25A2%2598%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Floopyasa.github.io%2F2019%2F10%2F%25E7%25BD%2591%25E9%25A1%25B5%25E9%259F%25B3%25E4%25B9%2590%25E6%25B7%25BB%25E5%258A%25A0%2F">
           <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
         </a>
       </li>
@@ -607,9 +595,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/loopyasa.github.io\/2019\/10\/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98\/';
+          this.page.url = 'https:\/\/loopyasa.github.io\/2019\/10\/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0\/';
           
-            this.page.identifier = '\/2019\/10\/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98\/'
+            this.page.identifier = '\/2019\/10\/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0\/'
           
         };
         (function() {

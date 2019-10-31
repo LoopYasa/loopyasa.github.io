@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>MaGent Blog</title>
-    <link>https://loopyasa.github.io/</link>
-    <description>Recent content on MaGent Blog</description>
+    <title>知识拓展 on MaGent Blog</title>
+    <link>https://loopyasa.github.io/categories/%E7%9F%A5%E8%AF%86%E6%8B%93%E5%B1%95/</link>
+    <description>Recent content in 知识拓展 on MaGent Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 31 Oct 2019 17:30:32 +0800</lastBuildDate>
     
-	<atom:link href="https://loopyasa.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://loopyasa.github.io/categories/%E7%9F%A5%E8%AF%86%E6%8B%93%E5%B1%95/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,15 +17,6 @@
       <pubDate>Thu, 31 Oct 2019 17:30:32 +0800</pubDate>
       
       <guid>https://loopyasa.github.io/2019/10/%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%B7%BB%E5%8A%A0/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hugo博客搭建问题</title>
-      <link>https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Sat, 26 Oct 2019 20:55:46 +0800</pubDate>
-      
-      <guid>https://loopyasa.github.io/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/</guid>
       <description></description>
     </item>
     
