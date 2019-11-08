@@ -6,10 +6,19 @@
     <description>Recent content in Categories on MaGent Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 31 Oct 2019 17:30:32 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 07 Nov 2019 23:26:52 +0800</lastBuildDate>
     
 	<atom:link href="https://loopyasa.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>日常问题</title>
+      <link>https://loopyasa.github.io/categories/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Thu, 07 Nov 2019 23:26:52 +0800</pubDate>
+      
+      <guid>https://loopyasa.github.io/categories/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>知识拓展</title>
@@ -17,15 +26,6 @@
       <pubDate>Thu, 31 Oct 2019 17:30:32 +0800</pubDate>
       
       <guid>https://loopyasa.github.io/categories/%E7%9F%A5%E8%AF%86%E6%8B%93%E5%B1%95/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>日常问题</title>
-      <link>https://loopyasa.github.io/categories/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Sat, 26 Oct 2019 20:55:46 +0800</pubDate>
-      
-      <guid>https://loopyasa.github.io/categories/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98/</guid>
       <description></description>
     </item>
     
