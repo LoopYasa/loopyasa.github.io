@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Android on MaGent Blog</title>
-    <link>https://loopyasa.github.io/tags/android/</link>
+    <link>https://github.com/LoopYasa/loopyasa.github.io/tags/android/</link>
     <description>Recent content in Android on MaGent Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 20 Nov 2019 00:08:40 +0800</lastBuildDate>
     
-	<atom:link href="https://loopyasa.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://github.com/LoopYasa/loopyasa.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Android_daily2</title>
-      <link>https://loopyasa.github.io/2019/11/android_daily2/</link>
+      <link>https://github.com/LoopYasa/loopyasa.github.io/2019/11/android_daily2/</link>
       <pubDate>Wed, 20 Nov 2019 00:08:40 +0800</pubDate>
       
-      <guid>https://loopyasa.github.io/2019/11/android_daily2/</guid>
+      <guid>https://github.com/LoopYasa/loopyasa.github.io/2019/11/android_daily2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Android_daily1</title>
-      <link>https://loopyasa.github.io/2019/11/android_daily1/</link>
+      <link>https://github.com/LoopYasa/loopyasa.github.io/2019/11/android_daily1/</link>
       <pubDate>Tue, 19 Nov 2019 22:05:13 +0800</pubDate>
       
-      <guid>https://loopyasa.github.io/2019/11/android_daily1/</guid>
+      <guid>https://github.com/LoopYasa/loopyasa.github.io/2019/11/android_daily1/</guid>
       <description></description>
     </item>
     
