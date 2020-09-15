@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Archives on MaGent Blog</title>
-    <link>https://github.com/LoopYasa/loopyasa.github.io.git/archives/</link>
+    <link>https://magentkkk.github.io/archives/</link>
     <description>Recent content in Archives on MaGent Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     
-	<atom:link href="https://github.com/LoopYasa/loopyasa.github.io.git/archives/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://magentkkk.github.io/archives/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

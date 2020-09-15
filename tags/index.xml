@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on MaGent Blog</title>
-    <link>https://github.com/LoopYasa/loopyasa.github.io.git/tags/</link>
+    <link>https://magentkkk.github.io/tags/</link>
     <description>Recent content in Tags on MaGent Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 24 Nov 2019 15:03:03 +0800</lastBuildDate>
     
-	<atom:link href="https://github.com/LoopYasa/loopyasa.github.io.git/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://magentkkk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>前端</title>
-      <link>https://github.com/LoopYasa/loopyasa.github.io.git/tags/%E5%89%8D%E7%AB%AF/</link>
+      <link>https://magentkkk.github.io/tags/%E5%89%8D%E7%AB%AF/</link>
       <pubDate>Sun, 24 Nov 2019 15:03:03 +0800</pubDate>
       
-      <guid>https://github.com/LoopYasa/loopyasa.github.io.git/tags/%E5%89%8D%E7%AB%AF/</guid>
+      <guid>https://magentkkk.github.io/tags/%E5%89%8D%E7%AB%AF/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Android</title>
-      <link>https://github.com/LoopYasa/loopyasa.github.io.git/tags/android/</link>
+      <link>https://magentkkk.github.io/tags/android/</link>
       <pubDate>Wed, 20 Nov 2019 00:08:40 +0800</pubDate>
       
-      <guid>https://github.com/LoopYasa/loopyasa.github.io.git/tags/android/</guid>
+      <guid>https://magentkkk.github.io/tags/android/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Git</title>
-      <link>https://github.com/LoopYasa/loopyasa.github.io.git/tags/git/</link>
+      <link>https://magentkkk.github.io/tags/git/</link>
       <pubDate>Thu, 07 Nov 2019 23:26:52 +0800</pubDate>
       
-      <guid>https://github.com/LoopYasa/loopyasa.github.io.git/tags/git/</guid>
+      <guid>https://magentkkk.github.io/tags/git/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hugo</title>
-      <link>https://github.com/LoopYasa/loopyasa.github.io.git/tags/hugo/</link>
+      <link>https://magentkkk.github.io/tags/hugo/</link>
       <pubDate>Sat, 26 Oct 2019 20:55:46 +0800</pubDate>
       
-      <guid>https://github.com/LoopYasa/loopyasa.github.io.git/tags/hugo/</guid>
+      <guid>https://magentkkk.github.io/tags/hugo/</guid>
       <description></description>
     </item>
     
