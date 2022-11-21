@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Archives | CHESHIRE
+            React组件状态 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -138,139 +138,128 @@
                     </div>
                     <div id="main">
                         
-<div id="archives">
-    
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2022/11/22</div>
-            <a href="/2022/11/22/fourth/">
-                <h3>React组件状态</h3>
+<div class="article">
+    <div>
+        <h1>React组件状态 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/22
+        </span>
+        
+        <span class="category">
+            <a href="/categories/笔记/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                笔记
             </a>
-            <div class="info">
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
                 
-                <span class="category">
-                    <a href="/categories/笔记/">
-                        <span class="icon">
-                            <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                        </span>
-                        笔记
-                    </a>
-                </span>
+                <a href="/tags/前端/" style="color: #03a9f4">
+                    前端
+                </a>
+            </span>
+            
+            <span class="tag">
                 
-                
-                <span class="tags">
-                    <span class="icon">
-                        <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/前端/" style="color: #00bcd4">
-                            前端
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/React/" style="color: #03a9f4">
-                            React
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+                <a href="/tags/React/" style="color: #ffa2c4">
+                    React
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    <div class="content" v-pre>
+        <h1 id="React类式组件状态"><a href="#React类式组件状态" class="headerlink" title="React类式组件状态"></a>React类式组件状态</h1><p><img src="https://p.sda1.dev/8/980c9178014b10cbbb524e8ff8cfb06d/B%60H2C%60JV4SB%604VYGM_MOYBA.png"></p>
+<h2 id="初始化状态"><a href="#初始化状态" class="headerlink" title="初始化状态"></a>初始化状态</h2><ul>
+<li><p>通过class的实例属性state来初始化 </p>
+</li>
+<li><p>state的值是一个对象结构，表示一个组件可以有多个数据状态</p>
+</li>
+</ul>
+<pre><code class="react">class Counter extends React.Component &#123;
+  // 初始化状态
+  state = &#123;
+    count: 0
+  &#125;
+  render() &#123;
+    return &lt;button&gt;计数器&lt;/button&gt;
+  &#125;
+&#125;
+</code></pre>
+<h2 id="读取状态"><a href="#读取状态" class="headerlink" title="读取状态"></a>读取状态</h2><ul>
+<li>通过this.state来获取状态</li>
+</ul>
+<pre><code class="react">class Counter extends React.Component &#123;
+  // 初始化状态
+  state = &#123;
+    count: 0
+  &#125;
+  render() &#123;
+    // 读取状态
+    return &lt;button&gt;计数器&#123;this.state.count&#125;&lt;/button&gt;
+  &#125;
+&#125;
+</code></pre>
+<h2 id="修改状态"><a href="#修改状态" class="headerlink" title="修改状态"></a>修改状态</h2><ul>
+<li><p>语法</p>
+<p><code>this.setState(&#123; 要修改的部分数据 &#125;)</code></p>
+</li>
+<li><p>setState方法作用 </p>
+</li>
+<li><p>修改state中的数据状态</p>
+</li>
+<li><p>更新UI</p>
+</li>
+<li><p>思想</p>
+<ul>
+<li>数据驱动视图，也就是只要修改数据状态，那么页面就会自动刷新，无需手动操作dom</li>
+</ul>
+</li>
+<li><p><code>注意事项</code></p>
+</li>
+</ul>
+<ol>
+<li><strong>不要直接修改state中的值，必须通过setState方法进行修改</strong></li>
+</ol>
+<pre><code class="react">class Counter extends React.Component &#123;
+  // 定义数据
+  state = &#123;
+    count: 0
+  &#125;
+  // 定义修改数据的方法
+  setCount = () =&gt; &#123;
+    this.setState(&#123;
+      count: this.state.count + 1
+    &#125;)
+  &#125;
+  // 使用数据 并绑定事件
+  render () &#123;
+    return &lt;button onClick=&#123;this.setCount&#125;&gt;&#123;this.state.count&#125;&lt;/button&gt;
+  &#125;
+&#125;
+</code></pre>
+
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2022/11/22</div>
-            <a href="/2022/11/22/third/">
-                <h3>React组件</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/笔记/">
-                        <span class="icon">
-                            <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                        </span>
-                        笔记
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/前端/" style="color: #03a9f4">
-                            前端
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/React/" style="color: #03a9f4">
-                            React
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container"></div>
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2022/11/21</div>
-            <a href="/2022/11/21/second/">
-                <h3>React脚手架</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/笔记/">
-                        <span class="icon">
-                            <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                        </span>
-                        笔记
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/前端/" style="color: #ffa2c4">
-                            前端
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/React/" style="color: #03a9f4">
-                            React
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
     
 </div>
                             
@@ -307,6 +296,24 @@
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "myblogtalk",
+        owner: "LoopYasa",
+        admin: ["LoopYasa"],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
 
     </body>
 
