@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            React受控组件与非受控组件 | CHESHIRE
+            React组件通信 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,7 +140,7 @@
                         
 <div class="article">
     <div>
-        <h1>React受控组件与非受控组件 </h1>
+        <h1>React组件通信 </h1>
     </div>
     <div class="info">
         <span class="date">
@@ -167,14 +167,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #00a596">
+                <a href="/tags/前端/" style="color: #00bcd4">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/React/" style="color: #00a596">
+                <a href="/tags/React/" style="color: #ffa2c4">
                     React
                 </a>
             </span>
@@ -183,89 +183,241 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="React受控组件与非受控组件"><a href="#React受控组件与非受控组件" class="headerlink" title="React受控组件与非受控组件"></a>React受控组件与非受控组件</h1><p>使用React处理表单元素，一般有两种方式:</p>
-<ul>
-<li>受控组件</li>
-<li>非受控组件</li>
-</ul>
-<h2 id="受控表单组件"><a href="#受控表单组件" class="headerlink" title="受控表单组件"></a>受控表单组件</h2><p>React组件的状态的地方是在state中，input表单元素也有自己的状态是在value中，React将state与表单元素的值（value）绑定到一起，由state的值来控制表单元素的值，从而保证单一数据源特性</p>
-<p><strong>实现步骤</strong></p>
-<p>以获取文本框的值为例，受控组件的使用步骤如下：</p>
+        <h1 id="React组件通信"><a href="#React组件通信" class="headerlink" title="React组件通信"></a>React组件通信</h1><p>组件是独立且封闭的单元，默认情况下组件<strong>只能使用自己的数据（state）</strong></p>
+<p>组件化开发的过程中，完整的功能会拆分多个组件，在这个过程中不可避免的需要互相传递一些数据</p>
+<p>为了能让各组件之间可以进行互相沟通，数据传递，这个过程就是组件通信</p>
 <ol>
-<li>在组件的state中声明一个组件的状态数据</li>
-<li>将状态数据设置为input标签元素的value属性的值</li>
-<li>为input添加change事件，在事件处理程序中，通过事件对象e获取到当前文本框的值（<code>即用户当前输入的值</code>）</li>
-<li>调用setState方法，将文本框的值作为state状态的最新值</li>
+<li>父子关系 -  <strong>最重要的</strong></li>
+<li>兄弟关系 -  自定义事件模式产生技术方法 eventBus  &#x2F;  通过共同的父组件通信</li>
+<li>其它关系 -  <strong>mobx &#x2F; redux &#x2F; zustand</strong></li>
 </ol>
-<p><strong>具体代码</strong>:</p>
+<h2 id="父组件传递子组件"><a href="#父组件传递子组件" class="headerlink" title="父组件传递子组件"></a>父组件传递子组件</h2><p><strong>实现步骤</strong></p>
+<ol>
+<li>父组件提供要传递的数据  -  <code>state</code> </li>
+<li>给子组件标签<code>添加属性</code>值为 state中的数据 </li>
+<li>子组件中通过 <code>props</code> 接收父组件中传过来的数据 <ul>
+<li>类组件使用this.props获取props对象</li>
+<li>函数式组件直接通过参数获取props对象</li>
+</ul>
+</li>
+</ol>
+<p><strong>代码实现</strong></p>
 <pre><code class="react">import React from &#39;react&#39;
 
-class InputComponent extends React.Component &#123;
-  // 声明组件状态
-  state = &#123;
-    message: &#39;this is message&#39;,
-  &#125;
-  // 声明事件回调函数
-  changeHandler = (e) =&gt; &#123;
-    this.setState(&#123; message: e.target.value &#125;)
-  &#125;
-  render () &#123;
+// 函数式子组件
+function FSon(props) &#123;
+  console.log(props)
+  return (
+    &lt;div&gt;
+      子组件1
+      &#123;props.msg&#125;
+    &lt;/div&gt;
+  )
+&#125;
+
+// 类子组件
+class CSon extends React.Component &#123;
+  render() &#123;
     return (
       &lt;div&gt;
-        &#123;/* 绑定value 绑定事件*/&#125;
-        &lt;input value=&#123;this.state.message&#125; onChange=&#123;this.changeHandler&#125; /&gt;
+        子组件2
+        &#123;this.props.msg&#125;
+      &lt;/div&gt;
+    )
+  &#125;
+&#125;
+// 父组件
+class App extends React.Component &#123;
+  state = &#123;
+    message: &#39;this is message&#39;
+  &#125;
+  render() &#123;
+    return (
+      &lt;div&gt;
+        &lt;div&gt;父组件&lt;/div&gt;
+        &lt;FSon msg=&#123;this.state.message&#125; /&gt;
+        &lt;CSon msg=&#123;this.state.message&#125; /&gt;
       &lt;/div&gt;
     )
   &#125;
 &#125;
 
+export default App
+</code></pre>
+<h2 id="子组件传递父组件"><a href="#子组件传递父组件" class="headerlink" title="子组件传递父组件"></a>子组件传递父组件</h2><p>父组件给子组件传递回调函数，子组件调用</p>
+<p><strong>实现步骤</strong></p>
+<ol>
+<li>父组件提供一个回调函数 - 用于接收数据</li>
+<li>将函数作为属性的值，传给子组件</li>
+<li>子组件通过props调用 回调函数</li>
+<li>将子组件中的数据作为参数传递给回调函数</li>
+</ol>
+<p><strong>代码实现</strong></p>
+<pre><code class="react">import React from &#39;react&#39;
 
-function App () &#123;
+// 子组件
+function Son(props) &#123;
+  function handleClick() &#123;
+    // 调用父组件传递过来的回调函数 并注入参数
+    props.changeMsg(&#39;this is newMessage&#39;)
+  &#125;
   return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;InputComponent /&gt;
+    &lt;div&gt;
+      &#123;props.msg&#125;
+      &lt;button onClick=&#123;handleClick&#125;&gt;change&lt;/button&gt;
     &lt;/div&gt;
   )
 &#125;
+
+
+class App extends React.Component &#123;
+  state = &#123;
+    message: &#39;this is message&#39;
+  &#125;
+  // 提供回调函数
+  changeMessage = (newMsg) =&gt; &#123;
+    console.log(&#39;子组件传过来的数据:&#39;,newMsg)
+    this.setState(&#123;
+      message: newMsg
+    &#125;)
+  &#125;
+  render() &#123;
+    return (
+      &lt;div&gt;
+        &lt;div&gt;父组件&lt;/div&gt;
+        &lt;Son
+          msg=&#123;this.state.message&#125;
+          // 传递给子组件
+          changeMsg=&#123;this.changeMessage&#125;
+        /&gt;
+      &lt;/div&gt;
+    )
+  &#125;
+&#125;
+
 export default App
 </code></pre>
-<h2 id="非受控表单组件"><a href="#非受控表单组件" class="headerlink" title="非受控表单组件"></a>非受控表单组件</h2><p>非受控组件就是通过手动操作dom的方式获取文本框的值，文本框的状态不受react组件的state中的状态控制，直接通过原生dom获取输入框的值</p>
+<h2 id="兄弟组件通信"><a href="#兄弟组件通信" class="headerlink" title="兄弟组件通信"></a>兄弟组件通信</h2><p>通过状态提升机制，利用共同的父组件实现兄弟通信</p>
+<p><img src="https://p.sda1.dev/8/b14d23e38f5fd1469674b8ff8bc33b86/V1_9%60OSZ___BV5@W~YR3YNP.png"></p>
 <p><strong>实现步骤</strong></p>
 <ol>
-<li>导入<code>createRef</code> 函数</li>
-<li>调用createRef函数，创建一个ref对象，存储到名为<code>msgRef</code>的实例属性中</li>
-<li>为input添加ref属性，值为<code>msgRef</code></li>
-<li>在按钮的事件处理程序中，通过<code>msgRef.current</code>即可拿到input对应的dom元素，而其中<code>msgRef.current.value</code>拿到的就是文本框的值</li>
+<li>将共享状态提升到最近的公共父组件中，由公共父组件管理这个状态 <ul>
+<li>提供共享状态</li>
+<li>提供操作共享状态的方法</li>
+</ul>
+</li>
+<li>要接收数据状态的子组件通过 props 接收数据</li>
+<li>要传递数据状态的子组件通过props接收方法，调用方法传递数据</li>
 </ol>
-<p><strong>具体代码</strong></p>
-<pre><code class="react">import React, &#123; createRef &#125; from &#39;react&#39;
+<p><strong>代码实现</strong></p>
+<pre><code class="react">import React from &#39;react&#39;
 
-class InputComponent extends React.Component &#123;
-  // 使用createRef产生一个存放dom的对象容器
-  msgRef = createRef()
+// 子组件A
+function SonA(props) &#123;
+  return (
+    &lt;div&gt;
+      SonA
+      &#123;props.msg&#125;
+    &lt;/div&gt;
+  )
+&#125;
+// 子组件B
+function SonB(props) &#123;
+  return (
+    &lt;div&gt;
+      SonB
+      &lt;button onClick=&#123;() =&gt; props.changeMsg(&#39;new message&#39;)&#125;&gt;changeMsg&lt;/button&gt;
+    &lt;/div&gt;
+  )
+&#125;
 
-  changeHandler = () =&gt; &#123;
-    console.log(this.msgRef.current.value)
+// 父组件
+class App extends React.Component &#123;
+  // 父组件提供状态数据
+  state = &#123;
+    message: &#39;this is message&#39;
+  &#125;
+  // 父组件提供修改数据的方法
+  changeMsg = (newMsg) =&gt; &#123;
+    this.setState(&#123;
+      message: newMsg
+    &#125;)
   &#125;
 
   render() &#123;
     return (
-      &lt;div&gt;
-        &#123;/* ref绑定 获取真实dom */&#125;
-        &lt;input ref=&#123;this.msgRef&#125; /&gt;
-        &lt;button onClick=&#123;this.changeHandler&#125;&gt;click&lt;/button&gt;
-      &lt;/div&gt;
+      &lt;&gt;
+        &#123;/* 接收数据的组件 */&#125;
+        &lt;SonA msg=&#123;this.state.message&#125; /&gt;
+        &#123;/* 修改数据的组件 */&#125;
+        &lt;SonB changeMsg=&#123;this.changeMsg&#125; /&gt;
+      &lt;/&gt;
     )
   &#125;
 &#125;
 
-function App () &#123;
+export default App
+</code></pre>
+<h2 id="跨组件通信Context"><a href="#跨组件通信Context" class="headerlink" title="跨组件通信Context"></a>跨组件通信Context</h2><p><img src="https://p.sda1.dev/8/6b196eb6d100812d884a0bb30af692e7/@QF9_2J7_BG~%60_MD7@FN3CM.png"></p>
+<p>上图是一个react形成的嵌套组件树，如果我们想从App组件向任意一个下层组件传递数据，该怎么办呢？目前我们能采取的方式就是一层一层的props往下传，显然很繁琐。</p>
+<p><code>Context</code> 提供了一个<strong>无需为每层组件手动添加 props，就能在组件树间进行数据传递的方法</strong></p>
+<p><strong>实现步骤</strong></p>
+<ol>
+<li><p>创建Context对象 导出 Provider 和 Consumer对象 </p>
+<pre><code class="js">const &#123; Provider, Consumer &#125; = createContext()
+</code></pre>
+</li>
+<li><p>使用Provider包裹上层组件提供数据 </p>
+<pre><code class="jsx">&lt;Provider value=&#123;this.state.message&#125;&gt;
+    &#123;/* 根组件 */&#125;
+&lt;/Provider&gt;
+</code></pre>
+</li>
+<li><p>需要用到数据的组件使用Consumer包裹获取数据 </p>
+<pre><code class="jsx">&lt;Consumer &gt;
+    &#123;value =&gt; /* 基于 context 值进行渲染*/&#125;
+&lt;/Consumer&gt;
+</code></pre>
+</li>
+</ol>
+<p><strong>代码实现</strong></p>
+<pre><code class="react">import React, &#123; createContext &#125;  from &#39;react&#39;
+
+// 1. 创建Context对象 
+const &#123; Provider, Consumer &#125; = createContext()
+
+
+// 3. 消费数据
+function ComC() &#123;
   return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;InputComponent /&gt;
-    &lt;/div&gt;
+    &lt;Consumer &gt;
+      &#123;value =&gt; &lt;div&gt;&#123;value&#125;&lt;/div&gt;&#125;
+    &lt;/Consumer&gt;
   )
 &#125;
+
+function ComA() &#123;
+  return (
+    &lt;ComC/&gt;
+  )
+&#125;
+
+// 2. 提供数据
+class App extends React.Component &#123;
+  state = &#123;
+    message: &#39;this is message&#39;
+  &#125;
+  render() &#123;
+    return (
+      &lt;Provider value=&#123;this.state.message&#125;&gt;
+        &lt;div className=&quot;app&quot;&gt;
+          &lt;ComA /&gt;
+        &lt;/div&gt;
+      &lt;/Provider&gt;
+    )
+  &#125;
+&#125;
+
 export default App
 </code></pre>
 
