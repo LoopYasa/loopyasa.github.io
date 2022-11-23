@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            React受控组件与非受控组件 | CHESHIRE
+            React生命周期 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>React受控组件与非受控组件 </h1>
+        <h1>React生命周期 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/11/22
+            2022/11/23
         </span>
         
         <span class="category">
@@ -167,14 +167,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #03a9f4">
+                <a href="/tags/前端/" style="color: #00bcd4">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/React/" style="color: #00a596">
+                <a href="/tags/React/" style="color: #ffa2c4">
                     React
                 </a>
             </span>
@@ -183,91 +183,66 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="React受控组件与非受控组件"><a href="#React受控组件与非受控组件" class="headerlink" title="React受控组件与非受控组件"></a>React受控组件与非受控组件</h1><p>使用React处理表单元素，一般有两种方式:</p>
-<ul>
-<li>受控组件</li>
-<li>非受控组件</li>
-</ul>
-<h2 id="受控表单组件"><a href="#受控表单组件" class="headerlink" title="受控表单组件"></a>受控表单组件</h2><p>React组件的状态的地方是在state中，input表单元素也有自己的状态是在value中，React将state与表单元素的值（value）绑定到一起，由state的值来控制表单元素的值，从而保证单一数据源特性</p>
-<p><strong>实现步骤</strong></p>
-<p>以获取文本框的值为例，受控组件的使用步骤如下：</p>
-<ol>
-<li>在组件的state中声明一个组件的状态数据</li>
-<li>将状态数据设置为input标签元素的value属性的值</li>
-<li>为input添加change事件，在事件处理程序中，通过事件对象e获取到当前文本框的值（<code>即用户当前输入的值</code>）</li>
-<li>调用setState方法，将文本框的值作为state状态的最新值</li>
-</ol>
-<p><strong>具体代码</strong>:</p>
-<pre><code class="react">import React from &#39;react&#39;
-
-class InputComponent extends React.Component &#123;
-  // 声明组件状态
-  state = &#123;
-    message: &#39;this is message&#39;,
-  &#125;
-  // 声明事件回调函数
-  changeHandler = (e) =&gt; &#123;
-    this.setState(&#123; message: e.target.value &#125;)
-  &#125;
-  render () &#123;
-    return (
-      &lt;div&gt;
-        &#123;/* 绑定value 绑定事件*/&#125;
-        &lt;input value=&#123;this.state.message&#125; onChange=&#123;this.changeHandler&#125; /&gt;
-      &lt;/div&gt;
-    )
-  &#125;
-&#125;
-
-
-function App () &#123;
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;InputComponent /&gt;
-    &lt;/div&gt;
-  )
-&#125;
-export default App
-</code></pre>
-<h2 id="非受控表单组件"><a href="#非受控表单组件" class="headerlink" title="非受控表单组件"></a>非受控表单组件</h2><p>非受控组件就是通过手动操作dom的方式获取文本框的值，文本框的状态不受react组件的state中的状态控制，直接通过原生dom获取输入框的值</p>
-<p><strong>实现步骤</strong></p>
-<ol>
-<li>导入<code>createRef</code> 函数</li>
-<li>调用createRef函数，创建一个ref对象，存储到名为<code>msgRef</code>的实例属性中</li>
-<li>为input添加ref属性，值为<code>msgRef</code></li>
-<li>在按钮的事件处理程序中，通过<code>msgRef.current</code>即可拿到input对应的dom元素，而其中<code>msgRef.current.value</code>拿到的就是文本框的值</li>
-</ol>
-<p><strong>具体代码</strong></p>
-<pre><code class="react">import React, &#123; createRef &#125; from &#39;react&#39;
-
-class InputComponent extends React.Component &#123;
-  // 使用createRef产生一个存放dom的对象容器
-  msgRef = createRef()
-
-  changeHandler = () =&gt; &#123;
-    console.log(this.msgRef.current.value)
-  &#125;
-
-  render() &#123;
-    return (
-      &lt;div&gt;
-        &#123;/* ref绑定 获取真实dom */&#125;
-        &lt;input ref=&#123;this.msgRef&#125; /&gt;
-        &lt;button onClick=&#123;this.changeHandler&#125;&gt;click&lt;/button&gt;
-      &lt;/div&gt;
-    )
-  &#125;
-&#125;
-
-function App () &#123;
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;InputComponent /&gt;
-    &lt;/div&gt;
-  )
-&#125;
-export default App
-</code></pre>
+        <h1 id="React生命周期"><a href="#React生命周期" class="headerlink" title="React生命周期"></a>React生命周期</h1><p><img src="https://p.sda1.dev/8/13ebf3d74f6b845d7c84dd434a8a91b9/G0NWQU1%6069NL_3_373TNS0G.png"></p>
+<h2 id="挂载阶段"><a href="#挂载阶段" class="headerlink" title="挂载阶段"></a>挂载阶段</h2><p><img src="https://p.sda1.dev/8/9694e3687ea8096fe8873fd94f58dc7d/Y_A~BYDC3HX7P%60P_I____QO.png"></p>
+<table>
+<thead>
+<tr>
+<th>钩子 函数</th>
+<th>触发时机</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>constructor</td>
+<td>创建组件时，最先执行，初始化的时候只执行一次</td>
+<td>1. 初始化state  2. 创建 Ref 3. 使用 bind 解决 this 指向问题等</td>
+</tr>
+<tr>
+<td>render</td>
+<td>每次组件渲染都会触发</td>
+<td>渲染UI（<strong>注意： 不能在里面调用setState()</strong> ）</td>
+</tr>
+<tr>
+<td>componentDidMount</td>
+<td>组件挂载（完成DOM渲染）后执行，初始化的时候执行一次</td>
+<td>1. 发送网络请求  2.DOM操作</td>
+</tr>
+</tbody></table>
+<h2 id="更新阶段"><a href="#更新阶段" class="headerlink" title="更新阶段"></a>更新阶段</h2><p><img src="https://p.sda1.dev/8/899ae32c7b7dfb9df342a2892ba54d8b/%60X2T@_GZG16_HWZI_G0L~_G.png"></p>
+<table>
+<thead>
+<tr>
+<th>钩子函数</th>
+<th>触发时机</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>render</td>
+<td>每次组件渲染都会触发</td>
+<td>渲染UI（与 挂载阶段 是同一个render）</td>
+</tr>
+<tr>
+<td>componentDidUpdate</td>
+<td>组件更新后（DOM渲染完毕）</td>
+<td>DOM操作，可以获取到更新后的DOM内容，<strong>不要直接调用setState</strong></td>
+</tr>
+</tbody></table>
+<h2 id="卸载阶段"><a href="#卸载阶段" class="headerlink" title="卸载阶段"></a>卸载阶段</h2><table>
+<thead>
+<tr>
+<th>钩子函数</th>
+<th>触发时机</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>componentWillUnmount</td>
+<td>组件卸载（从页面中消失）</td>
+<td>执行清理工作（比如：清理定时器等）</td>
+</tr>
+</tbody></table>
 
     </div>
     

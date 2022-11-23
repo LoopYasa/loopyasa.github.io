@@ -1,0 +1,528 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>
+            React Hooks | CHESHIRE
+        </title>
+        <meta name="author" content="Cheshire">
+        <meta name="description" content="上班坐牢  被迫摸鱼">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/img/favicon.png">
+        <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.2.0/js/all.min.js"></script>
+        
+                <link rel="stylesheet" href="/css/fonts.min.css">
+                <link rel="stylesheet" href="/css/particlex.css">
+                
+                    <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <div id="loading"
+            style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out">
+            <div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center">
+                <div id="loadcontent"
+                    style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center">
+                    <div>
+                        <h2>LOADING...</h2>
+                        <p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p>
+                        <div><img alt="loading" src="/loading.gif"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">CHESHIRE</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;CHESHIRE</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>React Hooks </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/23
+        </span>
+        
+        <span class="category">
+            <a href="/categories/笔记/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                笔记
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/前端/" style="color: #03a9f4">
+                    前端
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/React/" style="color: #03a9f4">
+                    React
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    <div class="content" v-pre>
+        <h1 id="React-Hooks"><a href="#React-Hooks" class="headerlink" title="React Hooks"></a>React Hooks</h1><h2 id="Hooks概念理解"><a href="#Hooks概念理解" class="headerlink" title="Hooks概念理解"></a>Hooks概念理解</h2><p>React体系里组件分为 类组件 和 函数组件</p>
+<p>经过多年的实战，函数组件是一个更加匹配React的设计理念 <code>UI = f(data)</code>，也更有利于逻辑拆分与重用的组件表达形式，而先前的函数组件是不可以有自己的状态的，为了能让函数组件可以拥有自己的状态，所以从react v16.8开始，Hooks应运而生</p>
+<p><strong>关键点</strong>:</p>
+<ol>
+<li>有了hooks之后，为了兼容老版本，class类组件并没有被移除，俩者都可以使用</li>
+<li>有了hooks之后，不能在把函数成为无状态组件了，因为hooks为函数组件提供了状态</li>
+<li>hooks只能在函数组件中使用</li>
+</ol>
+<h2 id="Hooks所解决问题"><a href="#Hooks所解决问题" class="headerlink" title="Hooks所解决问题"></a>Hooks所解决问题</h2><ol>
+<li>组件的逻辑复用<br>在hooks出现之前，react先后尝试了 mixins混入，HOC高阶组件，render-props等模式<br>但是都有各自的问题，比如mixin的数据来源不清晰，高阶组件的嵌套问题等等 </li>
+<li>class组件自身的问题<br>   class组件就像一个厚重的‘战舰’ 一样，大而全，提供了很多东西，有不可忽视的学习成本，比如各种生命周期，this指向问题等等，而我们更多时候需要的是一个轻快灵活的’快艇’</li>
+</ol>
+<h2 id="常用Hooks"><a href="#常用Hooks" class="headerlink" title="常用Hooks"></a>常用Hooks</h2><h3 id="useState"><a href="#useState" class="headerlink" title="useState"></a>useState</h3><blockquote>
+<p> useState为函数组件提供状态（state）</p>
+</blockquote>
+<h4 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h4><p><strong>使用步骤</strong></p>
+<ol>
+<li>导入 <code>useState</code> 函数</li>
+<li>调用 <code>useState</code> 函数，并传入状态的初始值</li>
+<li>从<code>useState</code>函数的返回值中，拿到状态和修改状态的方法</li>
+<li>在JSX中展示状态</li>
+<li>调用修改状态的方法更新状态</li>
+</ol>
+<p><strong>代码实现</strong></p>
+<pre><code class="react">import &#123; useState &#125; from &#39;react&#39;
+
+function App() &#123;
+  // 参数：状态初始值比如,传入 0 表示该状态的初始值为 0
+  // 返回值：数组,包含两个值：1 状态值（state） 2 修改该状态的函数（setState）
+  const [count, setCount] = useState(0)
+  return (
+    &lt;button onClick=&#123;() =&gt; &#123; setCount(count + 1) &#125;&#125;&gt;&#123;count&#125;&lt;/button&gt;
+  )
+&#125;
+export default App
+</code></pre>
+<h4 id="状态的读取和修改"><a href="#状态的读取和修改" class="headerlink" title="状态的读取和修改"></a>状态的读取和修改</h4><ul>
+<li><strong>读取状态</strong></li>
+</ul>
+<blockquote>
+<p>该方式提供的状态，是函数内部的局部变量，可以在函数内的任意位置使用</p>
+</blockquote>
+<ul>
+<li><strong>修改状态</strong></li>
+</ul>
+<blockquote>
+<ol>
+<li>setCount是一个函数，参数表示<code>最新的状态值</code></li>
+<li>调用该函数后，将使用新值替换旧值</li>
+<li>修改状态后，由于状态发生变化，会引起视图变化</li>
+</ol>
+</blockquote>
+<p><font color=red><strong>注意事项</strong></font></p>
+<p>修改状态的时候，一定要使用新的状态替换旧的状态，不能直接修改旧的状态，尤其是引用类型</p>
+<h4 id="组件的更新过程"><a href="#组件的更新过程" class="headerlink" title="组件的更新过程"></a>组件的更新过程</h4><ul>
+<li><p>组件第一次渲染 </p>
+<ol>
+<li>从头开始执行该组件中的代码逻辑</li>
+<li>调用 <code>useState(0)</code> 将传入的参数作为状态初始值，即：0</li>
+<li>渲染组件，此时，获取到的状态 count 值为： 0</li>
+</ol>
+</li>
+<li><p>组件第二次渲染 </p>
+<ul>
+<li>点击按钮，调用 <code>setCount(count + 1)</code> 修改状态，因为状态发生改变，所以，该组件会重新渲染</li>
+<li>组件重新渲染时，会再次执行该组件中的代码逻辑</li>
+<li>再次调用 <code>useState(0)</code>，此时 <strong>React 内部会拿到最新的状态值而非初始值</strong>，比如，该案例中最新的状态值为 1</li>
+<li>再次渲染组件，此时，获取到的状态 count 值为：1</li>
+</ul>
+</li>
+</ul>
+<p><font color=red><strong>注意事项</strong></font></p>
+<p><strong>useState 的初始值(参数)只会在组件第一次渲染时生效</strong>。也就是说，以后的每次渲染，useState 获取到都是最新的状态值，React 组件会记住每次最新的状态值</p>
+<h4 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h4><ol>
+<li><code>useState</code> 函数可以执行多次，每次执行互相独立，每调用一次为函数组件提供一个状态 </li>
+<li><code>useState</code> 注意事项 <ul>
+<li>只能出现在函数组件或者其他hook函数中 </li>
+<li>不能嵌套在if&#x2F;for&#x2F;其它函数中（react按照hooks的调用顺序识别每一个hook） </li>
+<li>可以通过开发者工具查看hooks状态</li>
+</ul>
+</li>
+</ol>
+<h3 id="useEffect"><a href="#useEffect" class="headerlink" title="useEffect"></a>useEffect</h3><h4 id="副作用函数"><a href="#副作用函数" class="headerlink" title="副作用函数"></a>副作用函数</h4><p>副作用是相对于主作用来说的，一个函数除了主作用，其他的作用就是副作用。对于 React 组件来说，<strong>主作用就是根据数据（state&#x2F;props）渲染 UI</strong>，除此之外都是副作用（比如，手动修改 DOM）</p>
+<p><strong>常见副作用</strong></p>
+<ul>
+<li>数据请求 ajax发送</li>
+<li>手动修改dom</li>
+<li>localstorage操作</li>
+</ul>
+<p>useEffect函数的作用就是为react函数组件提供副作用处理的！</p>
+<h4 id="基础使用-1"><a href="#基础使用-1" class="headerlink" title="基础使用"></a>基础使用</h4><p><strong>使用步骤</strong></p>
+<ol>
+<li>导入 <code>useEffect</code> 函数</li>
+<li>调用 <code>useEffect</code> 函数，并传入回调函数</li>
+<li>在回调函数中编写副作用处理（dom操作）</li>
+<li>修改数据状态</li>
+<li>检测副作用是否生效</li>
+</ol>
+<p><strong>代码实现</strong></p>
+<pre><code class="react">import &#123; useEffect, useState &#125; from &#39;react&#39;
+
+function App() &#123;
+  const [count, setCount] = useState(0)
+ 
+  useEffect(()=&gt;&#123;
+    // dom操作
+    document.title = `当前已点击了$&#123;count&#125;次`
+  &#125;)
+  return (
+    &lt;button onClick=&#123;() =&gt; &#123; setCount(count + 1) &#125;&#125;&gt;&#123;count&#125;&lt;/button&gt;
+  )
+&#125;
+
+export default App
+</code></pre>
+<h4 id="依赖项控制执行时机"><a href="#依赖项控制执行时机" class="headerlink" title="依赖项控制执行时机"></a>依赖项控制执行时机</h4><ol>
+<li><p>不添加依赖项</p>
+<blockquote>
+<p>组件首次渲染执行一次，以及不管是哪个状态更改引起组件更新时都会重新执行</p>
+<ul>
+<li><p>组件初始渲染</p>
+</li>
+<li><p>组件更新（不管是哪个状态引起的更新）</p>
+</li>
+</ul>
+</blockquote>
+<pre><code class="react">useEffect(()=&gt;&#123;
+    console.log(&#39;副作用执行了&#39;)
+&#125;)
+</code></pre>
+</li>
+<li><p>添加空数组</p>
+<blockquote>
+<p>组件只在首次渲染时执行一次</p>
+</blockquote>
+<pre><code class="react">useEffect(()=&gt;&#123;
+     console.log(&#39;副作用执行了&#39;)
+&#125;,[])
+</code></pre>
+</li>
+<li><p>添加特定依赖项</p>
+<blockquote>
+<p>副作用函数在首次渲染时执行，在依赖项发生变化时重新执行</p>
+</blockquote>
+<pre><code class="react">function App() &#123;  
+    const [count, setCount] = useState(0)  
+    const [name, setName] = useState(&#39;zs&#39;) 
+    
+    useEffect(() =&gt; &#123;    
+        console.log(&#39;副作用执行了&#39;)  
+    &#125;, [count])  
+    
+    return (    
+        &lt;&gt;      
+         &lt;button onClick=&#123;() =&gt; &#123; setCount(count + 1) &#125;&#125;&gt;&#123;count&#125;&lt;/button&gt;      
+         &lt;button onClick=&#123;() =&gt; &#123; setName(&#39;cp&#39;) &#125;&#125;&gt;&#123;name&#125;&lt;/button&gt;    
+        &lt;/&gt;  
+    )
+&#125;
+</code></pre>
+</li>
+</ol>
+<p><font color=red><strong>注意事项</strong></font></p>
+<p>useEffect 回调函数中用到的数据（比如，count）就是依赖数据，就应该出现在依赖项数组中，如果不添加依赖项就会有bug出现</p>
+<h4 id="清理副作用"><a href="#清理副作用" class="headerlink" title="清理副作用"></a>清理副作用</h4><p>如果想要清理副作用 可以在副作用函数中的末尾return一个新的函数，在新的函数中编写清理副作用的逻辑</p>
+<p>注意执行时机为：</p>
+<blockquote>
+<ol>
+<li>组件卸载时自动执行</li>
+<li>组件更新时，下一个useEffect副作用函数执行之前自动执行</li>
+</ol>
+</blockquote>
+<pre><code class="react">import &#123; useEffect, useState &#125; from &quot;react&quot;
+
+
+const App = () =&gt; &#123;
+  const [count, setCount] = useState(0)
+  useEffect(() =&gt; &#123;
+    const timerId = setInterval(() =&gt; &#123;
+      setCount(count + 1)
+    &#125;, 1000)
+    return () =&gt; &#123;
+      // 用来清理副作用的事情
+      clearInterval(timerId)
+    &#125;
+  &#125;, [count])
+  return (
+    &lt;div&gt;
+      &#123;count&#125;
+    &lt;/div&gt;
+  )
+&#125;
+
+export default App
+</code></pre>
+<h3 id="useRef"><a href="#useRef" class="headerlink" title="useRef"></a>useRef</h3><p>在函数组件中获取真实的dom元素对象或者是组件对象</p>
+<p><strong>使用步骤</strong></p>
+<ol>
+<li>导入 <code>useRef</code> 函数</li>
+<li>执行 <code>useRef</code> 函数并传入null，返回值为一个对象 内部有一个current属性存放拿到的dom对象（组件实例）</li>
+<li>通过ref 绑定 要获取的元素或者组件</li>
+</ol>
+<p><strong>获取dom代码示例</strong></p>
+<pre><code class="react">import &#123; useEffect, useRef &#125; from &#39;react&#39;
+function App() &#123;  
+    const h1Ref = useRef(null)  
+    useEffect(() =&gt; &#123;    
+        console.log(h1Ref)  
+    &#125;,[])  
+    return (    
+        &lt;div&gt;      
+            &lt;h1 ref=&#123; h1Ref &#125;&gt;this is h1&lt;/h1&gt;    
+        &lt;/div&gt;  
+    )
+&#125;
+export default App
+</code></pre>
+<p><strong>获取组件实例</strong></p>
+<blockquote>
+<p>函数组件由于没有实例，不能使用ref获取，如果想获取组件实例，必须是类组件</p>
+</blockquote>
+<pre><code class="react">class Foo extends React.Component &#123;  
+    sayHi = () =&gt; &#123;    
+        console.log(&#39;say hi&#39;)  
+    &#125;  
+    render()&#123;    
+        return &lt;div&gt;Foo&lt;/div&gt;  
+    &#125;
+&#125;
+    
+export default Foo
+</code></pre>
+<pre><code class="react">import &#123; useEffect, useRef &#125; from &#39;react&#39;
+import Foo from &#39;./Foo&#39;
+function App() &#123;  
+    const h1Foo = useRef(null)  
+    useEffect(() =&gt; &#123;    
+        console.log(h1Foo)  
+    &#125;, [])  
+    return (    
+        &lt;div&gt; &lt;Foo ref=&#123; h1Foo &#125; /&gt;&lt;/div&gt;  
+    )
+&#125;
+export default App
+</code></pre>
+<h3 id="useContext"><a href="#useContext" class="headerlink" title="useContext"></a>useContext</h3><p><strong>使用步骤</strong></p>
+<ol>
+<li>使用<code>createContext</code> 创建Context对象</li>
+<li>在顶层组件通过<code>Provider</code> 提供数据</li>
+<li>在底层组件通过<code>useContext</code>函数获取数据</li>
+</ol>
+<p><strong>代码实现</strong></p>
+<pre><code class="react">import &#123; createContext, useContext &#125; from &#39;react&#39;
+// 创建Context对象
+const Context = createContext()
+
+function Foo() &#123;  
+    return &lt;div&gt;Foo &lt;Bar/&gt;&lt;/div&gt;
+&#125;
+
+function Bar() &#123;  
+    // 底层组件通过useContext函数获取数据  
+    const name = useContext(Context)  
+    return &lt;div&gt;Bar &#123;name&#125;&lt;/div&gt;
+&#125;
+
+function App() &#123;  
+    return (    
+        // 顶层组件通过Provider 提供数据    
+        &lt;Context.Provider value=&#123;&#39;this is name&#39;&#125;&gt;     
+            &lt;div&gt;&lt;Foo/&gt;&lt;/div&gt;    
+        &lt;/Context.Provider&gt;  
+    )
+&#125;
+
+export default App
+</code></pre>
+
+    </div>
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
+</div>
+                            
+    <footer id="footer">
+        <div class="footer-wrap">
+            <div>
+                © 2022 - 2022
+                        CHESHIRE
+                            <span class="footer-icon">
+                                <i class="fa-solid fa-font-awesome fa-fw"></i>
+                            </span>
+                            @Cheshire
+            </div>
+            <div></div>
+            <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                    target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+            
+        </div>
+    </footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <canvas id="fireworks"
+            style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"></canvas>
+        <canvas id="background"
+            style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"></canvas>
+        <script src="/js/background.js"></script>
+        <script src="/js/fireworks.js"></script>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "myblogtalk",
+        owner: "LoopYasa",
+        admin: ["LoopYasa"],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
+
+    </body>
+
+    </html>
