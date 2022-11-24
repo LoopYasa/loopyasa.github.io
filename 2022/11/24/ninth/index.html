@@ -1,0 +1,534 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>
+            React路由 | CHESHIRE
+        </title>
+        <meta name="author" content="Cheshire">
+        <meta name="description" content="上班坐牢  被迫摸鱼">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/img/favicon.png">
+        <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.2.0/js/all.min.js"></script>
+        
+                <link rel="stylesheet" href="/css/fonts.min.css">
+                <link rel="stylesheet" href="/css/particlex.css">
+                
+                    <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <div id="loading"
+            style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out">
+            <div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center">
+                <div id="loadcontent"
+                    style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center">
+                    <div>
+                        <h2>LOADING...</h2>
+                        <p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p>
+                        <div><img alt="loading" src="/loading.gif"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">CHESHIRE</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;CHESHIRE</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>React路由 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/24
+        </span>
+        
+        <span class="category">
+            <a href="/categories/笔记/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                笔记
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/前端/" style="color: #00bcd4">
+                    前端
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/React/" style="color: #ffa2c4">
+                    React
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    <div class="content" v-pre>
+        <h1 id="React路由"><a href="#React路由" class="headerlink" title="React路由"></a>React路由</h1><h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><h3 id="单页面应用"><a href="#单页面应用" class="headerlink" title="单页面应用"></a>单页面应用</h3><p>只有一个html文件  主流的开发模式变成了通过路由进行页面切换 优势: 避免整体页面刷新  用户体验变好</p>
+<h3 id="路由本质"><a href="#路由本质" class="headerlink" title="路由本质"></a>路由本质</h3><p>概念来源于后端 : 一个路径表示匹配一个服务器资源   &#x2F;a.html   -&gt; a对应的文件资源  &#x2F;b.html -&gt; b对应的文件资源</p>
+<p>共同的思想: 一对一的关系</p>
+<p>前端的路由:  一个路径path对应唯一的一个组件comonent 当我们访问一个path  自动把path对应的组件进行渲染</p>
+<pre><code class="js">const routes = [
+  &#123;
+    path:&#39;/home&#39;,
+    component: Home
+  &#125;,
+   &#123;
+    path:&#39;/about&#39;,
+    component: About
+  &#125;,
+   &#123;
+    path:&#39;/article&#39;,
+    component: Article
+  &#125;
+]
+</code></pre>
+<h2 id="准备项目环境"><a href="#准备项目环境" class="headerlink" title="准备项目环境"></a>准备项目环境</h2><p>create-react-app  -&gt; cra  -&gt; webpack</p>
+<p>vite: 可以实现cra同等能力 但是速度更快的打包工具  [尤大]</p>
+<p>使用vite新增一个React项目，然后安装一个v6版本的react-router-dom</p>
+<pre><code class="bash"># 创建react项目
+$ yarn create vite react-router --template react
+
+# 安装所有依赖包
+$ yarn
+
+# 启动项目
+$ yarn dev
+
+# 安装react-router包
+$ yarn add react-router-dom@6
+</code></pre>
+<h2 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h2><p>需求:  准备俩个按钮，点击不同按钮切换不同组件内容的显示</p>
+<p>实现步骤：</p>
+<ol>
+<li>导入必要的路由router内置组件</li>
+<li>准备俩个React组件</li>
+<li>按照路由的规则进行路由配置</li>
+</ol>
+<p><img src="https://p.sda1.dev/8/14e05380931eb4f56cbfb0bf57831fff/UMG0QF6VBD__L__7Y8@~8_O.png"></p>
+<pre><code class="jsx">// 引入必要的内置组件
+import &#123; BrowserRouter, Routes, Route, Link &#125; from &#39;react-router-dom&#39;
+
+// 准备俩个路由组件
+
+const Home = () =&gt; &lt;div&gt;this is home&lt;/div&gt;
+const About = () =&gt; &lt;div&gt;this is about&lt;/div&gt;
+
+function App() &#123;
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &#123;/* 按照规则配置路由 */&#125;
+      &lt;BrowserRouter&gt;
+        &lt;Link to=&quot;/&quot;&gt;首页&lt;/Link&gt;
+        &lt;Link to=&quot;/about&quot;&gt;关于&lt;/Link&gt;
+        &lt;Routes&gt;
+          &lt;Route path=&quot;/&quot; element=&#123;&lt;Home /&gt;&#125;&gt;&lt;/Route&gt;
+          &lt;Route path=&quot;/about&quot; element=&#123;&lt;About /&gt;&#125;&gt;&lt;/Route&gt;
+        &lt;/Routes&gt;
+      &lt;/BrowserRouter&gt;
+    &lt;/div&gt;
+  )
+&#125;
+
+export default App
+</code></pre>
+<h2 id="核心内置组件"><a href="#核心内置组件" class="headerlink" title="核心内置组件"></a>核心内置组件</h2><h3 id="BrowerRouter"><a href="#BrowerRouter" class="headerlink" title="BrowerRouter"></a>BrowerRouter</h3><blockquote>
+<p>作用: 包裹整个应用，一个React应用只需要使用一次</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>模式</strong></th>
+<th><strong>实现方式</strong></th>
+<th><strong>路由url表现</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HashRouter</td>
+<td>监听url hash值实现</td>
+<td><a target="_blank" rel="noopener" href="http://localhost:3000/#/about">http://localhost:3000/#/about</a></td>
+</tr>
+<tr>
+<td>BrowerRouter</td>
+<td>h5的 history.pushState API实现</td>
+<td><a target="_blank" rel="noopener" href="http://localhost:3000/about">http://localhost:3000/about</a></td>
+</tr>
+</tbody></table>
+<h3 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h3><blockquote>
+<p>作用: 用于指定导航链接，完成声明式的路由跳转  类似于 <router-link/></p>
+</blockquote>
+<pre><code class="react">&lt;Link to = &quot;/path&quot;&gt;页面一&lt;/Link&gt;
+</code></pre>
+<p>这里to属性用于指定路由地址，表示要跳转到哪里去，Link组件最终会被渲染为原生的a链接</p>
+<h3 id="Routes"><a href="#Routes" class="headerlink" title="Routes"></a>Routes</h3><blockquote>
+<p>作用: 提供一个路由出口，组件内部会存在多个内置的Route组件，满足条件的路由会被渲染到组件内部</p>
+<p>类比  router-view</p>
+</blockquote>
+<pre><code class="react">&lt;Routes&gt;
+    &#123;/* 满足条件的路由组件会渲染到这里 */ &#125;
+    &lt;Route /&gt;
+    &lt;Route /&gt;
+&lt;/Routes&gt;
+</code></pre>
+<h3 id="Route"><a href="#Route" class="headerlink" title="Route"></a>Route</h3><blockquote>
+<p>作用: 用于定义路由路径和渲染组件的对应关系  [element：因为react体系内 把组件叫做react element]</p>
+</blockquote>
+<pre><code class="react">&lt;Route path=&quot;/about&quot; element=&#123; &lt;About/&gt; &#125;/&gt;
+</code></pre>
+<p>其中path属性用来指定匹配的路径地址，element属性指定要渲染的组件，图中配置的意思为: 当url上访问的地址为 &#x2F;about 时，当前路由发生匹配，对应的About组件渲染</p>
+<h3 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h3><p>声明式 【 Link to】  vs  编程式 【调用路由方法进行路由跳转】</p>
+<p>概念:  通过js编程的方式进行路由页面跳转，比如说从首页跳转到关于页</p>
+<p>实现步骤：</p>
+<ol>
+<li>导入一个 useNavigate 钩子函数</li>
+<li>执行 useNavigate 函数 得到 跳转函数</li>
+<li>在事件中执行跳转函数完成路由跳转</li>
+</ol>
+<pre><code class="react">// 导入useNavigate函数
+import &#123; useNavigate &#125; from &#39;react-router-dom&#39;
+const Home = () =&gt; &#123;
+  // 执行函数
+  const navigate = useNavigate()
+  return (
+    &lt;div&gt;
+      Home
+      &lt;button onClick=&#123; ()=&gt; navigate(&#39;/about&#39;) &#125;&gt; 跳转关于页 &lt;/button&gt;
+    &lt;/div&gt;
+  )
+&#125;
+
+export default Home
+</code></pre>
+<p><font color=red>注:</font> 如果在跳转时不想添加历史记录，可以添加额外参数replace 为true</p>
+<pre><code class="react">navigate(&#39;/about&#39;, &#123; replace: true &#125; )
+</code></pre>
+<h3 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h3><h4 id="searchParams传参"><a href="#searchParams传参" class="headerlink" title="searchParams传参"></a>searchParams传参</h4><p><strong>路由传参</strong></p>
+<pre><code class="react">navigage(&#39;/about?id=1001&#39;)
+</code></pre>
+<p><strong>路由取参</strong></p>
+<pre><code class="react">let [params] = useSearchParams()
+let id = params.get(&#39;id&#39;)
+</code></pre>
+<h4 id="params传参"><a href="#params传参" class="headerlink" title="params传参"></a>params传参</h4><p><strong>路由传参</strong></p>
+<pre><code class="react">navigage(&#39;/about/1001&#39;)
+</code></pre>
+<p><strong>路由取参</strong></p>
+<pre><code class="react">let params = useParams()
+let id = params.id
+</code></pre>
+<h3 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h3><p><img src="https://p.sda1.dev/8/bd812d1cc905800e6a561a62ff2b222c/T__MO@_P8U__XS3~O0%60LE15.png"></p>
+<p>实现步骤：</p>
+<ol>
+<li>App.js中定义嵌套路由声明</li>
+<li>Layout组件内部通过 <Outlet/> 指定二级路由出口</li>
+</ol>
+<p>App.js组件中定义路由嵌套关系</p>
+<pre><code class="jsx">&lt;Routes&gt;
+  &lt;Route path=&quot;/&quot;  element=&#123;&lt;Layout/&gt;&#125;&gt;
+    &lt;Route path=&quot;board&quot; element=&#123; &lt;Board/&gt; &#125; /&gt;
+    &lt;Route path=&quot;article&quot; element=&#123; &lt;Article/&gt; &#125; /&gt;
+  &lt;/Route&gt;
+   &#123; /* 省略部分  */ &#125;
+&lt;/Routes&gt;
+</code></pre>
+<p>Layout.js组件中使用 Outlet 组件添加二级路由出口</p>
+<pre><code class="jsx">import &#123; Outlet &#125; from &#39;react-router-dom&#39;
+
+const Layout = () =&gt; &#123;
+  return (
+    &lt;div&gt;
+      layout
+      &#123; /* 二级路由的path等于 一级path + 二级path  */ &#125;
+      &lt;Link to=&quot;/board&quot;&gt;board&lt;/Link&gt;
+      &lt;Link to=&quot;/article&quot;&gt;article&lt;/Link&gt;
+      &#123; /* 二级路由出口 */ &#125;
+      &lt;Outlet/&gt;
+    &lt;/div&gt;
+  )
+&#125;
+export default Layout
+</code></pre>
+<h3 id="默认二级路由"><a href="#默认二级路由" class="headerlink" title="默认二级路由"></a>默认二级路由</h3><p>实现步骤:</p>
+<ol>
+<li>给默认二级路由标记index属性</li>
+<li>把原本的路径path属性去掉</li>
+</ol>
+<p>App.jsx</p>
+<pre><code class="react">&lt;Routes&gt;
+  &lt;Route path=&quot;/&quot;  element=&#123;&lt;Layout/&gt;&#125;&gt;
+    &lt;Route index element=&#123; &lt;Board/&gt; &#125; /&gt;
+    &lt;Route path=&quot;article&quot; element=&#123; &lt;Article/&gt; &#125; /&gt;
+  &lt;/Route&gt;
+&lt;/Routes&gt;
+</code></pre>
+<p>pages&#x2F;Layout.jsx</p>
+<pre><code class="jsx">import &#123; Outlet &#125; from &#39;react-router-dom&#39;
+
+const Layout = () =&gt; &#123;
+  return (
+    &lt;div&gt;
+      layout
+      &#123; /* 默认二级不再具有自己的路径  */ &#125;
+      &lt;Link to=&quot;/&quot;&gt;board&lt;/Link&gt;
+      &lt;Link to=&quot;/article&quot;&gt;article&lt;/Link&gt;
+      &#123; /* 二级路由出口 */ &#125;
+      &lt;Outlet/&gt;
+    &lt;/div&gt;
+  )
+&#125;
+</code></pre>
+<h3 id="404路由配置"><a href="#404路由配置" class="headerlink" title="404路由配置"></a>404路由配置</h3><p>准备一个NotFound组件</p>
+<pre><code class="jsx">const NotFound = () =&gt; &#123;
+  return &lt;div&gt;this is NotFound&lt;/div&gt;
+&#125;
+
+export default NotFound
+</code></pre>
+<p>添加到App.js中   路由配置在最后</p>
+<pre><code class="jsx">&lt;BrowserRouter&gt;
+  &lt;Routes&gt;
+    &lt;Route path=&quot;/&quot; element=&#123;&lt;Layout /&gt;&#125;&gt;
+      &lt;Route index element=&#123;&lt;Board /&gt;&#125; /&gt;
+      &lt;Route path=&quot;article&quot; element=&#123;&lt;Article /&gt;&#125; /&gt;
+    &lt;/Route&gt;
+    &lt;Route path=&quot;*&quot; element=&#123;&lt;NotFound /&gt;&#125;&gt;&lt;/Route&gt;
+  &lt;/Routes&gt;
+&lt;/BrowserRouter&gt;
+</code></pre>
+<h3 id="集中式路由配置"><a href="#集中式路由配置" class="headerlink" title="集中式路由配置"></a>集中式路由配置</h3><blockquote>
+<p>场景: 当我们需要路由权限控制点时候, 对路由数组做一些权限的筛选过滤，所谓的集中式路由配置就是用一个数组统一把所有的路由对应关系写好替换 本来的Roues组件</p>
+</blockquote>
+<pre><code class="react">import &#123; BrowserRouter, Routes, Route, useRoutes &#125; from &#39;react-router-dom&#39;
+
+import Layout from &#39;./pages/Layout&#39;
+import Board from &#39;./pages/Board&#39;
+import Article from &#39;./pages/Article&#39;
+import NotFound from &#39;./pages/NotFound&#39;
+
+// 1. 准备一个路由数组 数组中定义所有的路由对应关系
+const routesList = [
+  &#123;
+    path: &#39;/&#39;,
+    element: &lt;Layout /&gt;,
+    children: [
+      &#123;
+        element: &lt;Board /&gt;,
+        index: true, // index设置为true 变成默认的二级路由
+      &#125;,
+      &#123;
+        path: &#39;article&#39;,
+        element: &lt;Article /&gt;,
+      &#125;,
+    ],
+  &#125;,
+  // 增加n个路由对应关系
+  &#123;
+    path: &#39;*&#39;,
+    element: &lt;NotFound /&gt;,
+  &#125;,
+]
+
+// 2. 使用useRoutes方法传入routesList生成Routes组件
+function WrapperRoutes() &#123;
+  let element = useRoutes(routesList)
+  return element
+&#125;
+
+function App() &#123;
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;BrowserRouter&gt;
+        &#123;/* 3. 替换之前的Routes组件 */&#125;
+        &lt;WrapperRoutes /&gt;
+      &lt;/BrowserRouter&gt;
+    &lt;/div&gt;
+  )
+&#125;
+
+export default App
+</code></pre>
+
+    </div>
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
+</div>
+                            
+    <footer id="footer">
+        <div class="footer-wrap">
+            <div>
+                © 2022 - 2022
+                        CHESHIRE
+                            <span class="footer-icon">
+                                <i class="fa-solid fa-font-awesome fa-fw"></i>
+                            </span>
+                            @Cheshire
+            </div>
+            <div></div>
+            <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                    target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+            
+        </div>
+    </footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <canvas id="fireworks"
+            style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"></canvas>
+        <canvas id="background"
+            style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"></canvas>
+        <script src="/js/background.js"></script>
+        <script src="/js/fireworks.js"></script>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "myblogtalk",
+        owner: "LoopYasa",
+        admin: ["LoopYasa"],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
+
+    </body>
+
+    </html>
