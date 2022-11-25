@@ -1,0 +1,579 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>
+            Mobx | CHESHIRE
+        </title>
+        <meta name="author" content="Cheshire">
+        <meta name="description" content="上班坐牢  被迫摸鱼">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/img/favicon.png">
+        <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.2.0/js/all.min.js"></script>
+        
+                <link rel="stylesheet" href="/css/fonts.min.css">
+                <link rel="stylesheet" href="/css/particlex.css">
+                
+                    <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <div id="loading"
+            style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out">
+            <div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center">
+                <div id="loadcontent"
+                    style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center">
+                    <div>
+                        <h2>LOADING...</h2>
+                        <p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p>
+                        <div><img alt="loading" src="/loading.gif"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">CHESHIRE</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;CHESHIRE</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>Mobx </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/25
+        </span>
+        
+        <span class="category">
+            <a href="/categories/笔记/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                笔记
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/前端/" style="color: #00a596">
+                    前端
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/React/" style="color: #03a9f4">
+                    React
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Mobx/" style="color: #ffa2c4">
+                    Mobx
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    <div class="content" v-pre>
+        <h1 id="Mobx基本介绍与使用"><a href="#Mobx基本介绍与使用" class="headerlink" title="Mobx基本介绍与使用"></a>Mobx基本介绍与使用</h1><h2 id="Mobx介绍"><a href="#Mobx介绍" class="headerlink" title="Mobx介绍"></a>Mobx介绍</h2><blockquote>
+<p>一个可以和React良好配合的集中状态管理工具，和Redux解决的问题相似，都可以独立组件进行集中状态管理</p>
+</blockquote>
+<p><strong>优点</strong></p>
+<ol>
+<li><p>简单</p>
+<p>编写无模板的极简代码精准描述你的意图 </p>
+</li>
+<li><p>轻松实现最优渲染</p>
+<p>依赖自动追踪，实现最小渲染优化</p>
+</li>
+<li><p>架构自由</p>
+<p>可移植, 可测试 无特殊心智负担</p>
+</li>
+</ol>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><blockquote>
+<p>Mobx是一个独立的响应式的库，可以独立于任何UI框架存在，但是通常大家习惯把它和React进行绑定使用，用Mobx来做响应式数据建模，React作为UI视图框架渲染内容，我们环境的配置需要三个部分</p>
+</blockquote>
+<ol>
+<li>一个create-react-app创建好的React项目环境</li>
+<li>mobx框架本身</li>
+<li>一个用来链接mobx和React的中间件</li>
+</ol>
+<pre><code class="bash"># 创建项目
+$ yarn create vite react-mobx --template react
+
+# 安装mobx和中间件工具 mobx-react-lite  只能函数组件中使用
+$ yarn add  mobx  mobx-react-lite
+</code></pre>
+<h2 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h2><p><img src="https://p.sda1.dev/8/f7405b72c755b073aa12a0cb2cbcdcfc/EW_3O@E_T6_S~PQ~JFC7~_M.png"></p>
+<h3 id="初始化Mobx"><a href="#初始化Mobx" class="headerlink" title="初始化Mobx"></a>初始化Mobx</h3><p>初始化步骤</p>
+<ol>
+<li>定义数据状态<strong>state</strong></li>
+<li>在构造器中实现数据响应式处理 <strong>makeAutoObservble</strong></li>
+<li>定义修改数据的函数<strong>action</strong></li>
+<li>实例化store并导出</li>
+</ol>
+<pre><code class="react">import &#123; makeAutoObservable &#125; from &#39;mobx&#39;
+
+class CounterStore &#123;
+  count = 0 // 定义数据
+  constructor() &#123;
+    makeAutoObservable(this)  // 响应式处理
+  &#125;
+  // 定义修改数据的方法
+  addCount = () =&gt; &#123;
+    this.count++
+  &#125;
+&#125;
+
+const counter = new CounterStore()
+export default counter
+</code></pre>
+<h3 id="React使用Store"><a href="#React使用Store" class="headerlink" title="React使用Store"></a>React使用Store</h3><p>实现步骤</p>
+<ol>
+<li>在组件中导入counterStore实例对象</li>
+<li>在组件中使用storeStore实例对象中的数据</li>
+<li>通过事件调用修改数据的方法修改store中的数据</li>
+<li>让组件响应数据变化</li>
+</ol>
+<pre><code class="react">// 导入counterStore
+import counterStore from &#39;./store&#39;
+// 导入observer方法
+import &#123; observer &#125; from &#39;mobx-react-lite&#39;
+function App() &#123;
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;button onClick=&#123;() =&gt; counterStore.addCount()&#125;&gt;
+        &#123;counterStore.count&#125;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  )
+&#125;
+// 包裹组件让视图响应数据变化
+export default observer(App)
+</code></pre>
+<h3 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h3><blockquote>
+<p>概念: 有一些状态根据现有的状态计算（衍生）得到，我们把这种状态叫做计算属性, 看下面的例子</p>
+</blockquote>
+<p><img src="https://p.sda1.dev/8/3f976f5d2e8182a30a0ca90bdd981cc6/3_Z0__7_IP35099GV__%60~BT.png"></p>
+<p>实现步骤</p>
+<ol>
+<li>生命一个存在的数据</li>
+<li>通过get关键词 定义计算属性</li>
+<li>在 makeAutoObservable 方法中标记计算属性</li>
+</ol>
+<pre><code class="react">import &#123; computed, makeAutoObservable &#125; from &#39;mobx&#39;
+
+class CounterStore &#123;
+  list = [1, 2, 3, 4, 5, 6]
+  constructor() &#123;
+    makeAutoObservable(this, &#123;
+      filterList: computed
+    &#125;)
+  &#125;
+  // 修改原数组
+  changeList = () =&gt; &#123;
+    this.list.push(7, 8, 9)
+  &#125;
+  // 定义计算属性
+  get filterList () &#123;
+    return this.list.filter(item =&gt; item &gt; 4)
+  &#125;
+&#125;
+
+const counter = new CounterStore()
+
+export default counter
+</code></pre>
+<pre><code class="react">// 导入counterStore
+import counterStore from &#39;./store&#39;
+// 导入observer方法
+import &#123; observer &#125; from &#39;mobx-react-lite&#39;
+function App() &#123;
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &#123;/* 原数组 */&#125;
+      &#123;JSON.stringify(counterStore.list)&#125;
+      &#123;/* 计算属性 */&#125;
+      &#123;JSON.stringify(counterStore.filterList)&#125;
+      &lt;button onClick=&#123;() =&gt; counterStore.changeList()&#125;&gt;change list&lt;/button&gt;
+    &lt;/div&gt;
+  )
+&#125;
+// 包裹组件让视图响应数据变化
+export default observer(App)
+</code></pre>
+<h3 id="异步数据处理"><a href="#异步数据处理" class="headerlink" title="异步数据处理"></a>异步数据处理</h3><blockquote>
+<p>实现步骤:</p>
+<ol>
+<li>在mobx中编写异步请求方法 获取数据 存入state中</li>
+<li>组件中通过 useEffect + 空依赖  触发action函数的执行</li>
+</ol>
+</blockquote>
+<pre><code class="react">// 异步的获取
+
+import &#123; makeAutoObservable &#125; from &#39;mobx&#39;
+import axios from &#39;axios&#39;
+
+class ChannelStore &#123;
+  channelList = []
+  constructor() &#123;
+    makeAutoObservable(this)
+  &#125;
+  // 只要调用这个方法 就可以从后端拿到数据并且存入channelList
+  setChannelList = async () =&gt; &#123;
+    const res = await axios.get(&#39;http://geek.itheima.net/v1_0/channels&#39;)
+    this.channelList = res.data.data.channels
+  &#125;
+&#125;
+const channlStore = new ChannelStore()
+export default channlStore
+</code></pre>
+<pre><code class="react">import &#123; useEffect &#125; from &#39;react&#39;
+import &#123; useStore &#125; from &#39;./store&#39;
+import &#123; observer &#125; from &#39;mobx-react-lite&#39;
+function App() &#123;
+  const &#123; channlStore &#125; = useStore()
+  // 1. 使用数据渲染组件
+  // 2. 触发action函数发送异步请求
+  useEffect(() =&gt; &#123;
+    channlStore.setChannelList()
+  &#125;, [])
+  return (
+    &lt;ul&gt;
+      &#123;channlStore.channelList.map((item) =&gt; (
+        &lt;li key=&#123;item.id&#125;&gt;&#123;item.name&#125;&lt;/li&gt;
+      ))&#125;
+    &lt;/ul&gt;
+  )
+&#125;
+// 让组件可以响应数据的变化[也就是数据一变组件重新渲染]
+export default observer(App)
+</code></pre>
+<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><blockquote>
+<p>场景: 一个项目有很多的业务模块，我们不能把所有的代码都写到一起，这样不好维护，提了提供可维护性，需要引入模块化机制</p>
+</blockquote>
+<p><img src="https://p.sda1.dev/8/e69b91ffd0c0c2562ee4feacc709c4f2/O~_E8_NMIQUCP71AS_BVHT8.png"></p>
+<p><strong>实现步骤</strong></p>
+<ol>
+<li>拆分模块js文件，每个模块中定义自己独立的state&#x2F;action</li>
+<li>在store&#x2F;index.js中导入拆分之后的模块，进行模块组合</li>
+<li>利用React的context的机制导出统一的useStore方法，给业务组件使用</li>
+</ol>
+<p>定义task模块</p>
+<pre><code class="react">import &#123; makeAutoObservable &#125; from &#39;mobx&#39;
+
+class TaskStore &#123;
+  taskList = []
+  constructor() &#123;
+    makeAutoObservable(this)
+  &#125;
+  addTask () &#123;
+    this.taskList.push(&#39;vue&#39;, &#39;react&#39;)
+  &#125;
+&#125;
+
+const task = new TaskStore()
+
+
+export default task
+</code></pre>
+<p>定义counterStore</p>
+<pre><code class="react">import &#123; makeAutoObservable &#125; from &#39;mobx&#39;
+
+class CounterStore &#123;
+  count = 0
+  list = [1, 2, 3, 4, 5, 6]
+  constructor() &#123;
+    makeAutoObservable(this)
+  &#125;
+  addCount = () =&gt; &#123;
+    this.count++
+  &#125;
+  changeList = () =&gt; &#123;
+    this.list.push(7, 8, 9)
+  &#125;
+  get filterList () &#123;
+    return this.list.filter(item =&gt; item &gt; 4)
+  &#125;
+&#125;
+
+const counter = new CounterStore()
+
+export default counter
+</code></pre>
+<p>组合模块导出统一方法</p>
+<pre><code class="react">import React from &#39;react&#39;
+
+import counter from &#39;./counterStore&#39;
+import task from &#39;./taskStore&#39;
+
+
+class RootStore &#123;
+  constructor() &#123;
+    this.counterStore = counter
+    this.taskStore = task
+  &#125;
+&#125;
+
+
+const rootStore = new RootStore()
+
+// context机制的数据查找链  Provider如果找不到 就找createContext方法执行时传入的参数
+const context = React.createContext(rootStore)
+
+const useStore = () =&gt; React.useContext(context)
+// useStore() =&gt;  rootStore  &#123; counterStore, taskStore &#125;
+
+export &#123; useStore &#125;
+</code></pre>
+<p>组件使用模块中的数据</p>
+<pre><code class="react">import &#123; observer &#125; from &#39;mobx-react-lite&#39;
+// 导入方法
+import &#123; useStore &#125; from &#39;./store&#39;
+function App() &#123;
+  // 得到store
+  const store = useStore()
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;button onClick=&#123;() =&gt; store.counterStore.addCount()&#125;&gt;
+        &#123;store.counterStore.count&#125;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  )
+&#125;
+// 包裹组件让视图响应数据变化
+export default observer(App)
+</code></pre>
+<h3 id="多组件共享数据"><a href="#多组件共享数据" class="headerlink" title="多组件共享数据"></a>多组件共享数据</h3><blockquote>
+<p>实现步骤：在Foo组件和Bar组件中分别使用store中的数据，然后在app组件中进行数据修改，查看Foo组件和Bar组件是否得到更新</p>
+</blockquote>
+<p><img src="https://p.sda1.dev/8/f6ec3c9f48d1443e7f34fb4bcb3b3259/H6V__LEP_W6J~QU_U___DMV.png"></p>
+<pre><code class="react">// 用taskStore中的taskList数据
+import &#123; useStore &#125; from &#39;./store&#39;
+import &#123; observer &#125; from &#39;mobx-react-lite&#39;
+const Bar = () =&gt; &#123;
+  const &#123; taskStore &#125; = useStore()
+  return (
+    &lt;ul&gt;
+      &#123;taskStore.taskList.map((item) =&gt; (
+        &lt;li&gt;&#123;item&#125;&lt;/li&gt;
+      ))&#125;
+    &lt;/ul&gt;
+  )
+&#125;
+
+export default observer(Son)
+</code></pre>
+<pre><code class="react">// 用taskStore中的taskList数据
+import &#123; useStore &#125; from &#39;./store&#39;
+import &#123; observer &#125; from &#39;mobx-react-lite&#39;
+const Bar = () =&gt; &#123;
+  const &#123; taskStore &#125; = useStore()
+  return (
+    &lt;ul&gt;
+      &#123;taskStore.taskList.map((item) =&gt; (
+        &lt;li&gt;&#123;item&#125;&lt;/li&gt;
+      ))&#125;
+    &lt;/ul&gt;
+  )
+&#125;
+
+export default observer(Son)
+</code></pre>
+<pre><code class="react">import Bar from &#39;./Bar&#39;
+import Foo from &#39;./Foo&#39;
+import &#123; useStore &#125; from &#39;./store&#39;
+function App() &#123;
+  const &#123; taskStore &#125; = useStore()
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;Bar /&gt;
+      &lt;button onClick=&#123;() =&gt; taskStore.setTaskList(&#39;angular&#39;)&#125;&gt;
+        修改taskStore
+      &lt;/button&gt;
+    &lt;/div&gt;
+  )
+&#125;
+export default App
+</code></pre>
+
+    </div>
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
+</div>
+                            
+    <footer id="footer">
+        <div class="footer-wrap">
+            <div>
+                © 2022 - 2022
+                        CHESHIRE
+                            <span class="footer-icon">
+                                <i class="fa-solid fa-font-awesome fa-fw"></i>
+                            </span>
+                            @Cheshire
+            </div>
+            <div></div>
+            <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                    target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+            
+        </div>
+    </footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <canvas id="fireworks"
+            style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"></canvas>
+        <canvas id="background"
+            style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"></canvas>
+        <script src="/js/background.js"></script>
+        <script src="/js/fireworks.js"></script>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "myblogtalk",
+        owner: "LoopYasa",
+        admin: ["LoopYasa"],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
+
+    </body>
+
+    </html>

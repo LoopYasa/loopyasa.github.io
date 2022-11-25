@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            React生命周期 | CHESHIRE
+            Tags: Mobx | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -137,121 +137,96 @@
 </nav>
                     </div>
                     <div id="main">
-                        
-<div class="article">
-    <div>
-        <h1>React生命周期 </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/11/23
-        </span>
+                         
+<div class="categories-tags">
+    
+    <div class="all-s">
         
-        <span class="category">
-            <a href="/categories/笔记/">
+        
+        <span>
+            <a href="/tags/前端/" style="background: #ff7d73">
                 <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
                 </span>
-                笔记
+                前端
             </a>
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/前端/" style="color: #00bcd4">
-                    前端
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/React/" style="color: #00bcd4">
-                    React
-                </a>
-            </span>
-            
+        <span>
+            <a href="/tags/React/" style="background: #00a596">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                React
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/Mobx/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                Mobx
+            </a>
         </span>
         
     </div>
-    <div class="content" v-pre>
-        <h1 id="React生命周期"><a href="#React生命周期" class="headerlink" title="React生命周期"></a>React生命周期</h1><p><img src="https://p.sda1.dev/8/13ebf3d74f6b845d7c84dd434a8a91b9/G0NWQU1%6069NL_3_373TNS0G.png"></p>
-<h2 id="挂载阶段"><a href="#挂载阶段" class="headerlink" title="挂载阶段"></a>挂载阶段</h2><p><img src="https://p.sda1.dev/8/9694e3687ea8096fe8873fd94f58dc7d/Y_A~BYDC3HX7P%60P_I____QO.png"></p>
-<table>
-<thead>
-<tr>
-<th>钩子 函数</th>
-<th>触发时机</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>constructor</td>
-<td>创建组件时，最先执行，初始化的时候只执行一次</td>
-<td>1. 初始化state  2. 创建 Ref 3. 使用 bind 解决 this 指向问题等</td>
-</tr>
-<tr>
-<td>render</td>
-<td>每次组件渲染都会触发</td>
-<td>渲染UI（<strong>注意： 不能在里面调用setState()</strong> ）</td>
-</tr>
-<tr>
-<td>componentDidMount</td>
-<td>组件挂载（完成DOM渲染）后执行，初始化的时候执行一次</td>
-<td>1. 发送网络请求  2.DOM操作</td>
-</tr>
-</tbody></table>
-<h2 id="更新阶段"><a href="#更新阶段" class="headerlink" title="更新阶段"></a>更新阶段</h2><p><img src="https://p.sda1.dev/8/899ae32c7b7dfb9df342a2892ba54d8b/%60X2T@_GZG16_HWZI_G0L~_G.png"></p>
-<table>
-<thead>
-<tr>
-<th>钩子函数</th>
-<th>触发时机</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>render</td>
-<td>每次组件渲染都会触发</td>
-<td>渲染UI（与 挂载阶段 是同一个render）</td>
-</tr>
-<tr>
-<td>componentDidUpdate</td>
-<td>组件更新后（DOM渲染完毕）</td>
-<td>DOM操作，可以获取到更新后的DOM内容，<strong>不要直接调用setState</strong></td>
-</tr>
-</tbody></table>
-<h2 id="卸载阶段"><a href="#卸载阶段" class="headerlink" title="卸载阶段"></a>卸载阶段</h2><table>
-<thead>
-<tr>
-<th>钩子函数</th>
-<th>触发时机</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>componentWillUnmount</td>
-<td>组件卸载（从页面中消失）</td>
-<td>执行清理工作（比如：清理定时器等）</td>
-</tr>
-</tbody></table>
-
+    <div id="archives">
+        
+        <div class="timeline">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2022/11/25</div>
+                <a href="/2022/11/25/tenth/">
+                    <h3>Mobx</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/笔记/">
+                            <span class="icon">
+                                <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                            </span>
+                            笔记
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/前端/" style="color: #ff7d73">
+                                前端
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/React/" style="color: #00a596">
+                                React
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Mobx/" style="color: #ff7d73">
+                                Mobx
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
     </div>
-    
-    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
-    <div id="comment">
-        <div id="gitalk-container"></div>
-    </div>
-    
-    
 </div>
                             
     <footer id="footer">
@@ -287,24 +262,6 @@
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
-<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
-<script>
-    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
-    
-    const gitalk = new Gitalk({
-        clientID: clientID,
-        clientSecret: clientSecret,
-        repo: "myblogtalk",
-        owner: "LoopYasa",
-        admin: ["LoopYasa"],
-        language: "zh-CN",
-        id: location.pathname,
-        distractionFreeMode: false,
-        
-    })
-    gitalk.render("gitalk-container")
-</script>
-
 
     </body>
 
