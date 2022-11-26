@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            React生命周期 | CHESHIRE
+            Redux | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>React生命周期 </h1>
+        <h1>Redux </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/11/23
+            2022/11/26
         </span>
         
         <span class="category">
@@ -167,15 +167,22 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #00a596">
+                <a href="/tags/前端/" style="color: #ffa2c4">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/React/" style="color: #03a9f4">
+                <a href="/tags/React/" style="color: #ffa2c4">
                     React
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Redux/" style="color: #00bcd4">
+                    Redux
                 </a>
             </span>
             
@@ -183,66 +190,217 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="React生命周期"><a href="#React生命周期" class="headerlink" title="React生命周期"></a>React生命周期</h1><p><img src="https://p.sda1.dev/8/13ebf3d74f6b845d7c84dd434a8a91b9/G0NWQU1%6069NL_3_373TNS0G.png"></p>
-<h2 id="挂载阶段"><a href="#挂载阶段" class="headerlink" title="挂载阶段"></a>挂载阶段</h2><p><img src="https://p.sda1.dev/8/9694e3687ea8096fe8873fd94f58dc7d/Y_A~BYDC3HX7P%60P_I____QO.png"></p>
-<table>
-<thead>
-<tr>
-<th>钩子 函数</th>
-<th>触发时机</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>constructor</td>
-<td>创建组件时，最先执行，初始化的时候只执行一次</td>
-<td>1. 初始化state  2. 创建 Ref 3. 使用 bind 解决 this 指向问题等</td>
-</tr>
-<tr>
-<td>render</td>
-<td>每次组件渲染都会触发</td>
-<td>渲染UI（<strong>注意： 不能在里面调用setState()</strong> ）</td>
-</tr>
-<tr>
-<td>componentDidMount</td>
-<td>组件挂载（完成DOM渲染）后执行，初始化的时候执行一次</td>
-<td>1. 发送网络请求  2.DOM操作</td>
-</tr>
-</tbody></table>
-<h2 id="更新阶段"><a href="#更新阶段" class="headerlink" title="更新阶段"></a>更新阶段</h2><p><img src="https://p.sda1.dev/8/899ae32c7b7dfb9df342a2892ba54d8b/%60X2T@_GZG16_HWZI_G0L~_G.png"></p>
-<table>
-<thead>
-<tr>
-<th>钩子函数</th>
-<th>触发时机</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>render</td>
-<td>每次组件渲染都会触发</td>
-<td>渲染UI（与 挂载阶段 是同一个render）</td>
-</tr>
-<tr>
-<td>componentDidUpdate</td>
-<td>组件更新后（DOM渲染完毕）</td>
-<td>DOM操作，可以获取到更新后的DOM内容，<strong>不要直接调用setState</strong></td>
-</tr>
-</tbody></table>
-<h2 id="卸载阶段"><a href="#卸载阶段" class="headerlink" title="卸载阶段"></a>卸载阶段</h2><table>
-<thead>
-<tr>
-<th>钩子函数</th>
-<th>触发时机</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>componentWillUnmount</td>
-<td>组件卸载（从页面中消失）</td>
-<td>执行清理工作（比如：清理定时器等）</td>
-</tr>
-</tbody></table>
+        <h1 id="Redux介绍与基本使用"><a href="#Redux介绍与基本使用" class="headerlink" title="Redux介绍与基本使用"></a>Redux介绍与基本使用</h1><h2 id="Redux介绍"><a href="#Redux介绍" class="headerlink" title="Redux介绍"></a>Redux介绍</h2><blockquote>
+<p>Redux是React中使用广泛的集中状态管理工具  类比vuex之于vue 同类的工具还有mobx等</p>
+</blockquote>
+<p><img src="https://p.sda1.dev/8/4f9691733212cada8a0a621bd7f5bf79/~_W_PUZ28R_D304ZFSQ090F.png"></p>
+<p><strong>优点</strong></p>
+<ol>
+<li>独立于组件，无视组件之间的层级关系，简化通信问题</li>
+<li>单项数据流清晰，易于定位bug</li>
+<li>调试工具配套良好，方便调试</li>
+</ol>
+<h2 id="Redux数据流架构"><a href="#Redux数据流架构" class="headerlink" title="Redux数据流架构"></a>Redux数据流架构</h2><p><img src="https://p.sda1.dev/8/89f0958ad6059514869ceea8e31d066f/_%60DE%60G_V__VK_COKB_LN~LB.png"></p>
+<ol>
+<li>state:  一个对象 存放着我们管理的数据</li>
+<li>action:  一个对象 用来描述你想怎么改数据</li>
+<li>reducer:  一个函数 根据action的描述更新state</li>
+</ol>
+<h2 id="创建counterStore"><a href="#创建counterStore" class="headerlink" title="创建counterStore"></a>创建counterStore</h2><p>创建store的的核心步骤分为两步</p>
+<ol>
+<li>使用toolkit的<strong>createSlice</strong>方法创建一个独立的子模块</li>
+<li>使用<strong>configureStore</strong>语法组合子模块</li>
+</ol>
+<p><strong>创建子模块</strong></p>
+<pre><code class="react">import &#123; createSlice &#125; from &#39;@reduxjs/toolkit&#39;
+
+const counter = createSlice(&#123;
+  // 模块名称独一无二
+  name: &#39;counter&#39;,
+  // 初始数据
+  initialState: &#123;
+    count: 1
+  &#125;,
+  // 修改数据的同步方法
+  reducers: &#123;
+    add (state) &#123;
+      state.count++
+    &#125;
+  &#125;
+&#125;)
+
+const &#123; add &#125; = counter.actions
+const reducer = counter.reducer
+
+// 导出修改数据的函数
+export &#123; add &#125;
+// 导出reducer
+export default reducer
+</code></pre>
+<p><strong>组合子模块</strong></p>
+<pre><code class="react">import &#123; configureStore &#125; from &#39;@reduxjs/toolkit&#39;
+
+import counterStore from &#39;./counterStore&#39;
+
+export default configureStore(&#123;
+  reducer: &#123;
+    // 注册子模块
+    counterStore
+  &#125;
+&#125;)
+</code></pre>
+<h2 id="为React提供Redux-store"><a href="#为React提供Redux-store" class="headerlink" title="为React提供Redux store"></a>为React提供Redux store</h2><blockquote>
+<p>要想让所有的组件都有资格访问store中的数据，需要我们在入口文件中，渲染根组件的位置通过Provider提供store数据</p>
+</blockquote>
+<pre><code class="react">import React from &#39;react&#39;
+import ReactDOM from &#39;react-dom/client&#39;
+import App from &#39;./App&#39;
+// 导入store
+import store from &#39;./store&#39;
+// 导入store提供组件Provider
+import &#123; Provider &#125; from &#39;react-redux&#39;
+
+ReactDOM.createRoot(document.getElementById(&#39;root&#39;)).render(
+  // 提供store数据
+  &lt;Provider store=&#123;store&#125;&gt;
+    &lt;App /&gt;
+  &lt;/Provider&gt;
+)
+</code></pre>
+<h2 id="组件使用store中的数据"><a href="#组件使用store中的数据" class="headerlink" title="组件使用store中的数据"></a>组件使用store中的数据</h2><blockquote>
+<p>组件使用store中的数据需要借助一个hook方法，叫做useSelector</p>
+<p>useSelector(state &#x3D;&gt; state.模块名)  方法的返回值为一个对象，对象中包含store子模块中的所有数据</p>
+</blockquote>
+<pre><code class="react">import &#123; useSelector &#125; from &#39;react-redux&#39;
+
+function App () &#123;
+  // 使用数据
+  const &#123; count &#125; = useSelector(state =&gt; state.counterStore)
+  
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &#123;count&#125;
+      &lt;button onClick=&#123;clickHandler&#125;&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+  )
+&#125;
+
+export default App
+</code></pre>
+<h2 id="组件修改store中的数据"><a href="#组件修改store中的数据" class="headerlink" title="组件修改store中的数据"></a>组件修改store中的数据</h2><blockquote>
+<p>修改store中的数据有俩个核心步骤</p>
+<ol>
+<li>使用counterStore模块中导出的add方法创建action对象</li>
+<li>通过dispatch函数以action作为参数传入完成数据更新</li>
+</ol>
+</blockquote>
+<pre><code class="react">import &#123; useSelector, useDispatch &#125; from &#39;react-redux&#39;
+import &#123; add &#125; from &#39;./store/counterStore&#39;
+
+function App () &#123;
+  // 使用数据
+  const &#123; count &#125; = useSelector(state =&gt; state.counterStore)
+  // 修改数据
+  const dispatch = useDispatch()
+  const clickHandler = () =&gt; &#123;
+    // 1. 生成action对象
+    const action = add()
+    // 2. 提交action进行数据更新
+    dispatch(action)
+  &#125;
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &#123;count&#125;
+      &lt;button onClick=&#123;clickHandler&#125;&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+  )
+&#125;
+
+export default App
+</code></pre>
+<h2 id="组件修改数据并传参"><a href="#组件修改数据并传参" class="headerlink" title="组件修改数据并传参"></a>组件修改数据并传参</h2><p><strong>改数据的方法中补充第二个参数action</strong></p>
+<pre><code class="react">import &#123; createSlice &#125; from &quot;@reduxjs/toolkit&quot;
+const counterStore = createSlice(&#123;
+  name: &#39;counter&#39;, // 独一无二不重复的名字语义化
+  // 定义初始化的数据
+  initialState: &#123;
+    taskList: [&#39;react&#39;]
+  &#125;,
+  reducers: &#123;
+    // action为一个对象 对象中有一个固定的属性叫做payload 为传递过来的参数
+    addTaskList (state, action) &#123;
+      state.taskList.push(action.payload)
+    &#125;
+  &#125;
+&#125;)
+
+// 生成修改数据的方法导出
+const &#123; addTaskList &#125; = counterStore.actions
+export &#123; addTaskList &#125;
+// 生成reducer 导出 供index.js做组合模块
+const reducer = counterStore.reducer
+
+export default reducer
+</code></pre>
+<p><strong>dispatch的时候传入实参</strong></p>
+<pre><code class="jsx">&lt;button onClick=&#123;() =&gt; dispatch(addTaskList(&#39;vue&#39;))&#125;&gt;addList&lt;/button&gt;
+</code></pre>
+<h2 id="Redux异步处理"><a href="#Redux异步处理" class="headerlink" title="Redux异步处理"></a>Redux异步处理</h2><pre><code class="react">import &#123; createSlice &#125; from &#39;@reduxjs/toolkit&#39;
+import axios from &#39;axios&#39;
+
+const channelStore = createSlice(&#123;
+  name: &#39;task&#39;,
+  initialState: &#123;
+    channels: []
+  &#125;,
+  reducers: &#123;
+    setChannels (state, action) &#123;
+      state.channels = action.payload
+    &#125;
+  &#125;
+&#125;)
+
+
+// 创建异步
+const &#123; setChannels &#125; = channelStore.actions
+const url = &#39;http://geek.itheima.net/v1_0/channels&#39;
+// 封装一个函数 在函数中return一个新函数 在新函数中封装异步
+// 得到数据之后通过dispatch函数 触发修改
+const fetchChannelList = () =&gt; &#123;
+  return async (dispatch) =&gt; &#123;
+    const res = await axios.get(url)
+    dispatch(setChannels(res.data.data.channels))
+  &#125;
+&#125;
+
+export &#123; fetchChannelList &#125;
+
+const reducer = channelStore.reducer
+export default reducer
+</code></pre>
+<pre><code class="react">import &#123; useEffect &#125; from &#39;react&#39;
+import &#123; useSelector, useDispatch &#125; from &#39;react-redux&#39;
+import &#123; fetchChannelList &#125; from &#39;./store/channelStore&#39;
+
+function App () &#123;
+  // 使用数据
+  const &#123; channels &#125; = useSelector(state =&gt; state.channelStore)
+  useEffect(() =&gt; &#123;
+    const action = fetchTaskList()
+    dispatch(action)
+  &#125;, [dispatch])
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;ul&gt;
+        &#123;channels.map(task =&gt; &lt;li key=&#123;task.id&#125;&gt;&#123;task.name&#125;&lt;/li&gt;)&#125;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  )
+&#125;
+
+export default App
+</code></pre>
 
     </div>
     
