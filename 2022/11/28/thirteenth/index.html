@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            React组件 | CHESHIRE
+            TailwindCSS | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,22 +140,22 @@
                         
 <div class="article">
     <div>
-        <h1>React组件 </h1>
+        <h1>TailwindCSS </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/11/22
+            2022/11/28
         </span>
         
         <span class="category">
-            <a href="/categories/笔记/">
+            <a href="/categories/问题记录/">
                 <span class="icon">
                     <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
                 </span>
-                笔记
+                问题记录
             </a>
         </span>
         
@@ -167,15 +167,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #ffa2c4">
-                    前端
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/React/" style="color: #00a596">
-                    React
+                <a href="/tags/TailwindCSS/" style="color: #00a596">
+                    TailwindCSS
                 </a>
             </span>
             
@@ -183,198 +176,23 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="React组件"><a href="#React组件" class="headerlink" title="React组件"></a>React组件</h1><p><img src="https://p.sda1.dev/8/9614847a0f0defff6e3ff6128f2043b6/X_M_OF8FS3QXLIPE1T___S1.png"></p>
-<h2 id="函数式组件"><a href="#函数式组件" class="headerlink" title="函数式组件"></a>函数式组件</h2><blockquote>
-<p>使用 JS 的函数（或箭头函数）创建的组件，就叫做<code>函数组件</code></p>
-</blockquote>
-<p>组件的定义与渲染</p>
-<pre><code class="react">// 定义函数组件
-function HelloFn () &#123;
-  return &lt;div&gt;这是我的第一个函数组件!&lt;/div&gt;
-&#125;
-
-// 定义类组件
-function App () &#123;
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &#123;/* 渲染函数组件 */&#125;
-      &lt;HelloFn /&gt;
-      &lt;HelloFn&gt;&lt;/HelloFn&gt;
-    &lt;/div&gt;
-  )
-&#125;
-export default App
+        <h1 id="Error-PostCSS-plugin-tailwindcss-requires-PostCSS-8"><a href="#Error-PostCSS-plugin-tailwindcss-requires-PostCSS-8" class="headerlink" title="Error: PostCSS plugin tailwindcss requires PostCSS 8."></a>Error: PostCSS plugin tailwindcss requires PostCSS 8.</h1><h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>在vue中使用TailwindCSS时报的错误:</p>
+<pre><code class="error">ERROR  Failed to compile with 1 error                                                                                                            
+ 
+ error  in ./node_modules/tailwindcss/tailwind.css
+ 
+Error: PostCSS plugin tailwindcss requires PostCSS 8.
+Migration guide for end-users:
+https://github.com/postcss/postcss/wiki/PostCSS-8-for-end-users
+ 
+ 
+ @ ./src/main.js 7:0-34
+ @ multi (webpack)-dev-server/client?http://192.168.28.203:8099/sockjs-node (webpack)/hot/dev-server.js ./src/main.js
 </code></pre>
-<p>约定说明</p>
-<ul>
-<li>组件的名称<strong>必须首字母大写</strong>，react内部会根据这个来判断是组件还是普通的HTML标签</li>
-<li>函数组件<strong>必须有返回值</strong>，表示该组件的 UI 结构；如果不需要渲染任何内容，则返回 null</li>
-<li>组件就像 HTML 标签一样可以被渲染到页面中。组件表示的是一段结构内容，对于函数组件来说，渲染的内容是函数的<strong>返回值</strong>就是对应的内容</li>
-<li>使用函数名称作为组件标签名称，可以成对出现也可以自闭合</li>
-</ul>
-<h1 id="类式组件"><a href="#类式组件" class="headerlink" title="类式组件"></a>类式组件</h1><blockquote>
-<p>使用 ES6 的 class 创建的组件，叫做类（class）组件</p>
-</blockquote>
-<p>组件的定义与渲染</p>
-<pre><code class="react">// 引入React
-import React from &#39;react&#39;
-
-// 定义类组件
-class HelloC extends React.Component &#123;
-  render () &#123;
-    return &lt;div&gt;这是我的第一个类组件!&lt;/div&gt;
-  &#125;
-&#125;
-
-function App () &#123;
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &#123;/* 渲染类组件 */&#125;
-      &lt;HelloC /&gt;
-      &lt;HelloC&gt;&lt;/HelloC&gt;
-    &lt;/div&gt;
-  )
-&#125;
-export default App
-</code></pre>
-<p>约定说明</p>
-<ul>
-<li><strong>类名称也必须以大写字母开头</strong></li>
-<li>类组件应该继承 React.Component 父类，从而使用父类中提供的方法或属性</li>
-<li>类组件必须提供 render 方法<strong>render 方法必须有返回值，表示该组件的 UI 结构</strong></li>
-</ul>
-<h2 id="函数组件的绑定事件"><a href="#函数组件的绑定事件" class="headerlink" title="函数组件的绑定事件"></a>函数组件的绑定事件</h2><h3 id="绑定事件"><a href="#绑定事件" class="headerlink" title="绑定事件"></a>绑定事件</h3><ul>
-<li>语法</li>
-</ul>
-<blockquote>
-<p>on + 事件名称 &#x3D; { 事件处理程序 } ，比如：<code>&lt;div onClick=&#123; onClick &#125;&gt;&lt;/div&gt;</code></p>
-</blockquote>
-<ul>
-<li>注意点</li>
-</ul>
-<blockquote>
-<p>react事件采用驼峰命名法，比如：onMouseEnter、onFocus </p>
-</blockquote>
-<ul>
-<li>样例</li>
-</ul>
-<pre><code class="react">
-// 函数组件
-function HelloFn () &#123;
-  // 定义事件回调函数
-  const clickHandler = () =&gt; &#123;
-    console.log(&#39;事件被触发了&#39;)
-  &#125;
-  return (
-    // 绑定事件
-    &lt;button onClick=&#123;clickHandler&#125;&gt;click me!&lt;/button&gt;
-  )
-&#125;
-</code></pre>
-<h3 id="获取事件对象"><a href="#获取事件对象" class="headerlink" title="获取事件对象"></a>获取事件对象</h3><ul>
-<li>获取事件对象e只需要在 事件的回调函数中 补充一个形参e即可拿到</li>
-</ul>
-<pre><code class="react">// 函数组件
-function HelloFn () &#123;
-  // 定义事件回调函数
-  const clickHandler = (e) =&gt; &#123;
-    console.log(&#39;事件被触发了&#39;, e)
-  &#125;
-  return (
-    // 绑定事件
-    &lt;button onClick=&#123;clickHandler&#125;&gt;click me!&lt;/button&gt;
-  )
-&#125;
-</code></pre>
-<h3 id="传递额外参数"><a href="#传递额外参数" class="headerlink" title="传递额外参数"></a>传递额外参数</h3><blockquote>
-<p>解决思路: 改造事件绑定为箭头函数 在箭头函数中完成参数的传递</p>
-</blockquote>
-<pre><code class="react">
-import React from &quot;react&quot;
-
-// 如何获取额外的参数？
-// onClick=&#123; onDel &#125; -&gt; onClick=&#123; () =&gt; onDel(id) &#125;
-// 注意: 一定不要在模板中写出函数调用的代码 onClick = &#123; onDel(id) &#125;  bad!!!!!!
-
-const TestComponent = () =&gt; &#123;
-  const list = [
-    &#123;
-      id: 1001,
-      name: &#39;react&#39;
-    &#125;,
-    &#123;
-      id: 1002,
-      name: &#39;vue&#39;
-    &#125;
-  ]
-  const onDel = (e, id) =&gt; &#123;
-    console.log(e, id)
-  &#125;
-  return (
-      &lt;ul&gt;
-        &#123;list.map(item =&gt;（
-           &lt;li key=&#123;item.id&#125;&gt;
-                &#123;item.name&#125;
-                &lt;button onClick=&#123;(e) =&gt; onDel(e, item.id)&#125;&gt;x&lt;/button&gt;
-           &lt;/li&gt;
-        ))&#125;
-      &lt;/ul&gt;
-  )
-&#125;
-
-function App () &#123;
-  return (
-    &lt;div&gt;
-      &lt;TestComponent /&gt;
-    &lt;/div&gt;
-  )
-&#125;
-
-
-export default App
-</code></pre>
-<h2 id="类组件的事件绑定"><a href="#类组件的事件绑定" class="headerlink" title="类组件的事件绑定"></a>类组件的事件绑定</h2><pre><code class="react">// 类组件中的事件绑定
-// 整体的套路都是一致的 和函数组件没有太多不同
-// 唯一需要注意的 因为处于class 类环境下 所以定义事件回调函数 以及 绑定它写法上有不同
-// 定义的时候: class Fields语法  
-// 使用的时候: 需要借助this关键词获取
-
-
-// 注意事项: 之所以要采取class Fields写法是为了保证this的指向正确 永远指向当前的组件实例
-
-import React from &quot;react&quot;
-class CComponent extends React.Component &#123;
-  // class Fields
-  clickHandler = (e, num) =&gt; &#123;
-    // 这里的this指向的是正确的当前的组件实例对象 
-    // 可以非常方便的通过this关键词拿到组件实例身上的其他属性或者方法
-    console.log(this)
-  &#125;
-
-  clickHandler1 () &#123;
-    // 这里的this 不指向当前的组件实例对象  undefined 存在this丢失问题
-    console.log(this)
-  &#125;
-
-  render () &#123;
-    return (
-      &lt;div&gt;
-        &lt;button onClick=&#123;(e) =&gt; this.clickHandler(e, &#39;123&#39;)&#125;&gt;click me&lt;/button&gt;
-        &lt;button onClick=&#123;this.clickHandler1&#125;&gt;click me&lt;/button&gt;
-      &lt;/div&gt;
-    )
-  &#125;
-&#125;
-
-function App () &#123;
-  return (
-    &lt;div&gt;
-      &lt;CComponent /&gt;
-    &lt;/div&gt;
-  )
-&#125;
-
-export default App
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><pre><code class="bash"># 删除原来安装的包
+npm uninstall tailwindcss postcss autoprefixer
+# 安装低版本包
+npm install tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 </code></pre>
 
     </div>
