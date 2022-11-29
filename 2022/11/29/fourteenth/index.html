@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Redux | CHESHIRE
+            Vue3 响应式 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>Redux </h1>
+        <h1>Vue3 响应式 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/11/26
+            2022/11/29
         </span>
         
         <span class="category">
@@ -167,22 +167,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #ff7d73">
+                <a href="/tags/前端/" style="color: #00bcd4">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/React/" style="color: #ffa2c4">
-                    React
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Redux/" style="color: #00bcd4">
-                    Redux
+                <a href="/tags/Vue/" style="color: #03a9f4">
+                    Vue
                 </a>
             </span>
             
@@ -190,217 +183,96 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="Redux介绍与基本使用"><a href="#Redux介绍与基本使用" class="headerlink" title="Redux介绍与基本使用"></a>Redux介绍与基本使用</h1><h2 id="Redux介绍"><a href="#Redux介绍" class="headerlink" title="Redux介绍"></a>Redux介绍</h2><blockquote>
-<p>Redux是React中使用广泛的集中状态管理工具  类比vuex之于vue 同类的工具还有mobx等</p>
-</blockquote>
-<p><img src="https://p.sda1.dev/8/4f9691733212cada8a0a621bd7f5bf79/~_W_PUZ28R_D304ZFSQ090F.png"></p>
-<p><strong>优点</strong></p>
-<ol>
-<li>独立于组件，无视组件之间的层级关系，简化通信问题</li>
-<li>单项数据流清晰，易于定位bug</li>
-<li>调试工具配套良好，方便调试</li>
+        <h1 id="Ref-isRef-customRef-shallowRef-triggerRef"><a href="#Ref-isRef-customRef-shallowRef-triggerRef" class="headerlink" title="Ref isRef customRef shallowRef triggerRef"></a>Ref isRef customRef shallowRef triggerRef</h1><h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ol>
+<li>接受一个内部值并返回一个响应式且可变的 ref 对象。ref 对象仅有一个 <code>.value</code> property，指向该内部值。 </li>
+<li>如果将对象分配为 ref 值，则它将被 <code>reactive</code> 函数处理为深层的响应式对象。 </li>
+<li>template 内使用 ref 对象，会自动解包。</li>
 </ol>
-<h2 id="Redux数据流架构"><a href="#Redux数据流架构" class="headerlink" title="Redux数据流架构"></a>Redux数据流架构</h2><p><img src="https://p.sda1.dev/8/89f0958ad6059514869ceea8e31d066f/_%60DE%60G_V__VK_COKB_LN~LB.png"></p>
-<ol>
-<li>state:  一个对象 存放着我们管理的数据</li>
-<li>action:  一个对象 用来描述你想怎么改数据</li>
-<li>reducer:  一个函数 根据action的描述更新state</li>
+<p><strong>示例代码</strong></p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div&gt;
+    &#123;&#123;Reftest&#125;&#125;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script lang=&#39;ts&#39; setup&gt;
+import &#123; ref,isReactive &#125; from &#39;vue&#39;;
+const Reftest = ref(&#39;test&#39;)
+console.log(Redf.value);
+&lt;/script&gt;
+</code></pre>
+<p><strong>在阅读源码后知道了Ref在接收对象和数组这些引用类型数据时自己也会调用Reactive，相对比shallowRef则没有调用。</strong></p>
+<h2 id="isRef"><a href="#isRef" class="headerlink" title="isRef"></a>isRef</h2><ol>
+<li>检查值是否为一个 ref 对象。</li>
 </ol>
-<h2 id="创建counterStore"><a href="#创建counterStore" class="headerlink" title="创建counterStore"></a>创建counterStore</h2><p>创建store的的核心步骤分为两步</p>
-<ol>
-<li>使用toolkit的<strong>createSlice</strong>方法创建一个独立的子模块</li>
-<li>使用<strong>configureStore</strong>语法组合子模块</li>
+<pre><code class="vue">&lt;script lang=&#39;ts&#39; setup&gt;
+import &#123; isRef &#125; from &#39;vue&#39;;
+// ()内例子是上面的。
+console.log(isRef(Reftest));
+&lt;/script&gt;
+</code></pre>
+<h2 id="cusomRef"><a href="#cusomRef" class="headerlink" title="cusomRef"></a>cusomRef</h2><ol>
+<li>创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。它需要一个工厂函数，该函数接收 track 和 trigger 函数作为参数，并且应该返回一个带有 get 和 set 的对象。</li>
 </ol>
-<p><strong>创建子模块</strong></p>
-<pre><code class="react">import &#123; createSlice &#125; from &#39;@reduxjs/toolkit&#39;
-
-const counter = createSlice(&#123;
-  // 模块名称独一无二
-  name: &#39;counter&#39;,
-  // 初始数据
-  initialState: &#123;
-    count: 1
-  &#125;,
-  // 修改数据的同步方法
-  reducers: &#123;
-    add (state) &#123;
-      state.count++
+<pre><code class="vue">&lt;script lang=&#39;ts&#39; setup&gt;
+import &#123; useDebouncedRef &#125; from &#39;vue&#39;;
+function useDebouncedRef(value, delay = 200) &#123;
+  let timeout;
+  return customRef((track, trigger) =&gt; &#123;
+    return &#123;
+      get() &#123;
+        return value
+      &#125;,
+      set(newValue) &#123;
+        // 此处可以做一系列操作进行数据处理。
+        // 例子1：使用自定义 ref 通过 v-model 实现 debounce 的示例：
+        clearTimeout(timeout)
+        timeout = setTimeout(() =&gt; &#123;
+          value = newValue
+          trigger()
+        &#125;, delay)
+      &#125;
     &#125;
-  &#125;
-&#125;)
-
-const &#123; add &#125; = counter.actions
-const reducer = counter.reducer
-
-// 导出修改数据的函数
-export &#123; add &#125;
-// 导出reducer
-export default reducer
-</code></pre>
-<p><strong>组合子模块</strong></p>
-<pre><code class="react">import &#123; configureStore &#125; from &#39;@reduxjs/toolkit&#39;
-
-import counterStore from &#39;./counterStore&#39;
-
-export default configureStore(&#123;
-  reducer: &#123;
-    // 注册子模块
-    counterStore
-  &#125;
-&#125;)
-</code></pre>
-<h2 id="为React提供Redux-store"><a href="#为React提供Redux-store" class="headerlink" title="为React提供Redux store"></a>为React提供Redux store</h2><blockquote>
-<p>要想让所有的组件都有资格访问store中的数据，需要我们在入口文件中，渲染根组件的位置通过Provider提供store数据</p>
-</blockquote>
-<pre><code class="react">import React from &#39;react&#39;
-import ReactDOM from &#39;react-dom/client&#39;
-import App from &#39;./App&#39;
-// 导入store
-import store from &#39;./store&#39;
-// 导入store提供组件Provider
-import &#123; Provider &#125; from &#39;react-redux&#39;
-
-ReactDOM.createRoot(document.getElementById(&#39;root&#39;)).render(
-  // 提供store数据
-  &lt;Provider store=&#123;store&#125;&gt;
-    &lt;App /&gt;
-  &lt;/Provider&gt;
-)
-</code></pre>
-<h2 id="组件使用store中的数据"><a href="#组件使用store中的数据" class="headerlink" title="组件使用store中的数据"></a>组件使用store中的数据</h2><blockquote>
-<p>组件使用store中的数据需要借助一个hook方法，叫做useSelector</p>
-<p>useSelector(state &#x3D;&gt; state.模块名)  方法的返回值为一个对象，对象中包含store子模块中的所有数据</p>
-</blockquote>
-<pre><code class="react">import &#123; useSelector &#125; from &#39;react-redux&#39;
-
-function App () &#123;
-  // 使用数据
-  const &#123; count &#125; = useSelector(state =&gt; state.counterStore)
-  
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &#123;count&#125;
-      &lt;button onClick=&#123;clickHandler&#125;&gt;+&lt;/button&gt;
-    &lt;/div&gt;
-  )
+  &#125;)
 &#125;
-
-export default App
+let a23 = useDebouncedRef(&#39;hello&#39;)
+&lt;/script&gt;
 </code></pre>
-<h2 id="组件修改store中的数据"><a href="#组件修改store中的数据" class="headerlink" title="组件修改store中的数据"></a>组件修改store中的数据</h2><blockquote>
-<p>修改store中的数据有俩个核心步骤</p>
-<ol>
-<li>使用counterStore模块中导出的add方法创建action对象</li>
-<li>通过dispatch函数以action作为参数传入完成数据更新</li>
+<h2 id="shallowRef"><a href="#shallowRef" class="headerlink" title="shallowRef"></a>shallowRef</h2><ol>
+<li>如字面意思，浅响应式，如果传入的是基本类型跟 ref 没区别。 </li>
+<li>如果传入的是引用类型，.value值将不会是响应式的数据，ref的 value 属性则会是响应式的。</li>
 </ol>
-</blockquote>
-<pre><code class="react">import &#123; useSelector, useDispatch &#125; from &#39;react-redux&#39;
-import &#123; add &#125; from &#39;./store/counterStore&#39;
-
-function App () &#123;
-  // 使用数据
-  const &#123; count &#125; = useSelector(state =&gt; state.counterStore)
-  // 修改数据
-  const dispatch = useDispatch()
-  const clickHandler = () =&gt; &#123;
-    // 1. 生成action对象
-    const action = add()
-    // 2. 提交action进行数据更新
-    dispatch(action)
-  &#125;
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &#123;count&#125;
-      &lt;button onClick=&#123;clickHandler&#125;&gt;+&lt;/button&gt;
-    &lt;/div&gt;
-  )
-&#125;
-
-export default App
+<pre><code class="vue">&lt;script lang=&#39;ts&#39; setup&gt;
+import &#123; shallowRef,isReactive &#125; from &#39;vue&#39;;
+const foo = shallowRef(&#123;a:1&#125;)
+// 改变 ref 的值是响应式的
+foo.value = &#123;b:2&#125;
+// 但是这个值不会被转换。
+isReactive(foo.value) // false
+&lt;/script&gt;
 </code></pre>
-<h2 id="组件修改数据并传参"><a href="#组件修改数据并传参" class="headerlink" title="组件修改数据并传参"></a>组件修改数据并传参</h2><p><strong>改数据的方法中补充第二个参数action</strong></p>
-<pre><code class="react">import &#123; createSlice &#125; from &quot;@reduxjs/toolkit&quot;
-const counterStore = createSlice(&#123;
-  name: &#39;counter&#39;, // 独一无二不重复的名字语义化
-  // 定义初始化的数据
-  initialState: &#123;
-    taskList: [&#39;react&#39;]
-  &#125;,
-  reducers: &#123;
-    // action为一个对象 对象中有一个固定的属性叫做payload 为传递过来的参数
-    addTaskList (state, action) &#123;
-      state.taskList.push(action.payload)
-    &#125;
-  &#125;
+<p><strong>在阅读源码之后知道了shallowRef没有调用Reactive，这就导致shallowRef只能浅层次的监听，例如数组、对象这些引用类型里的值发生改变则不能监听到，从而进行响应。</strong></p>
+<h2 id="triggerRef"><a href="#triggerRef" class="headerlink" title="triggerRef"></a>triggerRef</h2><ol>
+<li>手动执行与 shallowRef 关联的任何作用 (effect)。 </li>
+<li>简单讲就是配合 shallowRef 用的，并且 shallowRef 传入的是个引用类型。</li>
+</ol>
+<pre><code class="vue">&lt;script lang=&#39;ts&#39; setup&gt;
+import &#123; shallowRef,watchEffect,triggerRef &#125; from &#39;vue&#39;;
+const shallow = shallowRef(&#123;
+  greet: &#39;Hello, world&#39;
 &#125;)
-
-// 生成修改数据的方法导出
-const &#123; addTaskList &#125; = counterStore.actions
-export &#123; addTaskList &#125;
-// 生成reducer 导出 供index.js做组合模块
-const reducer = counterStore.reducer
-
-export default reducer
-</code></pre>
-<p><strong>dispatch的时候传入实参</strong></p>
-<pre><code class="jsx">&lt;button onClick=&#123;() =&gt; dispatch(addTaskList(&#39;vue&#39;))&#125;&gt;addList&lt;/button&gt;
-</code></pre>
-<h2 id="Redux异步处理"><a href="#Redux异步处理" class="headerlink" title="Redux异步处理"></a>Redux异步处理</h2><pre><code class="react">import &#123; createSlice &#125; from &#39;@reduxjs/toolkit&#39;
-import axios from &#39;axios&#39;
-
-const channelStore = createSlice(&#123;
-  name: &#39;task&#39;,
-  initialState: &#123;
-    channels: []
-  &#125;,
-  reducers: &#123;
-    setChannels (state, action) &#123;
-      state.channels = action.payload
-    &#125;
-  &#125;
+watchEffect(() =&gt; &#123;
+  // 第一次运行时记录一次 &quot;Hello, world&quot;
+  console.log(shallow.value.greet)
 &#125;)
+shallow.value.greet = &#39;Hello, universe&#39;
 
-
-// 创建异步
-const &#123; setChannels &#125; = channelStore.actions
-const url = &#39;http://geek.itheima.net/v1_0/channels&#39;
-// 封装一个函数 在函数中return一个新函数 在新函数中封装异步
-// 得到数据之后通过dispatch函数 触发修改
-const fetchChannelList = () =&gt; &#123;
-  return async (dispatch) =&gt; &#123;
-    const res = await axios.get(url)
-    dispatch(setChannels(res.data.data.channels))
-  &#125;
-&#125;
-
-export &#123; fetchChannelList &#125;
-
-const reducer = channelStore.reducer
-export default reducer
+// 首先 watchEffect 追踪的是响应式数据，shallowRef 是浅层的，  
+// 所以当是&#123;&#125;的时候，无法触发 effect ，每次操作 shallow.value 的时候，则需要 triggerRef(shallow) 主动触发执行。  
+// 记住，是每次操作，都需要 triggerRef() 一下
+triggerRef(shallow)
+&lt;/script&gt;
 </code></pre>
-<pre><code class="react">import &#123; useEffect &#125; from &#39;react&#39;
-import &#123; useSelector, useDispatch &#125; from &#39;react-redux&#39;
-import &#123; fetchChannelList &#125; from &#39;./store/channelStore&#39;
-
-function App () &#123;
-  // 使用数据
-  const &#123; channels &#125; = useSelector(state =&gt; state.channelStore)
-  useEffect(() =&gt; &#123;
-    const action = fetchTaskList()
-    dispatch(action)
-  &#125;, [dispatch])
-
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;ul&gt;
-        &#123;channels.map(task =&gt; &lt;li key=&#123;task.id&#125;&gt;&#123;task.name&#125;&lt;/li&gt;)&#125;
-      &lt;/ul&gt;
-    &lt;/div&gt;
-  )
-&#125;
-
-export default App
-</code></pre>
+<p><strong>ref底层实现的时候自己就调了该方法，但是shallowRef没有，所以在使用时ref和shallowRef不要一起用</strong></p>
 
     </div>
     
