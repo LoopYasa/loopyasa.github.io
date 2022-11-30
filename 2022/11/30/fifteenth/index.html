@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Tags: Redux | CHESHIRE
+            Vue3 Computed | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -137,136 +137,97 @@
 </nav>
                     </div>
                     <div id="main">
-                         
-<div class="categories-tags">
-    
-    <div class="all-s">
-        
-        
-        <span>
-            <a href="/tags/前端/" style="background: #00bcd4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                前端
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/React/" style="background: #00bcd4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                React
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Mobx/" style="background: #00a596">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Mobx
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Redux/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Redux
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue/" style="background: #00bcd4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/TailwindCSS/" style="background: #ffa2c4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                TailwindCSS
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue3/" style="background: #00a596">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue3
-            </a>
-        </span>
-        
+                        
+<div class="article">
+    <div>
+        <h1>Vue3 Computed </h1>
     </div>
-    <div id="archives">
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/30
+        </span>
         
-        <div class="timeline">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2022/11/26</div>
-                <a href="/2022/11/26/eleventh/">
-                    <h3>Redux</h3>
+        <span class="category">
+            <a href="/categories/笔记/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                笔记
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/前端/" style="color: #03a9f4">
+                    前端
                 </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/笔记/">
-                            <span class="icon">
-                                <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                            </span>
-                            笔记
-                        </a>
-                    </span>
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/前端/" style="color: #ff7d73">
-                                前端
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/React/" style="color: #00bcd4">
-                                React
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Redux/" style="color: #03a9f4">
-                                Redux
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue3/" style="color: #00bcd4">
+                    Vue3
+                </a>
+            </span>
+            
+        </span>
         
     </div>
+    <div class="content" v-pre>
+        <h1 id="Vue3-computed"><a href="#Vue3-computed" class="headerlink" title="Vue3 computed"></a>Vue3 computed</h1><p>computed 接收一个回调函数，返回一个通过其他属性经过计算的新值<br>并且这个新值是通过 ref 包装过的常量 </p>
+<p>在Vue3中基本使用如下:</p>
+<pre><code class="vue">setup() &#123;
+  const &#123; computed, ref &#125; = Vue;
+  const name = ref(0)
+
+  const newName = computed(() =&gt; &#123;
+     return name.value + 5     // 注意 ref 包装过的值在value中
+  &#125;)
+
+  return &#123; newName &#125;
+&#125;
+</code></pre>
+<p>也可以进行复杂计算</p>
+<p>computed 也可以接收一个对象，这个对象可以接收 get 和 set 两个方法</p>
+<pre><code class="vue">setup() &#123;
+  const &#123; computed, ref &#125; = Vue;
+  const name = ref(0)
+
+  const newName = computed(&#123;
+    get: () =&gt; &#123;   // 3. 当 name 的值被修改后，触发 get 方法
+      return name.value + 10  // 95 + 10 = 105，所以newName 的值是 105
+    &#125;,
+    set: ( param ) =&gt; &#123;  // 2. 下方定时器中赋值的 100 ,会作为参数传递到 set 方法 ，
+      name.value = param - 5  //   name.value 被修改 100 - 5 = 95 ，所以 name 的值是95
+    &#125;,
+  &#125;)
+
+  setTimeout(() =&gt; &#123;
+    newName.value = 100
+   &#125;,3000)  // 1. 三秒后给 newName 赋值
+
+  return &#123; newName &#125; // 所有代码执行完毕之后 newName 的值是 105
+&#125;
+</code></pre>
+<p>上诉代码功能为三秒后给newName赋值，定时器中赋值的100，会作为参数传递到set方法，当name的值被修改后，触发get方法，最后的newName的值为105</p>
+
+    </div>
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
 </div>
                             
     <footer id="footer">
@@ -302,6 +263,24 @@
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "myblogtalk",
+        owner: "LoopYasa",
+        admin: ["LoopYasa"],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
 
     </body>
 
