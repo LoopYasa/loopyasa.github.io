@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Vue3 Computed | CHESHIRE
+            Vue3 插件 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,22 +140,22 @@
                         
 <div class="article">
     <div>
-        <h1>Vue3 Computed </h1>
+        <h1>Vue3 插件 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/11/30
+            2022/12/2
         </span>
         
         <span class="category">
-            <a href="/categories/笔记/">
+            <a href="/categories/插件/">
                 <span class="icon">
                     <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
                 </span>
-                笔记
+                插件
             </a>
         </span>
         
@@ -167,14 +167,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #03a9f4">
+                <a href="/tags/前端/" style="color: #ff7d73">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Vue3/" style="color: #00a596">
+                <a href="/tags/Vue3/" style="color: #ff7d73">
                     Vue3
                 </a>
             </span>
@@ -183,42 +183,24 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="Vue3-computed"><a href="#Vue3-computed" class="headerlink" title="Vue3 computed"></a>Vue3 computed</h1><p>computed 接收一个回调函数，返回一个通过其他属性经过计算的新值<br>并且这个新值是通过 ref 包装过的常量 </p>
-<p>在Vue3中基本使用如下:</p>
-<pre><code class="vue">setup() &#123;
-  const &#123; computed, ref &#125; = Vue;
-  const name = ref(0)
-
-  const newName = computed(() =&gt; &#123;
-     return name.value + 5     // 注意 ref 包装过的值在value中
-  &#125;)
-
-  return &#123; newName &#125;
-&#125;
+        <h1 id="unplugin-auto-import-插件安装配置与使用"><a href="#unplugin-auto-import-插件安装配置与使用" class="headerlink" title="unplugin-auto-import 插件安装配置与使用"></a>unplugin-auto-import 插件安装配置与使用</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code class="bash">npm i -D unplugin-auto-import
 </code></pre>
-<p>也可以进行复杂计算</p>
-<p>computed 也可以接收一个对象，这个对象可以接收 get 和 set 两个方法</p>
-<pre><code class="vue">setup() &#123;
-  const &#123; computed, ref &#125; = Vue;
-  const name = ref(0)
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>在vite.config.ts中进行导入并配置</p>
+<pre><code class="typescript">import AutoImport from &#39;unplugin-auto-import/vite&#39;
 
-  const newName = computed(&#123;
-    get: () =&gt; &#123;   // 3. 当 name 的值被修改后，触发 get 方法
-      return name.value + 10  // 95 + 10 = 105，所以newName 的值是 105
-    &#125;,
-    set: ( param ) =&gt; &#123;  // 2. 下方定时器中赋值的 100 ,会作为参数传递到 set 方法 ，
-      name.value = param - 5  //   name.value 被修改 100 - 5 = 95 ，所以 name 的值是95
-    &#125;,
-  &#125;)
-
-  setTimeout(() =&gt; &#123;
-    newName.value = 100
-   &#125;,3000)  // 1. 三秒后给 newName 赋值
-
-  return &#123; newName &#125; // 所有代码执行完毕之后 newName 的值是 105
-&#125;
+export default defineConfig(&#123;
+  plugins: [
+      ...
+    AutoImport(&#123; 
+        /* options */
+        // 这是vue3的配置
+        imports:[&#39;vue&#39;],
+        dts:&quot;src/auto-import.d.ts&quot; // 生成在src路径下名为auto-import.d.ts的声明文件
+     &#125;),
+  ],
+&#125;)
 </code></pre>
-<p>上诉代码功能为三秒后给newName赋值，定时器中赋值的100，会作为参数传递到set方法，当name的值被修改后，触发get方法，最后的newName的值为105</p>
+<p>完成之后便可以使用了，在使用vue3中的api时可以无需进行import导入，直接使用就可以了。</p>
 
     </div>
     
