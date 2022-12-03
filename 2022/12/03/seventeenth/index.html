@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Tags: Redux | CHESHIRE
+            Vue3 插件 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -137,136 +137,149 @@
 </nav>
                     </div>
                     <div id="main">
-                         
-<div class="categories-tags">
-    
-    <div class="all-s">
-        
-        
-        <span>
-            <a href="/tags/前端/" style="background: #ff7d73">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                前端
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/React/" style="background: #ffa2c4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                React
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Mobx/" style="background: #03a9f4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Mobx
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Redux/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Redux
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue/" style="background: #00a596">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/TailwindCSS/" style="background: #ffa2c4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                TailwindCSS
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue3/" style="background: #03a9f4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue3
-            </a>
-        </span>
-        
+                        
+<div class="article">
+    <div>
+        <h1>Vue3 插件 </h1>
     </div>
-    <div id="archives">
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/12/3
+        </span>
         
-        <div class="timeline">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2022/11/26</div>
-                <a href="/2022/11/26/eleventh/">
-                    <h3>Redux</h3>
+        <span class="category">
+            <a href="/categories/笔记/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                笔记
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/前端/" style="color: #03a9f4">
+                    前端
                 </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/笔记/">
-                            <span class="icon">
-                                <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                            </span>
-                            笔记
-                        </a>
-                    </span>
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/前端/" style="color: #ff7d73">
-                                前端
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/React/" style="color: #00bcd4">
-                                React
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Redux/" style="color: #00bcd4">
-                                Redux
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue3/" style="color: #ff7d73">
+                    Vue3
+                </a>
+            </span>
+            
+        </span>
         
     </div>
+    <div class="content" v-pre>
+        <h1 id="Vue3-插件"><a href="#Vue3-插件" class="headerlink" title="Vue3 插件"></a>Vue3 插件</h1><h2 id="Vue2中的插件"><a href="#Vue2中的插件" class="headerlink" title="Vue2中的插件"></a>Vue2中的插件</h2><p>Vue2 插件的时候会暴露一个 install 方法，并通过全局方法 Vue.use() 使用插件。install 方法的第一个参数是 Vue 构造器，插件的方法就添加在 Vue 构造器的原型对象上。通过 new Vue() 实例化后，在组件中就能调用 this.*** 使用组件了。 </p>
+<h2 id="Vue3中的插件"><a href="#Vue3中的插件" class="headerlink" title="Vue3中的插件"></a>Vue3中的插件</h2><p>Vue3 的 install 方法不是传入 Vue 构造器，没有原型对象，Vue.prototype 是 undefined。vue3 采用依赖注入的方式，在插件内部利用 provide 和 inject 并暴露出一个组合函数，在组件中使用。 </p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>在使用 <code>createApp()</code> 初始化 Vue 应用程序后，你可以通过调用 <code>use()</code> 方法将插件添加到你的应用程序中。 </p>
+<h2 id="加载示例"><a href="#加载示例" class="headerlink" title="加载示例"></a>加载示例</h2><p><strong>Loading.vue</strong></p>
+<pre><code class="vue">&lt;template&gt;
+    &lt;div v-if=&quot;isShow&quot; class=&quot;loading&quot;&gt;
+        &lt;div class=&quot;loading-content&quot;&gt;Loading...&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+    
+&lt;script setup lang=&#39;ts&#39;&gt;
+import &#123; ref &#125; from &#39;vue&#39;;
+const isShow = ref(false)//定位loading 的开关
+ 
+const show = () =&gt; &#123;
+    isShow.value = true
+&#125;
+const hide = () =&gt; &#123;
+    isShow.value = false
+&#125;
+//对外暴露 当前组件的属性和方法
+defineExpose(&#123;
+    isShow,
+    show,
+    hide
+&#125;)
+&lt;/script&gt;
+</code></pre>
+<p><strong>Loading.ts</strong></p>
+<pre><code class="typescript">import Loading from &#39;./index.vue&#39;
+ 
+export default &#123;
+    install(app: App) &#123;
+        //createVNode vue提供的底层方法 可以给我们组件创建一个虚拟DOM 也就是Vnode
+        const vnode: VNode = createVNode(Loading)
+        //render 把我们的Vnode 生成真实DOM 并且挂载到指定节点
+        render(vnode, document.body)
+        // Vue 提供的全局配置 可以自定义
+        app.config.globalProperties.$loading = &#123;
+            show: () =&gt; vnode.component?.exposed?.show(),
+            hide: () =&gt; vnode.component?.exposed?.hide()
+        &#125;
+ 
+    &#125;
+&#125;
+</code></pre>
+<p><strong>Main.ts</strong></p>
+<pre><code class="typescript">import Loading from &#39;./components/loading&#39;
+ 
+ 
+let app = createApp(App)
+ 
+app.use(Loading)
+ 
+ 
+type Lod = &#123;
+    show: () =&gt; void,
+    hide: () =&gt; void
+&#125;
+//编写ts loading 声明文件放置报错 和 智能提示
+declare module &#39;@vue/runtime-core&#39; &#123;
+    export interface ComponentCustomProperties &#123;
+        $loading: Lod
+    &#125;
+&#125;
+
+app.mount(&#39;#app&#39;)
+</code></pre>
+<p><strong>使用</strong></p>
+<pre><code class="vue">
+&lt;template&gt;
+ 
+  &lt;div&gt;&lt;/div&gt;
+ 
+&lt;/template&gt;
+ 
+&lt;script setup lang=&#39;ts&#39;&gt;
+import &#123; ref,reactive,getCurrentInstance&#125; from &#39;vue&#39;
+const  instance = getCurrentInstance()  
+instance?.proxy?.$Loading.show()
+setTimeout(()=&gt;&#123;
+  instance?.proxy?.$Loading.hide()
+&#125;,5000)
+ 
+ 
+// console.log(instance)
+&lt;/script&gt;
+</code></pre>
+
+    </div>
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
 </div>
                             
     <footer id="footer">
@@ -302,6 +315,24 @@
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "myblogtalk",
+        owner: "LoopYasa",
+        admin: ["LoopYasa"],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
 
     </body>
 
