@@ -167,14 +167,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #03a9f4">
+                <a href="/tags/前端/" style="color: #ff7d73">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Vue3/" style="color: #ff7d73">
+                <a href="/tags/Vue3/" style="color: #00a596">
                     Vue3
                 </a>
             </span>
@@ -183,7 +183,7 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="Vue3-插件"><a href="#Vue3-插件" class="headerlink" title="Vue3 插件"></a>Vue3 插件</h1><h2 id="Vue2中的插件"><a href="#Vue2中的插件" class="headerlink" title="Vue2中的插件"></a>Vue2中的插件</h2><p>Vue2 插件的时候会暴露一个 install 方法，并通过全局方法 Vue.use() 使用插件。install 方法的第一个参数是 Vue 构造器，插件的方法就添加在 Vue 构造器的原型对象上。通过 new Vue() 实例化后，在组件中就能调用 this.*** 使用组件了。 </p>
+        <h2 id="Vue2中的插件"><a href="#Vue2中的插件" class="headerlink" title="Vue2中的插件"></a>Vue2中的插件</h2><p>编写Vue2 插件的时候会暴露一个 install 方法，并通过全局方法 Vue.use() 使用插件。install 方法的第一个参数是 Vue 构造器，插件的方法就添加在 Vue 构造器的原型对象上。通过 new Vue() 实例化后，在组件中就能调用 this.*** 使用组件了。 </p>
 <h2 id="Vue3中的插件"><a href="#Vue3中的插件" class="headerlink" title="Vue3中的插件"></a>Vue3中的插件</h2><p>Vue3 的 install 方法不是传入 Vue 构造器，没有原型对象，Vue.prototype 是 undefined。vue3 采用依赖注入的方式，在插件内部利用 provide 和 inject 并暴露出一个组合函数，在组件中使用。 </p>
 <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>在使用 <code>createApp()</code> 初始化 Vue 应用程序后，你可以通过调用 <code>use()</code> 方法将插件添加到你的应用程序中。 </p>
 <h2 id="加载示例"><a href="#加载示例" class="headerlink" title="加载示例"></a>加载示例</h2><p><strong>Loading.vue</strong></p>
