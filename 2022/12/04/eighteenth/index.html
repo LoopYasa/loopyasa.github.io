@@ -174,7 +174,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Vue3/" style="color: #00a596">
+                <a href="/tags/Vue3/" style="color: #00bcd4">
                     Vue3
                 </a>
             </span>
@@ -194,11 +194,11 @@
 <h2 id="PostCSS"><a href="#PostCSS" class="headerlink" title="PostCSS"></a>PostCSS</h2><p>PostCSS会给一个组件中的所有dom添加了一个独一无二的动态属性data-v-xxxx，然后，给CSS选择器额外添加一个对应的属性选择器来选择该组件中dom，这种做法使得样式只作用于含有该属性的dom——组件内部dom, 从而达到了’样式模块化’的效果。</p>
 <h2 id="Vue2中样式穿透的方法"><a href="#Vue2中样式穿透的方法" class="headerlink" title="Vue2中样式穿透的方法"></a>Vue2中样式穿透的方法</h2><ul>
 <li><p>原生CSS   使用<code>&gt;&gt;&gt;</code></p>
-<pre><code>.类名 &gt;&gt;&gt; .类名&#123;样式&#125;
+<pre><code class="css">.类名 &gt;&gt;&gt; .类名&#123;样式&#125;
 </code></pre>
 </li>
-<li><p>使用预处理器    使用<code>/deep/ </code></p>
-<pre><code>/deep/ .类名&#123;样式&#125;
+<li><p>使用预处理器    使用<code>/deep/ </code> 或者<code>::v-deep</code></p>
+<pre><code class="scss">/deep/ .类名&#123;样式&#125;
 父类 /deep/ 子类
 
 ::v-deep .类名&#123;样式&#125;
@@ -208,11 +208,11 @@
 </ul>
 <h2 id="Vue3中样式穿透的方法"><a href="#Vue3中样式穿透的方法" class="headerlink" title="Vue3中样式穿透的方法"></a>Vue3中样式穿透的方法</h2><ul>
 <li><p>使用<code>:deep()</code></p>
-<pre><code>:deep(样式选择器)
+<pre><code class="scss">:deep(样式选择器)
 </code></pre>
 </li>
 <li><p>使用<code>::v-deep()</code></p>
-<pre><code>::v-deep(样式选择器)
+<pre><code class="scss">::v-deep(样式选择器)
 </code></pre>
 </li>
 </ul>
