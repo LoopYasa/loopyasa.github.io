@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Vue3 插件 | CHESHIRE
+            Vue3 Suspense | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>Vue3 插件 </h1>
+        <h1>Vue3 Suspense </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/3
+            2022/12/6
         </span>
         
         <span class="category">
@@ -174,7 +174,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Vue3/" style="color: #00a596">
+                <a href="/tags/Vue3/" style="color: #ffa2c4">
                     Vue3
                 </a>
             </span>
@@ -183,94 +183,32 @@
         
     </div>
     <div class="content" v-pre>
-        <h2 id="Vue2中的插件"><a href="#Vue2中的插件" class="headerlink" title="Vue2中的插件"></a>Vue2中的插件</h2><p>编写Vue2 插件的时候会暴露一个 install 方法，并通过全局方法 Vue.use() 使用插件。install 方法的第一个参数是 Vue 构造器，插件的方法就添加在 Vue 构造器的原型对象上。通过 new Vue() 实例化后，在组件中就能调用 this.*** 使用组件了。 </p>
-<h2 id="Vue3中的插件"><a href="#Vue3中的插件" class="headerlink" title="Vue3中的插件"></a>Vue3中的插件</h2><p>Vue3 的 install 方法不是传入 Vue 构造器，没有原型对象，Vue.prototype 是 undefined。vue3 采用依赖注入的方式，在插件内部利用 provide 和 inject 并暴露出一个组合函数，在组件中使用。 </p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>在使用 <code>createApp()</code> 初始化 Vue 应用程序后，你可以通过调用 <code>use()</code> 方法将插件添加到你的应用程序中。 </p>
-<h2 id="加载示例"><a href="#加载示例" class="headerlink" title="加载示例"></a>加载示例</h2><p><strong>Loading.vue</strong></p>
+        <h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>等待异步组件时渲染一些额外内容，让应用有更好的用户体验 </p>
+<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ul>
+<li><p>异步引入组件</p>
+<pre><code class="vue">import &#123;defineAsyncComponent&#125; from &#39;vue&#39;
+const Child = defineAsyncComponent(()=&gt;import(&#39;./components/Child.vue&#39;))
+</code></pre>
+</li>
+<li><p>使用<code>Suspense</code>包裹组件，并配置好<code>default</code> 与 <code>fallback</code></p>
+</li>
+</ul>
 <pre><code class="vue">&lt;template&gt;
-    &lt;div v-if=&quot;isShow&quot; class=&quot;loading&quot;&gt;
-        &lt;div class=&quot;loading-content&quot;&gt;Loading...&lt;/div&gt;
+    &lt;div class=&quot;app&quot;&gt;
+        &lt;h3&gt;我是App组件&lt;/h3&gt;
+        &lt;Suspense&gt;
+            &lt;template v-slot:default&gt;
+                &lt;Child/&gt;
+            &lt;/template&gt;
+            &lt;template v-slot:fallback&gt;
+                &lt;h3&gt;加载中.....&lt;/h3&gt;
+            &lt;/template&gt;
+        &lt;/Suspense&gt;
     &lt;/div&gt;
 &lt;/template&gt;
-    
-&lt;script setup lang=&#39;ts&#39;&gt;
-import &#123; ref &#125; from &#39;vue&#39;;
-const isShow = ref(false)//定位loading 的开关
- 
-const show = () =&gt; &#123;
-    isShow.value = true
-&#125;
-const hide = () =&gt; &#123;
-    isShow.value = false
-&#125;
-//对外暴露 当前组件的属性和方法
-defineExpose(&#123;
-    isShow,
-    show,
-    hide
-&#125;)
-&lt;/script&gt;
 </code></pre>
-<p><strong>Loading.ts</strong></p>
-<pre><code class="typescript">import Loading from &#39;./index.vue&#39;
- 
-export default &#123;
-    install(app: App) &#123;
-        //createVNode vue提供的底层方法 可以给我们组件创建一个虚拟DOM 也就是Vnode
-        const vnode: VNode = createVNode(Loading)
-        //render 把我们的Vnode 生成真实DOM 并且挂载到指定节点
-        render(vnode, document.body)
-        // Vue 提供的全局配置 可以自定义
-        app.config.globalProperties.$loading = &#123;
-            show: () =&gt; vnode.component?.exposed?.show(),
-            hide: () =&gt; vnode.component?.exposed?.hide()
-        &#125;
- 
-    &#125;
-&#125;
-</code></pre>
-<p><strong>Main.ts</strong></p>
-<pre><code class="typescript">import Loading from &#39;./components/loading&#39;
- 
- 
-let app = createApp(App)
- 
-app.use(Loading)
- 
- 
-type Lod = &#123;
-    show: () =&gt; void,
-    hide: () =&gt; void
-&#125;
-//编写ts loading 声明文件放置报错 和 智能提示
-declare module &#39;@vue/runtime-core&#39; &#123;
-    export interface ComponentCustomProperties &#123;
-        $loading: Lod
-    &#125;
-&#125;
-
-app.mount(&#39;#app&#39;)
-</code></pre>
-<p><strong>使用</strong></p>
-<pre><code class="vue">
-&lt;template&gt;
- 
-  &lt;div&gt;&lt;/div&gt;
- 
-&lt;/template&gt;
- 
-&lt;script setup lang=&#39;ts&#39;&gt;
-import &#123; ref,reactive,getCurrentInstance&#125; from &#39;vue&#39;
-const  instance = getCurrentInstance()  
-instance?.proxy?.$Loading.show()
-setTimeout(()=&gt;&#123;
-  instance?.proxy?.$Loading.hide()
-&#125;,5000)
- 
- 
-// console.log(instance)
-&lt;/script&gt;
-</code></pre>
+<p>  <code>fallback</code>是加载等待时显示的组件，而<code>default</code>是加载成功后显示的组件。并且这两个<strong>不可改名</strong>，为定义好的slot具名插槽。</p>
+<p>补充: <font color=red>使用Suspense能缓解首页加载时间，原因是在使用异步组件进行打包时会分开，不用则打成一个js文件。</font></p>
 
     </div>
     
