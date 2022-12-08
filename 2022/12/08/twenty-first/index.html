@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Tags: TailwindCSS | CHESHIRE
+            Vue3 nextTick | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -137,122 +137,97 @@
 </nav>
                     </div>
                     <div id="main">
-                         
-<div class="categories-tags">
-    
-    <div class="all-s">
-        
-        
-        <span>
-            <a href="/tags/前端/" style="background: #ffa2c4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                前端
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/React/" style="background: #ffa2c4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                React
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Mobx/" style="background: #03a9f4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Mobx
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Redux/" style="background: #ffa2c4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Redux
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue/" style="background: #ff7d73">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/TailwindCSS/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                TailwindCSS
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue3/" style="background: #00bcd4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue3
-            </a>
-        </span>
-        
+                        
+<div class="article">
+    <div>
+        <h1>Vue3 nextTick </h1>
     </div>
-    <div id="archives">
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/12/8
+        </span>
         
-        <div class="timeline">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2022/11/28</div>
-                <a href="/2022/11/28/thirteenth/">
-                    <h3>TailwindCSS</h3>
+        <span class="category">
+            <a href="/categories/笔记/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                笔记
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/前端/" style="color: #00bcd4">
+                    前端
                 </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/问题记录/">
-                            <span class="icon">
-                                <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                            </span>
-                            问题记录
-                        </a>
-                    </span>
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/TailwindCSS/" style="color: #03a9f4">
-                                TailwindCSS
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue3/" style="color: #ffa2c4">
+                    Vue3
+                </a>
+            </span>
+            
+        </span>
         
     </div>
+    <div class="content" v-pre>
+        <h2 id="介绍与使用场景"><a href="#介绍与使用场景" class="headerlink" title="介绍与使用场景"></a>介绍与使用场景</h2><ul>
+<li><strong>定义</strong></li>
+</ul>
+<p>将回调推迟到下一个 DOM 更新周期之后执行，在更改了一些数据以等待 DOM 更新后立即使用它 </p>
+<ul>
+<li><strong>使用场景</strong></li>
+</ul>
+<p>在实际中使用这个方法一般是用于组件更新，你需要获取更新后的数据，所以使用nextTick等待DOM更新 </p>
+<h2 id="官网示例"><a href="#官网示例" class="headerlink" title="官网示例"></a>官网示例</h2><pre><code class="vue">&lt;script&gt;
+import &#123; nextTick &#125; from &#39;vue&#39;
+
+export default &#123;
+  data() &#123;
+    return &#123;
+      count: 0
+    &#125;
+  &#125;,
+  methods: &#123;
+    async increment() &#123;
+      this.count++
+
+      // DOM 还未更新
+      console.log(document.getElementById(&#39;counter&#39;).textContent) // 0
+
+      await nextTick()
+      // DOM 此时已经更新
+      console.log(document.getElementById(&#39;counter&#39;).textContent) // 1
+    &#125;
+  &#125;
+&#125;
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button id=&quot;counter&quot; @click=&quot;increment&quot;&gt;&#123;&#123; count &#125;&#125;&lt;/button&gt;
+&lt;/template&gt;
+</code></pre>
+
+    </div>
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
 </div>
                             
     <footer id="footer">
@@ -288,6 +263,24 @@
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "myblogtalk",
+        owner: "LoopYasa",
+        admin: ["LoopYasa"],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
 
     </body>
 
