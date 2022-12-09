@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Tags: Vue | CHESHIRE
+            Vue3 Teleport | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -137,122 +137,104 @@
 </nav>
                     </div>
                     <div id="main">
-                         
-<div class="categories-tags">
-    
-    <div class="all-s">
-        
-        
-        <span>
-            <a href="/tags/前端/" style="background: #ff7d73">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                前端
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/React/" style="background: #00a596">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                React
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Mobx/" style="background: #ffa2c4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Mobx
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Redux/" style="background: #00a596">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Redux
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/TailwindCSS/" style="background: #ffa2c4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                TailwindCSS
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue3/" style="background: #ff7d73">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue3
-            </a>
-        </span>
-        
+                        
+<div class="article">
+    <div>
+        <h1>Vue3 Teleport </h1>
     </div>
-    <div id="archives">
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/12/9
+        </span>
         
-        <div class="timeline">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2022/11/27</div>
-                <a href="/2022/11/27/twelfth/">
-                    <h3>Vue跳转相同路由刷新问题</h3>
+        <span class="category">
+            <a href="/categories/笔记/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                笔记
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/前端/" style="color: #00bcd4">
+                    前端
                 </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/问题记录/">
-                            <span class="icon">
-                                <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                            </span>
-                            问题记录
-                        </a>
-                    </span>
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Vue/" style="color: #ffa2c4">
-                                Vue
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue3/" style="color: #ff7d73">
+                    Vue3
+                </a>
+            </span>
+            
+        </span>
         
     </div>
+    <div class="content" v-pre>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><code>&lt;Teleport&gt;</code> 是一个内置组件，它可以将一个组件内部的一部分模板“传送”到该组件的 DOM 结构外层的位置去。 </p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>这类场景最常见的例子就是全屏的模态框。理想情况下，我们希望触发模态框的按钮和模态框本身是在同一个组件中，因为它们都与组件的开关状态有关。但这意味着该模态框将与按钮一起渲染在应用 DOM 结构里很深的地方。这会导致该模态框的 CSS 布局代码很难写。 </p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><ul>
+<li><p>外层</p>
+<pre><code class="html">&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+    //等会将会传送到这里哈
+    &lt;div id=&quot;myapp&quot;&gt;&lt;/div&gt;
+ &lt;/body&gt;
+</code></pre>
+</li>
+<li><p>传送组件</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;a-button type=&quot;primary&quot; @click=&quot;openHander&quot;&gt;open&lt;/a-button&gt;
+    &lt;!-- 将内容区域的代码移动到id=myapp下 --&gt;
+    &lt;teleport to=&#39;#myapp&#39;&gt;
+        &lt;div class=&quot;mask&quot; v-if=&quot;showFlag&quot;&gt;
+            &lt;h1&gt;对话框组件&lt;/h1&gt;
+            &lt;div&gt;
+                我是内容哈哈
+            &lt;/div&gt;
+            &lt;a-button  @click=&quot;openHander&quot;&gt;关闭&lt;/a-button&gt;
+        &lt;/div&gt;
+    &lt;/teleport&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import &#123; ref &#125; from &#39;@vue/reactivity&#39;
+export default &#123;
+  setup () &#123;
+    let showFlag=ref(false)
+    const openHander=()=&gt;&#123;
+        showFlag.value=!showFlag.value
+    &#125;
+    return &#123;showFlag,openHander&#125;
+  &#125;
+&#125;
+&lt;/script&gt;
+</code></pre>
+</li>
+</ul>
+<p>在自己使用上比较常见的是弹窗组件，可以直接挂载到最外层进行弹窗。</p>
+
+    </div>
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
 </div>
                             
     <footer id="footer">
@@ -288,6 +270,24 @@
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "myblogtalk",
+        owner: "LoopYasa",
+        admin: ["LoopYasa"],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
 
     </body>
 
