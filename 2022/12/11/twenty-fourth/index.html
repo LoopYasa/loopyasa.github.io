@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Tags: TailwindCSS | CHESHIRE
+            React-Create-App Src 引入目录外部文件冲突问题 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -137,122 +137,60 @@
 </nav>
                     </div>
                     <div id="main">
-                         
-<div class="categories-tags">
-    
-    <div class="all-s">
-        
-        
-        <span>
-            <a href="/tags/前端/" style="background: #ff7d73">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                前端
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/React/" style="background: #ffa2c4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                React
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Mobx/" style="background: #00bcd4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Mobx
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Redux/" style="background: #00bcd4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Redux
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue/" style="background: #ff7d73">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/TailwindCSS/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                TailwindCSS
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue3/" style="background: #ff7d73">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue3
-            </a>
-        </span>
-        
+                        
+<div class="article">
+    <div>
+        <h1>React-Create-App Src 引入目录外部文件冲突问题 </h1>
     </div>
-    <div id="archives">
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/12/11
+        </span>
         
-        <div class="timeline">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2022/11/28</div>
-                <a href="/2022/11/28/thirteenth/">
-                    <h3>TailwindCSS</h3>
+        <span class="category">
+            <a href="/categories/问题/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                问题
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/前端/" style="color: #00a596">
+                    前端
                 </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/问题记录/">
-                            <span class="icon">
-                                <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                            </span>
-                            问题记录
-                        </a>
-                    </span>
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/TailwindCSS/" style="color: #03a9f4">
-                                TailwindCSS
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+            </span>
+            
+        </span>
         
     </div>
+    <div class="content" v-pre>
+        <h2 id="报错原因"><a href="#报错原因" class="headerlink" title="报错原因"></a>报错原因</h2><p>使用 react-create-app 构建的项目，当 src 文件夹下文件想引用 src 文件夹外文件因为官方限制问题会报以下错误。 </p>
+<p><font color=red>Module not found: You attempted to import ****** which falls outside of the project src&#x2F; directory. Relative imports outside of src&#x2F; are not supported. You can either move it inside src&#x2F;, or add a symlink to it from project’s node_modules&#x2F;. </font></p>
+<h2 id="解决方案一"><a href="#解决方案一" class="headerlink" title="解决方案一"></a>解决方案一</h2><p>项目直接 eject 命令，如果之前执行过了产生了 webpack 等文件就不用再执行</p>
+<h2 id="解决方案二"><a href="#解决方案二" class="headerlink" title="解决方案二"></a>解决方案二</h2><p>将 webpack.config.dev 中 ModuleScopePlugin 命令注释掉即可。 </p>
+<pre><code class="webpack.config.dev">//new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
+</code></pre>
+
+    </div>
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
 </div>
                             
     <footer id="footer">
@@ -288,6 +226,24 @@
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "myblogtalk",
+        owner: "LoopYasa",
+        admin: ["LoopYasa"],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
 
     </body>
 
