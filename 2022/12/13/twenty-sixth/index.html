@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            React组件状态 | CHESHIRE
+            Input框设置了value值之后不能根据state值进行更新 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,22 +140,22 @@
                         
 <div class="article">
     <div>
-        <h1>React组件状态 </h1>
+        <h1>Input框设置了value值之后不能根据state值进行更新 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/11/22
+            2022/12/13
         </span>
         
         <span class="category">
-            <a href="/categories/笔记/">
+            <a href="/categories/问题/">
                 <span class="icon">
                     <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
                 </span>
-                笔记
+                问题
             </a>
         </span>
         
@@ -167,14 +167,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #03a9f4">
+                <a href="/tags/前端/" style="color: #ff7d73">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/React/" style="color: #ffa2c4">
+                <a href="/tags/React/" style="color: #00a596">
                     React
                 </a>
             </span>
@@ -183,75 +183,22 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="React类式组件状态"><a href="#React类式组件状态" class="headerlink" title="React类式组件状态"></a>React类式组件状态</h1><p><img src="https://p.sda1.dev/8/980c9178014b10cbbb524e8ff8cfb06d/B%60H2C%60JV4SB%604VYGM_MOYBA.png"></p>
-<h2 id="初始化状态"><a href="#初始化状态" class="headerlink" title="初始化状态"></a>初始化状态</h2><ul>
-<li><p>通过class的实例属性state来初始化 </p>
-</li>
-<li><p>state的值是一个对象结构，表示一个组件可以有多个数据状态</p>
-</li>
-</ul>
-<pre><code class="react">class Counter extends React.Component &#123;
-  // 初始化状态
-  state = &#123;
-    count: 0
-  &#125;
-  render() &#123;
-    return &lt;button&gt;计数器&lt;/button&gt;
-  &#125;
-&#125;
-</code></pre>
-<h2 id="读取状态"><a href="#读取状态" class="headerlink" title="读取状态"></a>读取状态</h2><ul>
-<li>通过this.state来获取状态</li>
-</ul>
-<pre><code class="react">class Counter extends React.Component &#123;
-  // 初始化状态
-  state = &#123;
-    count: 0
-  &#125;
-  render() &#123;
-    // 读取状态
-    return &lt;button&gt;计数器&#123;this.state.count&#125;&lt;/button&gt;
-  &#125;
-&#125;
-</code></pre>
-<h2 id="修改状态"><a href="#修改状态" class="headerlink" title="修改状态"></a>修改状态</h2><ul>
-<li><p>语法</p>
-<p><code>this.setState(&#123; 要修改的部分数据 &#125;)</code></p>
-</li>
-<li><p>setState方法作用 </p>
-</li>
-<li><p>修改state中的数据状态</p>
-</li>
-<li><p>更新UI</p>
-</li>
-<li><p>思想</p>
+        <h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>在react中使用input框，并将value赋值state中的值，但在state中的值改变时并不能使input框中的值改变，类似与vue中的双向绑定</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>使用<code>onChange</code>方法更新</p>
 <ul>
-<li>数据驱动视图，也就是只要修改数据状态，那么页面就会自动刷新，无需手动操作dom</li>
-</ul>
-</li>
-<li><p><code>注意事项</code></p>
-</li>
-</ul>
-<ol>
-<li><strong>不要直接修改state中的值，必须通过setState方法进行修改</strong></li>
-</ol>
-<pre><code class="react">class Counter extends React.Component &#123;
-  // 定义数据
-  state = &#123;
-    count: 0
-  &#125;
-  // 定义修改数据的方法
-  setCount = () =&gt; &#123;
-    this.setState(&#123;
-      count: this.state.count + 1
-    &#125;)
-  &#125;
-  // 使用数据 并绑定事件
-  render () &#123;
-    return &lt;button onClick=&#123;this.setCount&#125;&gt;&#123;this.state.count&#125;&lt;/button&gt;
-  &#125;
-&#125;
+<li><p>input框代码</p>
+<pre><code class="jsx">&lt;input type=&quot;number&quot; value=&#123;this.state.number&#125; ref=&#123;(input) =&gt; (this.input = input)&#125; onBlur=&#123;this.inputOnBlur&#125; onChange=&#123;this.change&#125; /&gt;
 </code></pre>
+</li>
+<li><p>实现onChange绑定的change函数完成赋值</p>
+<pre><code class="jsx">change = (event) =&gt; &#123;
+    this.setState(&#123;
+        number: event.target.value,
+    &#125;);
+&#125;;
+</code></pre>
+</li>
+</ul>
 
     </div>
     
