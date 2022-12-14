@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            TailwindCSS | CHESHIRE
+            Vue3 路由传参 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,22 +140,22 @@
                         
 <div class="article">
     <div>
-        <h1>TailwindCSS </h1>
+        <h1>Vue3 路由传参 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/11/28
+            2022/12/14
         </span>
         
         <span class="category">
-            <a href="/categories/问题记录/">
+            <a href="/categories/笔记/">
                 <span class="icon">
                     <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
                 </span>
-                问题记录
+                笔记
             </a>
         </span>
         
@@ -167,8 +167,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/TailwindCSS/" style="color: #ff7d73">
-                    TailwindCSS
+                <a href="/tags/前端/" style="color: #00a596">
+                    前端
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue3/" style="color: #03a9f4">
+                    Vue3
                 </a>
             </span>
             
@@ -176,23 +183,118 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="Error-PostCSS-plugin-tailwindcss-requires-PostCSS-8"><a href="#Error-PostCSS-plugin-tailwindcss-requires-PostCSS-8" class="headerlink" title="Error: PostCSS plugin tailwindcss requires PostCSS 8."></a>Error: PostCSS plugin tailwindcss requires PostCSS 8.</h1><h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>在vue中使用TailwindCSS时报的错误:</p>
-<pre><code class="error">ERROR  Failed to compile with 1 error                                                                                                            
+        <h2 id="query"><a href="#query" class="headerlink" title="query"></a>query</h2><p>编程式导航 使用<code>router.push</code> 或者 <code>router.replace</code> 的时候，改为对象形式新增<code>query</code> 必须传入一个对象 </p>
+<ul>
+<li>与path配合完成</li>
+<li>刷新后页面参数不丢失</li>
+</ul>
+<pre><code class="vue">// 传参页面
+import &#123; useRouter &#125; from &#39;vue-router&#39;;
+...
+const router = useRouter()
+const toDetail = (item: Item) =&gt; &#123;
+    router.push(&#123;
+        path: &#39;/info&#39;,
+        query: item
+    &#125;)
+&#125;
+
+// 接参页面
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;div&gt;ID：&#123;&#123;route.query?.id&#125;&#125;&lt;/div&gt;
+        &lt;div&gt;名称：&#123;&#123;route.query?.name&#125;&#125;&lt;/div&gt;
+        &lt;div&gt;价格：&#123;&#123;route.query?.price&#125;&#125;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
  
- error  in ./node_modules/tailwindcss/tailwind.css
- 
-Error: PostCSS plugin tailwindcss requires PostCSS 8.
-Migration guide for end-users:
-https://github.com/postcss/postcss/wiki/PostCSS-8-for-end-users
- 
- 
- @ ./src/main.js 7:0-34
- @ multi (webpack)-dev-server/client?http://192.168.28.203:8099/sockjs-node (webpack)/hot/dev-server.js ./src/main.js
+&lt;script setup lang=&#39;ts&#39;&gt;
+import &#123; useRoute &#125; from &#39;vue-router&#39;;
+
+const route = useRoute()
 </code></pre>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><pre><code class="bash"># 删除原来安装的包
-npm uninstall tailwindcss postcss autoprefixer
-# 安装低版本包
-npm install tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+<h2 id="params"><a href="#params" class="headerlink" title="params"></a>params</h2><p>编程式导航 使用<code>router.push</code> 或者 <code>router.replace</code> 的时候，改为对象形式并且只能使用<code>name</code>，path无效，然后传入<code>params</code> </p>
+<ul>
+<li>与name配合完成</li>
+<li>刷新后页面参数回丢失</li>
+</ul>
+<pre><code class="vue">// 传参页面
+import &#123; useRouter &#125; from &#39;vue-router&#39;;
+
+const router = useRouter()
+const toDetail = (item: Item) =&gt; &#123;
+    router.push(&#123;
+        name: &#39;Info&#39;,
+        params: item
+    &#125;)
+&#125;
+
+// 接参页面
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;div&gt;ID：&#123;&#123;route.params?.id&#125;&#125;&lt;/div&gt;
+        &lt;div&gt;名称：&#123;&#123;route.params?.name&#125;&#125;&lt;/div&gt;
+        &lt;div&gt;价格：&#123;&#123;route.params?.price&#125;&#125;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+ 
+&lt;script setup lang=&#39;ts&#39;&gt;
+import &#123; useRoute &#125; from &#39;vue-router&#39;;
+const route = useRoute()
+ 
+&lt;/script&gt;
+</code></pre>
+<h2 id="动态传参"><a href="#动态传参" class="headerlink" title="动态传参"></a>动态传参</h2><pre><code class="typescript">// router.ts
+import &#123; createRouter, createWebHistory, RouteRecordRaw &#125; from &quot;vue-router&quot;;
+ 
+const routes: Array&lt;RouteRecordRaw&gt; = [&#123;
+    path: &#39;/&#39;,
+    name: &#39;table&#39;,
+    component: () =&gt; import(&#39;@/view/Table/index.vue&#39;)
+&#125;, &#123;
+    path: &#39;/info/:id&#39;,
+    name: &#39;Info&#39;,
+    component: () =&gt; import(&#39;@/view/Table/info.vue&#39;)
+&#125;,
+...
+]
+ 
+const router = createRouter(&#123;
+    history: createWebHistory(),
+    routes
+&#125;)
+ 
+export default router
+
+// 传参页面
+import &#123; useRouter &#125; from &#39;vue-router&#39;;
+
+const router = useRouter()
+const toDetail = (item: Item) =&gt; &#123;
+    router.push(&#123;
+        name: &#39;Info&#39;,
+        params: &#123;id: item.id&#125;
+    &#125;)
+&#125;
+</code></pre>
+<pre><code class="vue">// 接收参数页面
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;div&gt;ID：&#123;&#123; item?.id &#125;&#125;&lt;/div&gt;
+        &lt;div&gt;名称：&#123;&#123; item?.name &#125;&#125;&lt;/div&gt;
+        &lt;div&gt;价格：&#123;&#123; item?.price &#125;&#125;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+ 
+&lt;script setup lang=&#39;ts&#39;&gt;
+import &#123; useRoute &#125; from &#39;vue-router&#39;;
+import &#123; data &#125; from &#39;./data.json&#39;
+
+const route = useRoute()
+// 模拟根据id获取数据
+const item = data.find(v =&gt; v.id === Number(route.params.id))
+ 
+&lt;/script&gt;
 </code></pre>
 
     </div>
