@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Tags: Node | CHESHIRE
+            Vue使用Element-UI中的$message反复弹窗问题 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -137,139 +137,127 @@
 </nav>
                     </div>
                     <div id="main">
-                         
-<div class="categories-tags">
-    
-    <div class="all-s">
-        
-        
-        <span>
-            <a href="/tags/前端/" style="background: #03a9f4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                前端
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/React/" style="background: #00bcd4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                React
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Redux/" style="background: #ff7d73">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Redux
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue3/" style="background: #03a9f4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue3
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Mobx/" style="background: #00bcd4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Mobx
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/TailwindCSS/" style="background: #00bcd4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                TailwindCSS
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Vue/" style="background: #00bcd4">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Vue
-            </a>
-        </span>
-        
-        
-        <span>
-            <a href="/tags/Node/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                </span>
-                Node
-            </a>
-        </span>
-        
+                        
+<div class="article">
+    <div>
+        <h1>Vue使用Element-UI中的$message反复弹窗问题 </h1>
     </div>
-    <div id="archives">
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/12/15
+        </span>
         
-        <div class="timeline">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2022/12/12</div>
-                <a href="/2022/12/12/twenty-fifth/">
-                    <h3>ERESOLVE Unable to Resolve Dependency Tree</h3>
+        <span class="category">
+            <a href="/categories/问题/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                问题
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/前端/" style="color: #ff7d73">
+                    前端
                 </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/问题/">
-                            <span class="icon">
-                                <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                            </span>
-                            问题
-                        </a>
-                    </span>
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/前端/" style="color: #03a9f4">
-                                前端
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Node/" style="color: #00a596">
-                                Node
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue/" style="color: #00bcd4">
+                    Vue
+                </a>
+            </span>
+            
+        </span>
         
     </div>
+    <div class="content" v-pre>
+        <h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>操作过程中连续点击按钮弹出很多错误提示或者函数执行多次产生很多错误提示弹窗不友好</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
+<li><strong>在util里新建一个resetMessage.js 文件</strong></li>
+</ul>
+<pre><code class="vue">import &#123; Message &#125; from &quot;element-ui&quot;;
+let messageInstance = null;
+let mainMessage = function DoneMessage(options) &#123;
+  //如果弹窗已存在先关闭
+  if (messageInstance) &#123;
+    messageInstance.close();
+  &#125;
+  messageInstance = Message(options);
+&#125;
+let arr = [&#39;success&#39;, &#39;warning&#39;, &#39;info&#39;, &#39;error&#39;];
+arr.forEach(function (type) &#123;
+  mainMessage[type] = function (options) &#123;
+    if (typeof options === &#39;string&#39;) &#123;
+      options = &#123;
+        message: options
+      &#125;;
+    &#125;
+    options.type = type;
+    return mainMessage(options);
+  &#125;;
+&#125;);
+export const message = mainMessage;
+</code></pre>
+<ul>
+<li><strong>在main.js引用</strong></li>
+</ul>
+<pre><code class="vue">import &#123; message &#125; from &#39;./utils/message&#39;
+Vue.use(ElementUI)
+Vue.prototype.$message = message;
+</code></pre>
+
+    </div>
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+
+</div>
+
+    </div>
+
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
 </div>
                             
     <footer id="footer">
@@ -305,6 +293,24 @@
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "myblogtalk",
+        owner: "LoopYasa",
+        admin: ["LoopYasa"],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
 
     </body>
 
