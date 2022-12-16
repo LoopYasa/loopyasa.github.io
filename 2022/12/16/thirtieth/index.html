@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            React-Create-App Src 引入目录外部文件冲突问题 | CHESHIRE
+            Background-Size：cover和contain以及100% | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,22 +140,22 @@
                         
 <div class="article">
     <div>
-        <h1>React-Create-App Src 引入目录外部文件冲突问题 </h1>
+        <h1>Background-Size：cover和contain以及100% </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/11
+            2022/12/16
         </span>
         
         <span class="category">
-            <a href="/categories/问题/">
+            <a href="/categories/笔记/">
                 <span class="icon">
                     <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
                 </span>
-                问题
+                笔记
             </a>
         </span>
         
@@ -172,16 +172,24 @@
                 </a>
             </span>
             
+            <span class="tag">
+                
+                <a href="/tags/CSS/" style="color: #00bcd4">
+                    CSS
+                </a>
+            </span>
+            
         </span>
         
     </div>
     <div class="content" v-pre>
-        <h2 id="报错原因"><a href="#报错原因" class="headerlink" title="报错原因"></a>报错原因</h2><p>使用 react-create-app 构建的项目，当 src 文件夹下文件想引用 src 文件夹外文件因为官方限制问题会报以下错误。 </p>
-<p><font color=red>Module not found: You attempted to import ****** which falls outside of the project src&#x2F; directory. Relative imports outside of src&#x2F; are not supported. You can either move it inside src&#x2F;, or add a symlink to it from project’s node_modules&#x2F;. </font></p>
-<h2 id="解决方案一"><a href="#解决方案一" class="headerlink" title="解决方案一"></a>解决方案一</h2><p>项目直接 eject 命令，如果之前执行过了产生了 webpack 等文件就不用再执行</p>
-<h2 id="解决方案二"><a href="#解决方案二" class="headerlink" title="解决方案二"></a>解决方案二</h2><p>将 webpack.config.dev 中 ModuleScopePlugin 命令注释掉即可。 </p>
-<pre><code class="webpack.config.dev">//new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
-</code></pre>
+        <h2 id="contain"><a href="#contain" class="headerlink" title="contain"></a>contain</h2><p><strong>图片放大至满足背景区域的最小边即止</strong>，当背景区域与背景图片的宽高比不一致的情况下，<strong>背景区域可能会长边下有空白覆盖不全</strong>。</p>
+<h2 id="cover"><a href="#cover" class="headerlink" title="cover"></a>cover</h2><p><strong>图片放大至能满足最大变时为止</strong>，当背景区域与背景图片的宽高比不一致时，<strong>背景图片会在短边下有裁切，显示不全</strong>。 </p>
+<h2 id="百分比"><a href="#百分比" class="headerlink" title="百分比"></a>百分比</h2><p>可以设置两个值</p>
+<ul>
+<li>第一个设置宽度，第二个设置高度</li>
+<li>如果只设置了一个值，那么第二个值默认会被设置为<code>auto</code></li>
+</ul>
 
     </div>
 
