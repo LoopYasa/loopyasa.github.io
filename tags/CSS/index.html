@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Vue3 响应式 | CHESHIRE
+            Tags: CSS | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -137,183 +137,149 @@
 </nav>
                     </div>
                     <div id="main">
-                        
-<div class="article">
-    <div>
-        <h1>Vue3 响应式 </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/11/29
-        </span>
+                         
+<div class="categories-tags">
+    
+    <div class="all-s">
         
-        <span class="category">
-            <a href="/categories/笔记/">
+        
+        <span>
+            <a href="/tags/前端/" style="background: #00bcd4">
                 <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
                 </span>
-                笔记
+                前端
             </a>
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/前端/" style="color: #ffa2c4">
-                    前端
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Vue3/" style="color: #ffa2c4">
-                    Vue3
-                </a>
-            </span>
-            
+        <span>
+            <a href="/tags/React/" style="background: #03a9f4">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                React
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/Redux/" style="background: #00a596">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                Redux
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/Vue3/" style="background: #00a596">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                Vue3
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/Mobx/" style="background: #00a596">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                Mobx
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/TailwindCSS/" style="background: #ffa2c4">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                TailwindCSS
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/Vue/" style="background: #03a9f4">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                Vue
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/Node/" style="background: #03a9f4">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                Node
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/CSS/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                CSS
+            </a>
         </span>
         
     </div>
-    <div class="content" v-pre>
-        <h1 id="Ref-isRef-customRef-shallowRef-triggerRef"><a href="#Ref-isRef-customRef-shallowRef-triggerRef" class="headerlink" title="Ref isRef customRef shallowRef triggerRef"></a>Ref isRef customRef shallowRef triggerRef</h1><h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ol>
-<li>接受一个内部值并返回一个响应式且可变的 ref 对象。ref 对象仅有一个 <code>.value</code> property，指向该内部值。 </li>
-<li>如果将对象分配为 ref 值，则它将被 <code>reactive</code> 函数处理为深层的响应式对象。 </li>
-<li>template 内使用 ref 对象，会自动解包。</li>
-</ol>
-<p><strong>示例代码</strong></p>
-<pre><code class="vue">&lt;template&gt;
-  &lt;div&gt;
-    &#123;&#123;Reftest&#125;&#125;
-  &lt;/div&gt;
-&lt;/template&gt;
-&lt;script lang=&#39;ts&#39; setup&gt;
-import &#123; ref,isReactive &#125; from &#39;vue&#39;;
-const Reftest = ref(&#39;test&#39;)
-console.log(Redf.value);
-&lt;/script&gt;
-</code></pre>
-<p><strong>在阅读源码后知道了Ref在接收对象和数组这些引用类型数据时自己也会调用Reactive，相对比shallowRef则没有调用。</strong></p>
-<h2 id="isRef"><a href="#isRef" class="headerlink" title="isRef"></a>isRef</h2><ol>
-<li>检查值是否为一个 ref 对象。</li>
-</ol>
-<pre><code class="vue">&lt;script lang=&#39;ts&#39; setup&gt;
-import &#123; isRef &#125; from &#39;vue&#39;;
-// ()内例子是上面的。
-console.log(isRef(Reftest));
-&lt;/script&gt;
-</code></pre>
-<h2 id="cusomRef"><a href="#cusomRef" class="headerlink" title="cusomRef"></a>cusomRef</h2><ol>
-<li>创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。它需要一个工厂函数，该函数接收 track 和 trigger 函数作为参数，并且应该返回一个带有 get 和 set 的对象。</li>
-</ol>
-<pre><code class="vue">&lt;script lang=&#39;ts&#39; setup&gt;
-import &#123; useDebouncedRef &#125; from &#39;vue&#39;;
-function useDebouncedRef(value, delay = 200) &#123;
-  let timeout;
-  return customRef((track, trigger) =&gt; &#123;
-    return &#123;
-      get() &#123;
-        return value
-      &#125;,
-      set(newValue) &#123;
-        // 此处可以做一系列操作进行数据处理。
-        // 例子1：使用自定义 ref 通过 v-model 实现 debounce 的示例：
-        clearTimeout(timeout)
-        timeout = setTimeout(() =&gt; &#123;
-          value = newValue
-          trigger()
-        &#125;, delay)
-      &#125;
-    &#125;
-  &#125;)
-&#125;
-let a23 = useDebouncedRef(&#39;hello&#39;)
-&lt;/script&gt;
-</code></pre>
-<h2 id="shallowRef"><a href="#shallowRef" class="headerlink" title="shallowRef"></a>shallowRef</h2><ol>
-<li>如字面意思，浅响应式，如果传入的是基本类型跟 ref 没区别。 </li>
-<li>如果传入的是引用类型，.value值将不会是响应式的数据，ref的 value 属性则会是响应式的。</li>
-</ol>
-<pre><code class="vue">&lt;script lang=&#39;ts&#39; setup&gt;
-import &#123; shallowRef,isReactive &#125; from &#39;vue&#39;;
-const foo = shallowRef(&#123;a:1&#125;)
-// 改变 ref 的值是响应式的
-foo.value = &#123;b:2&#125;
-// 但是这个值不会被转换。
-isReactive(foo.value) // false
-&lt;/script&gt;
-</code></pre>
-<p><strong>在阅读源码之后知道了shallowRef没有调用Reactive，这就导致shallowRef只能浅层次的监听，例如数组、对象这些引用类型里的值发生改变则不能监听到，从而进行响应。</strong></p>
-<h2 id="triggerRef"><a href="#triggerRef" class="headerlink" title="triggerRef"></a>triggerRef</h2><ol>
-<li>手动执行与 shallowRef 关联的任何作用 (effect)。 </li>
-<li>简单讲就是配合 shallowRef 用的，并且 shallowRef 传入的是个引用类型。</li>
-</ol>
-<pre><code class="vue">&lt;script lang=&#39;ts&#39; setup&gt;
-import &#123; shallowRef,watchEffect,triggerRef &#125; from &#39;vue&#39;;
-const shallow = shallowRef(&#123;
-  greet: &#39;Hello, world&#39;
-&#125;)
-watchEffect(() =&gt; &#123;
-  // 第一次运行时记录一次 &quot;Hello, world&quot;
-  console.log(shallow.value.greet)
-&#125;)
-shallow.value.greet = &#39;Hello, universe&#39;
-
-// 首先 watchEffect 追踪的是响应式数据，shallowRef 是浅层的，  
-// 所以当是&#123;&#125;的时候，无法触发 effect ，每次操作 shallow.value 的时候，则需要 triggerRef(shallow) 主动触发执行。  
-// 记住，是每次操作，都需要 triggerRef() 一下
-triggerRef(shallow)
-&lt;/script&gt;
-</code></pre>
-<p><strong>ref底层实现的时候自己就调了该方法，但是shallowRef没有，所以在使用时ref和shallowRef不要一起用</strong></p>
-
+    <div id="archives">
+        
+        <div class="timeline">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2022/12/16</div>
+                <a href="/2022/12/16/twenty-ninth/">
+                    <h3>文字溢出省略号</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/笔记/">
+                            <span class="icon">
+                                <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                            </span>
+                            笔记
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/前端/" style="color: #00bcd4">
+                                前端
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/CSS/" style="color: #00bcd4">
+                                CSS
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
     </div>
-
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
-
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-
-</div>
-
-    </div>
-
-    
-    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
-    <div id="comment">
-        <div id="gitalk-container"></div>
-    </div>
-    
-    
 </div>
                             
     <footer id="footer">
@@ -349,24 +315,6 @@ triggerRef(shallow)
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
-<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
-<script>
-    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
-    
-    const gitalk = new Gitalk({
-        clientID: clientID,
-        clientSecret: clientSecret,
-        repo: "myblogtalk",
-        owner: "LoopYasa",
-        admin: ["LoopYasa"],
-        language: "zh-CN",
-        id: location.pathname,
-        distractionFreeMode: false,
-        
-    })
-    gitalk.render("gitalk-container")
-</script>
-
 
     </body>
 
