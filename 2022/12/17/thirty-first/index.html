@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            React组件状态 | CHESHIRE
+            Pnpm无法加载文件 C\Users *****  因为在此系统上禁止运行脚本。 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,22 +140,22 @@
                         
 <div class="article">
     <div>
-        <h1>React组件状态 </h1>
+        <h1>Pnpm无法加载文件 C\Users *****  因为在此系统上禁止运行脚本。 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/11/22
+            2022/12/17
         </span>
         
         <span class="category">
-            <a href="/categories/笔记/">
+            <a href="/categories/问题/">
                 <span class="icon">
                     <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
                 </span>
-                笔记
+                问题
             </a>
         </span>
         
@@ -167,15 +167,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #ffa2c4">
+                <a href="/tags/前端/" style="color: #00bcd4">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/React/" style="color: #03a9f4">
-                    React
+                <a href="/tags/Node/" style="color: #ffa2c4">
+                    Node
                 </a>
             </span>
             
@@ -183,75 +183,32 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="React类式组件状态"><a href="#React类式组件状态" class="headerlink" title="React类式组件状态"></a>React类式组件状态</h1><p><img src="https://p.sda1.dev/8/980c9178014b10cbbb524e8ff8cfb06d/B%60H2C%60JV4SB%604VYGM_MOYBA.png"></p>
-<h2 id="初始化状态"><a href="#初始化状态" class="headerlink" title="初始化状态"></a>初始化状态</h2><ul>
-<li><p>通过class的实例属性state来初始化 </p>
-</li>
-<li><p>state的值是一个对象结构，表示一个组件可以有多个数据状态</p>
-</li>
-</ul>
-<pre><code class="react">class Counter extends React.Component &#123;
-  // 初始化状态
-  state = &#123;
-    count: 0
-  &#125;
-  render() &#123;
-    return &lt;button&gt;计数器&lt;/button&gt;
-  &#125;
-&#125;
-</code></pre>
-<h2 id="读取状态"><a href="#读取状态" class="headerlink" title="读取状态"></a>读取状态</h2><ul>
-<li>通过this.state来获取状态</li>
-</ul>
-<pre><code class="react">class Counter extends React.Component &#123;
-  // 初始化状态
-  state = &#123;
-    count: 0
-  &#125;
-  render() &#123;
-    // 读取状态
-    return &lt;button&gt;计数器&#123;this.state.count&#125;&lt;/button&gt;
-  &#125;
-&#125;
-</code></pre>
-<h2 id="修改状态"><a href="#修改状态" class="headerlink" title="修改状态"></a>修改状态</h2><ul>
-<li><p>语法</p>
-<p><code>this.setState(&#123; 要修改的部分数据 &#125;)</code></p>
-</li>
-<li><p>setState方法作用 </p>
-</li>
-<li><p>修改state中的数据状态</p>
-</li>
-<li><p>更新UI</p>
-</li>
-<li><p>思想</p>
+        <h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>将代码从git上克隆到本地后使用pnpm安装依赖时报错，具体情况如下</p>
 <ul>
-<li>数据驱动视图，也就是只要修改数据状态，那么页面就会自动刷新，无需手动操作dom</li>
-</ul>
-</li>
-<li><p><code>注意事项</code></p>
-</li>
-</ul>
-<ol>
-<li><strong>不要直接修改state中的值，必须通过setState方法进行修改</strong></li>
-</ol>
-<pre><code class="react">class Counter extends React.Component &#123;
-  // 定义数据
-  state = &#123;
-    count: 0
-  &#125;
-  // 定义修改数据的方法
-  setCount = () =&gt; &#123;
-    this.setState(&#123;
-      count: this.state.count + 1
-    &#125;)
-  &#125;
-  // 使用数据 并绑定事件
-  render () &#123;
-    return &lt;button onClick=&#123;this.setCount&#125;&gt;&#123;this.state.count&#125;&lt;/button&gt;
-  &#125;
-&#125;
+<li><p>首先使用npm命令全局安装pnpm</p>
+<pre><code class="bash">npm install pnpm -g
 </code></pre>
+</li>
+<li><p>然后使用pnpm命令安装本地依赖</p>
+<pre><code class="bash">pnpm install
+</code></pre>
+</li>
+</ul>
+<p><img src="https://p.sda1.dev/8/a987949420d523b349156dc073652f38/@JV_YOYU8PGM%60EBTBB__V1S.png"></p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
+<li><p>在系统中搜索框输入 Windos PowerShell 并以管理员身份运行</p>
+</li>
+<li><p>执行以下命令</p>
+<pre><code class="bash">set-executionpolicy
+</code></pre>
+</li>
+<li><p>根据提示，输入A，回车</p>
+</li>
+</ul>
+<p><img src="https://p.sda1.dev/8/fd137a32cc9ed5e027328f16b1fdf430/A3%60__W7_LL%60P~J9O98RH4PA.png"></p>
+<p>完成之后返回vscode命令行中执行安装依赖完成</p>
+<p><img src="https://p.sda1.dev/8/5f30ff4e36511e8eb852c4102cc3b9f7/57V_LSTYHNF7_P9~T7M47~U.png"></p>
+<p><font color=red> 不只是pnpm命令，包括cnpm、yarn等这些命令，如果执行时，报这样的错误，都可以通过此方法解决。 前提是，如果是用npm命令来安装这些cli命令工具，必须安装到全局环境中，才能生效。 </font></p>
 
     </div>
 
