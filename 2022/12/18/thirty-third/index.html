@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            ERESOLVE Unable to Resolve Dependency Tree | CHESHIRE
+            修改Element样式的集中方法 | CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -140,22 +140,22 @@
                         
 <div class="article">
     <div>
-        <h1>ERESOLVE Unable to Resolve Dependency Tree </h1>
+        <h1>修改Element样式的集中方法 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/12
+            2022/12/18
         </span>
         
         <span class="category">
-            <a href="/categories/问题/">
+            <a href="/categories/笔记/">
                 <span class="icon">
                     <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
                 </span>
-                问题
+                笔记
             </a>
         </span>
         
@@ -167,15 +167,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #00bcd4">
+                <a href="/tags/前端/" style="color: #ff7d73">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Node/" style="color: #03a9f4">
-                    Node
+                <a href="/tags/CSS/" style="color: #ffa2c4">
+                    CSS
                 </a>
             </span>
             
@@ -183,15 +183,85 @@
         
     </div>
     <div class="content" v-pre>
-        <h2 id="报错原因"><a href="#报错原因" class="headerlink" title="报错原因"></a>报错原因</h2><p>在clone项目后安装依赖报的错误</p>
-<p>原因： <strong>ERESOLVE与npm@7有关的问题很常见，因为npm7.x对某些事情比npm6.x更严格</strong></p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
-<li><p>删除node_modules和package-lock.json </p>
-</li>
-<li><p>降级npm到6版本或使用npx指定npm的版本</p>
-</li>
+        <h2 id="Vue中修改样式"><a href="#Vue中修改样式" class="headerlink" title="Vue中修改样式"></a>Vue中修改样式</h2><pre><code class="css">// 第一种/deep/
+/deep/ .test &#123;
+ ***
+&#125;
+
+// 第二种::v-deep
+::v-deep .test&#123;
+ ***
+&#125;
+</code></pre>
+<h2 id="table样式修改"><a href="#table样式修改" class="headerlink" title="table样式修改"></a>table样式修改</h2><p>在一个有时候会遇到修改<code>elementui</code>中<code>table</code>的全部样式，下面就来对应的去修改下的： </p>
+<ul>
+<li>修改<strong>表格头部</strong>背景</li>
 </ul>
-<pre><code class="bash">npx -p npm@6 npm i --legacy-peer-deps
+<pre><code class="css">::v-deep .el-table th&#123;
+    background: orange;
+&#125;
+</code></pre>
+<ul>
+<li>修改<strong>表格行</strong>背景</li>
+</ul>
+<pre><code class="css">::v-deep .el-table tr&#123;
+   background: #eee;
+&#125;
+</code></pre>
+<ul>
+<li>修改<strong>斑马线表格</strong>的背景</li>
+</ul>
+<pre><code class="css">::v-deep .el-table--striped .el-table__body tr.el-table__row--striped td &#123;
+    background: #ccc;
+&#125;
+</code></pre>
+<ul>
+<li>修改<strong>行内线</strong>的颜色</li>
+</ul>
+<pre><code class="css">::v-deep .el-table td,.building-top .el-table th.is-leaf &#123;
+    border-bottom:  2px solid #eee;
+&#125;
+</code></pre>
+<ul>
+<li>修改<strong>表格最底部边框</strong>颜色和高度</li>
+</ul>
+<pre><code class="css">::v-deep .el-table::before&#123;
+   border-bottom:  1px solid #ccc;
+    height: 3px
+&#125;
+</code></pre>
+<ul>
+<li>修改<strong>表头字体</strong>颜色</li>
+</ul>
+<pre><code class="css">::v-deep .el-table thead &#123;
+    color: #ccc;
+    font-weight: 700;
+&#125;
+</code></pre>
+<ul>
+<li>修改<strong>表格内容</strong>字体颜色和字体大小</li>
+</ul>
+<pre><code class="css">::v-deep .el-table&#123;
+    color: #6B91CE;
+    font-size: 14px;
+&#125;
+</code></pre>
+<ul>
+<li>修改<strong>表格无数据的时候</strong>背景，字体颜色</li>
+</ul>
+<pre><code class="css">::v-deep .el-table__empty-block&#123;
+    background: #ccc;
+&#125;
+::v-deep .el-table__empty-text&#123;
+  color: #fff
+&#125;
+</code></pre>
+<ul>
+<li>修改<strong>表格鼠标悬浮</strong><code>hover</code>背景色</li>
+</ul>
+<pre><code class="css">::v-deep .el-table--enable-row-hover .el-table__body tr:hover&gt;td &#123;
+    background-color: pink;
+&#125;
 </code></pre>
 
     </div>
