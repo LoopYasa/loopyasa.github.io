@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Vue3 插件 | CHESHIRE
+            CHESHIRE
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="上班坐牢  被迫摸鱼">
@@ -137,79 +137,169 @@
 </nav>
                     </div>
                     <div id="main">
-                        
-<div class="article">
-    <div>
-        <h1>Vue3 插件 </h1>
+                        <div id="home-head">
+    <div id="home-background" style="background-image: url(/img/backgroundimg.png)"></div>
+    
+    <div id="home-info" class="home-info" @click="home_click">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>CHESHIRE</h1>
+                <h3></h3>
+                <h5>上班坐牢  被迫摸鱼</h5>
+            </div>
+        </span>
     </div>
-    <div class="info">
+    
+</div>
+
+<div id="home-posts-wrap" class="">
+    <div id="home-posts">
+        <div id="posts">
+            
+
+<div class="post">
+    <a href="/2022/11/21/second/">
+        <h2 class="post-title">React脚手架</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/笔记/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                笔记
+            </a>
+        </span>
+        
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/2
+            2022/11/21
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <p>开始重新搭配React18复习React相关知识</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
         </span>
         
-        <span class="category">
-            <a href="/categories/插件/">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                </span>
-                插件
+        
+        <span class="tag">
+            
+            <a href="/tags/前端/" style="color: #ffa2c4">
+                前端
             </a>
         </span>
         
-        
-        <span class="tags">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-            </span>
+        <span class="tag">
             
-            <span class="tag">
-                
-                <a href="/tags/前端/" style="color: #ff7d73">
-                    前端
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Vue3/" style="color: #ffa2c4">
-                    Vue3
-                </a>
-            </span>
-            
+            <a href="/tags/React/" style="color: #03a9f4">
+                React
+            </a>
         </span>
         
     </div>
-    <div class="content" v-pre>
-        <h1 id="unplugin-auto-import-插件安装配置与使用"><a href="#unplugin-auto-import-插件安装配置与使用" class="headerlink" title="unplugin-auto-import 插件安装配置与使用"></a>unplugin-auto-import 插件安装配置与使用</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code class="bash">npm i -D unplugin-auto-import
-</code></pre>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>在vite.config.ts中进行导入并配置</p>
-<pre><code class="typescript">import AutoImport from &#39;unplugin-auto-import/vite&#39;
+    <a href="/2022/11/21/second/" class="go-post">阅读全文</a>
+</div>
 
-export default defineConfig(&#123;
-  plugins: [
-      ...
-    AutoImport(&#123; 
-        /* options */
-        // 这是vue3的配置
-        imports:[&#39;vue&#39;],
-        dts:&quot;src/auto-import.d.ts&quot; // 生成在src路径下名为auto-import.d.ts的声明文件
-     &#125;),
-  ],
-&#125;)
-</code></pre>
-<p>完成之后便可以使用了，在使用vue3中的api时可以无需进行import导入，直接使用就可以了。</p>
-
+             
+<div class="page-current">
+    <div class="prev">
+        
+        <a href="/page/3/">
+            <span class="page-num">
+                <i class="fa-solid fa-caret-left fa-fw"></i>
+            </span>
+        </a>
+        
     </div>
-
-    
-    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
-    <div id="comment">
-        <div id="gitalk-container"></div>
+    <div class="page-index">
+        
+        <span>
+            
+            <a href="/"><span class="page-num">1</span></a>
+            <span class="page-omit">...</span>
+            
+            
+                
+                
+                <a href="/page/2">
+                    <span class="page-num">
+                        2
+                    </span>
+                </a>
+                
+            
+            <a href="/page/3/">
+                <span class="page-num">
+                    3
+                </span>
+            </a>
+        </span>
+        
+        <span class="current">
+            4
+        </span>
+        
+    </div>
+    <div class="next">
+        
+    </div>
+</div>
+        </div>
     </div>
     
+    <div id="home-card">
+        <div id="card-div">
+    <div class="card-style" style="width: 300px">
+        <div class="avatar">
+            <img src="/img/avatar.png " alt="avatar">
+        </div>
+        <div class="name">
+            Cheshire
+        </div>
+        <div class="descriptions">
+            
+            <div class="description">
+                羔羊所到处 必有恶狼随行
+            </div>
+            
+        </div>
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://github.com/LoopYasa">
+                    <i class="fa-brands fa-github fa-fw"></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://twitter.com/LoopYasa">
+                    <i class="fa-brands fa-twitter fa-fw"></i>
+                </a>
+            </span>
+            
+        </div>
+        <div class="friend-links">
+            
+        </div>
+    </div>
+</div>
+    </div>
     
 </div>
                             
@@ -246,24 +336,6 @@ export default defineConfig(&#123;
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
-<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
-<script>
-    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
-    
-    const gitalk = new Gitalk({
-        clientID: clientID,
-        clientSecret: clientSecret,
-        repo: "myblogtalk",
-        owner: "LoopYasa",
-        admin: ["LoopYasa"],
-        language: "zh-CN",
-        id: location.pathname,
-        distractionFreeMode: false,
-        
-    })
-    gitalk.render("gitalk-container")
-</script>
-
 
     </body>
 
