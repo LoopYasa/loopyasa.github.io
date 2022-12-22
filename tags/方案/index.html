@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Vue3 Suspense | Cheshire
+            Tags: 方案 | Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -137,88 +137,179 @@
 </nav>
                     </div>
                     <div id="main">
-                        
-<div class="article">
-    <div>
-        <h1>Vue3 Suspense </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/12/6
-        </span>
+                         
+<div class="categories-tags">
+    
+    <div class="all-s">
         
-        <span class="category">
-            <a href="/categories/笔记/">
+        
+        <span>
+            <a href="/tags/前端/" style="background: #ff7d73">
                 <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
                 </span>
-                笔记
+                前端
             </a>
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/前端/" style="color: #00a596">
-                    前端
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Vue3/" style="color: #00bcd4">
-                    Vue3
-                </a>
-            </span>
-            
+        <span>
+            <a href="/tags/React/" style="background: #ff7d73">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                React
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/Redux/" style="background: #ffa2c4">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                Redux
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/Vue3/" style="background: #00a596">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                Vue3
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/Mobx/" style="background: #ff7d73">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                Mobx
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/TailwindCSS/" style="background: #ffa2c4">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                TailwindCSS
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/Vue/" style="background: #ff7d73">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                Vue
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/Node/" style="background: #00bcd4">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                Node
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/CSS/" style="background: #00bcd4">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                CSS
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/JavaScript/" style="background: #00bcd4">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                JavaScript
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/HTML5/" style="background: #00a596">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                HTML5
+            </a>
+        </span>
+        
+        
+        <span>
+            <a href="/tags/方案/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                </span>
+                方案
+            </a>
         </span>
         
     </div>
-    <div class="content" v-pre>
-        <h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>等待异步组件时渲染一些额外内容，让应用有更好的用户体验 </p>
-<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ul>
-<li><p>异步引入组件</p>
-<pre><code class="vue">import &#123;defineAsyncComponent&#125; from &#39;vue&#39;
-const Child = defineAsyncComponent(()=&gt;import(&#39;./components/Child.vue&#39;))
-</code></pre>
-</li>
-<li><p>使用<code>Suspense</code>包裹组件，并配置好<code>default</code> 与 <code>fallback</code></p>
-</li>
-</ul>
-<pre><code class="vue">&lt;template&gt;
-    &lt;div class=&quot;app&quot;&gt;
-        &lt;h3&gt;我是App组件&lt;/h3&gt;
-        &lt;Suspense&gt;
-            &lt;template v-slot:default&gt;
-                &lt;Child/&gt;
-            &lt;/template&gt;
-            &lt;template v-slot:fallback&gt;
-                &lt;h3&gt;加载中.....&lt;/h3&gt;
-            &lt;/template&gt;
-        &lt;/Suspense&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-</code></pre>
-<p>  <code>fallback</code>是加载等待时显示的组件，而<code>default</code>是加载成功后显示的组件。并且这两个<strong>不可改名</strong>，为定义好的slot具名插槽。</p>
-<p>补充: <font color=red>使用Suspense能缓解首页加载时间，原因是在使用异步组件进行打包时会分开，不用则打成一个js文件。</font></p>
-
+    <div id="archives">
+        
+        <div class="timeline">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2022/12/22</div>
+                <a href="/2022/12/22/thirty-seven/">
+                    <h3>处理请求后数据过量</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/笔记/">
+                            <span class="icon">
+                                <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                            </span>
+                            笔记
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/前端/" style="color: #00bcd4">
+                                前端
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/方案/" style="color: #ff7d73">
+                                方案
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
     </div>
-
-    
-    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
-    <div id="comment">
-        <div id="gitalk-container"></div>
-    </div>
-    
-    
 </div>
                             
     <footer id="footer">
@@ -254,24 +345,6 @@ const Child = defineAsyncComponent(()=&gt;import(&#39;./components/Child.vue&#39
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
-<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
-<script>
-    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
-    
-    const gitalk = new Gitalk({
-        clientID: clientID,
-        clientSecret: clientSecret,
-        repo: "myblogtalk",
-        owner: "LoopYasa",
-        admin: ["LoopYasa"],
-        language: "zh-CN",
-        id: location.pathname,
-        distractionFreeMode: false,
-        
-    })
-    gitalk.render("gitalk-container")
-</script>
-
 
     </body>
 

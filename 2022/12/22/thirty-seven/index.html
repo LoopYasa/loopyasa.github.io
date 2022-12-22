@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Vue3 Suspense | Cheshire
+            处理请求后数据过量 | Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>Vue3 Suspense </h1>
+        <h1>处理请求后数据过量 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/6
+            2022/12/22
         </span>
         
         <span class="category">
@@ -174,8 +174,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/Vue3/" style="color: #00bcd4">
-                    Vue3
+                <a href="/tags/方案/" style="color: #ff7d73">
+                    方案
                 </a>
             </span>
             
@@ -183,32 +183,149 @@
         
     </div>
     <div class="content" v-pre>
-        <h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>等待异步组件时渲染一些额外内容，让应用有更好的用户体验 </p>
-<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ul>
-<li><p>异步引入组件</p>
-<pre><code class="vue">import &#123;defineAsyncComponent&#125; from &#39;vue&#39;
-const Child = defineAsyncComponent(()=&gt;import(&#39;./components/Child.vue&#39;))
+        <p><strong>以下假设getList方法为请求方法，返回大量数据</strong></p>
+<h2 id="直接渲染"><a href="#直接渲染" class="headerlink" title="直接渲染"></a>直接渲染</h2><pre><code class="js">const renderList = async () =&gt; &#123;
+    const list = await getList()
+
+    list.forEach(item =&gt; &#123;
+        const div = document.createElement(&#39;div&#39;)
+        div.className = &#39;sunshine&#39;
+        div.innerHTML = `&lt;img src=&quot;$&#123;item.src&#125;&quot; /&gt;&lt;span&gt;$&#123;item.text&#125;&lt;/span&gt;`
+        container.appendChild(div)
+    &#125;)
+&#125;
+renderList()
 </code></pre>
-</li>
-<li><p>使用<code>Suspense</code>包裹组件，并配置好<code>default</code> 与 <code>fallback</code></p>
-</li>
-</ul>
-<pre><code class="vue">&lt;template&gt;
-    &lt;div class=&quot;app&quot;&gt;
-        &lt;h3&gt;我是App组件&lt;/h3&gt;
-        &lt;Suspense&gt;
-            &lt;template v-slot:default&gt;
-                &lt;Child/&gt;
-            &lt;/template&gt;
-            &lt;template v-slot:fallback&gt;
-                &lt;h3&gt;加载中.....&lt;/h3&gt;
-            &lt;/template&gt;
-        &lt;/Suspense&gt;
+<p>这种方法最为直接但是是不可取的，由于数据量巨大渲染时间会大幅提升。</p>
+<h2 id="通过setTimeout进行分页渲染"><a href="#通过setTimeout进行分页渲染" class="headerlink" title="通过setTimeout进行分页渲染"></a>通过setTimeout进行分页渲染</h2><p>一个简单的优化方法是对数据进行分页。假设每个页面都有limit记录，那么数据可以分为Math.ceil(total&#x2F;limit)个页面。之后，我们可以使用 setTimeout 顺序渲染页面，一次只渲染一个页面。 </p>
+<pre><code class="js">const renderList = async () =&gt; &#123;
+
+    const list = await getList()
+
+    const total = list.length
+    const page = 0
+    const limit = 200
+    const totalPage = Math.ceil(total / limit)
+
+    const render = (page) =&gt; &#123;
+        if (page &gt;= totalPage) return
+        setTimeout(() =&gt; &#123;
+            for (let i = page * limit; i &lt; page * limit + limit; i++) &#123;
+                const item = list[i]
+                const div = document.createElement(&#39;div&#39;)
+                div.className = &#39;sunshine&#39;
+                div.innerHTML = `&lt;img src=&quot;$&#123;item.src&#125;&quot; /&gt;&lt;span&gt;$&#123;item.text&#125;&lt;/span&gt;`
+                container.appendChild(div)
+            &#125;
+            render(page + 1)
+        &#125;, 0)
+    &#125;
+    render(page)
+&#125;
+</code></pre>
+<p>分页后，数据可以快速渲染到屏幕上，减少页面的空白时间。 </p>
+<h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><p>在渲染页面的时候，我们可以使用requestAnimationFrame来代替setTimeout，这样可以减少reflow次数，提高性能。 </p>
+<pre><code class="js">onst renderList = async () =&gt; &#123;
+    const list = await getList()
+
+    const total = list.length
+    const page = 0
+    const limit = 200
+    const totalPage = Math.ceil(total / limit)
+
+    const render = (page) =&gt; &#123;
+        if (page &gt;= totalPage) return
+
+        requestAnimationFrame(() =&gt; &#123;
+            for (let i = page * limit; i &lt; page * limit + limit; i++) &#123;
+                const item = list[i]
+                const div = document.createElement(&#39;div&#39;)
+                div.className = &#39;sunshine&#39;
+                div.innerHTML = `&lt;img src=&quot;$&#123;item.src&#125;&quot; /&gt;&lt;span&gt;$&#123;item.text&#125;&lt;/span&gt;`
+                container.appendChild(div)
+            &#125;
+            render(page + 1)
+        &#125;)
+    &#125;
+    render(page)
+&#125;
+</code></pre>
+<p>window.requestAnimationFrame() 方法告诉浏览器您希望执行动画，并请求浏览器调用指定函数在下一次重绘之前更新动画。该方法将回调作为要在重绘之前调用的参数。 </p>
+<h2 id="文档片段"><a href="#文档片段" class="headerlink" title="文档片段"></a>文档片段</h2><p>以前，每次创建 div 元素时，都会通过 appendChild 将元素直接插入到页面中。但是 appendChild 是一项昂贵的操作。</p>
+<p>实际上，我们可以先创建一个文档片段，在创建了 div 元素之后，再将元素插入到文档片段中。创建完所有 div 元素后，将片段插入页面。这样做还可以提高页面性能。</p>
+<pre><code class="js">
+const renderList = async () =&gt; &#123;
+    console.time(&#39;time&#39;)
+    const list = await getList()
+    console.log(list)
+    const total = list.length
+    const page = 0
+    const limit = 200
+    const totalPage = Math.ceil(total / limit)
+
+    const render = (page) =&gt; &#123;
+        if (page &gt;= totalPage) return
+        requestAnimationFrame(() =&gt; &#123;
+
+            const fragment = document.createDocumentFragment()
+            for (let i = page * limit; i &lt; page * limit + limit; i++) &#123;
+                const item = list[i]
+                const div = document.createElement(&#39;div&#39;)
+                div.className = &#39;sunshine&#39;
+                div.innerHTML = `&lt;img src=&quot;$&#123;item.src&#125;&quot; /&gt;&lt;span&gt;$&#123;item.text&#125;&lt;/span&gt;`
+
+                fragment.appendChild(div)
+            &#125;
+            container.appendChild(fragment)
+            render(page + 1)
+        &#125;)
+    &#125;
+    render(page)
+    console.timeEnd(&#39;time&#39;)
+&#125;
+</code></pre>
+<h2 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h2><p>虽然后端一次返回这么多数据，但用户的屏幕只能同时显示有限的数据。所以我们可以采用延迟加载的策略，根据用户的滚动位置动态渲染数据。</p>
+<p>要获取用户的滚动位置，我们可以在列表末尾添加一个空节点空白。每当视口出现空白时，就意味着用户已经滚动到网页底部，这意味着我们需要继续渲染数据。</p>
+<p>同时，我们可以使用getBoundingClientRect来判断空白是否在页面底部。</p>
+<pre><code class="vue">
+&lt;script setup lang=&quot;ts&quot;&gt;
+import &#123; onMounted, ref, computed &#125; from &#39;vue&#39;
+const getList = () =&gt; &#123;
+  // code as before
+&#125;
+const container = ref&lt;HTMLElement&gt;() // container element
+const blank = ref&lt;HTMLElement&gt;() // blank element
+const list = ref&lt;any&gt;([])
+const page = ref(1)
+const limit = 200
+const maxPage = computed(() =&gt; Math.ceil(list.value.length / limit))
+// List of real presentations
+const showList = computed(() =&gt; list.value.slice(0, page.value * limit))
+const handleScroll = () =&gt; &#123;
+  if (page.value &gt; maxPage.value) return
+  const clientHeight = container.value?.clientHeight
+  const blankTop = blank.value?.getBoundingClientRect().top
+  if (clientHeight === blankTop) &#123;
+    // When the blank node appears in the viewport, the current page number is incremented by 1
+    page.value++
+  &#125;
+&#125;
+onMounted(async () =&gt; &#123;
+  const res = await getList()
+  list.value = res
+&#125;)
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div id=&quot;container&quot; @scroll=&quot;handleScroll&quot; ref=&quot;container&quot;&gt;
+    &lt;div class=&quot;sunshine&quot; v-for=&quot;(item) in showList&quot; :key=&quot;item.tid&quot;&gt;
+      &lt;img :src=&quot;item.src&quot; /&gt;
+      &lt;span&gt;&#123;&#123; item.text &#125;&#125;&lt;/span&gt;
     &lt;/div&gt;
+    &lt;div ref=&quot;blank&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
 &lt;/template&gt;
 </code></pre>
-<p>  <code>fallback</code>是加载等待时显示的组件，而<code>default</code>是加载成功后显示的组件。并且这两个<strong>不可改名</strong>，为定义好的slot具名插槽。</p>
-<p>补充: <font color=red>使用Suspense能缓解首页加载时间，原因是在使用异步组件进行打包时会分开，不用则打成一个js文件。</font></p>
 
     </div>
 
