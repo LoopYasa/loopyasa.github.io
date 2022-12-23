@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            React生命周期 | Cheshire
+            Vue中的组件和插件 | Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>React生命周期 </h1>
+        <h1>Vue中的组件和插件 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/11/23
+            2022/12/23
         </span>
         
         <span class="category">
@@ -174,8 +174,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/React/" style="color: #00bcd4">
-                    React
+                <a href="/tags/Vue/" style="color: #ffa2c4">
+                    Vue
                 </a>
             </span>
             
@@ -183,66 +183,98 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="React生命周期"><a href="#React生命周期" class="headerlink" title="React生命周期"></a>React生命周期</h1><p><img src="https://p.sda1.dev/8/13ebf3d74f6b845d7c84dd434a8a91b9/G0NWQU1%6069NL_3_373TNS0G.png"></p>
-<h2 id="挂载阶段"><a href="#挂载阶段" class="headerlink" title="挂载阶段"></a>挂载阶段</h2><p><img src="https://p.sda1.dev/8/9694e3687ea8096fe8873fd94f58dc7d/Y_A~BYDC3HX7P%60P_I____QO.png"></p>
-<table>
-<thead>
-<tr>
-<th>钩子 函数</th>
-<th>触发时机</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>constructor</td>
-<td>创建组件时，最先执行，初始化的时候只执行一次</td>
-<td>1. 初始化state  2. 创建 Ref 3. 使用 bind 解决 this 指向问题等</td>
-</tr>
-<tr>
-<td>render</td>
-<td>每次组件渲染都会触发</td>
-<td>渲染UI（<strong>注意： 不能在里面调用setState()</strong> ）</td>
-</tr>
-<tr>
-<td>componentDidMount</td>
-<td>组件挂载（完成DOM渲染）后执行，初始化的时候执行一次</td>
-<td>1. 发送网络请求  2.DOM操作</td>
-</tr>
-</tbody></table>
-<h2 id="更新阶段"><a href="#更新阶段" class="headerlink" title="更新阶段"></a>更新阶段</h2><p><img src="https://p.sda1.dev/8/899ae32c7b7dfb9df342a2892ba54d8b/%60X2T@_GZG16_HWZI_G0L~_G.png"></p>
-<table>
-<thead>
-<tr>
-<th>钩子函数</th>
-<th>触发时机</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>render</td>
-<td>每次组件渲染都会触发</td>
-<td>渲染UI（与 挂载阶段 是同一个render）</td>
-</tr>
-<tr>
-<td>componentDidUpdate</td>
-<td>组件更新后（DOM渲染完毕）</td>
-<td>DOM操作，可以获取到更新后的DOM内容，<strong>不要直接调用setState</strong></td>
-</tr>
-</tbody></table>
-<h2 id="卸载阶段"><a href="#卸载阶段" class="headerlink" title="卸载阶段"></a>卸载阶段</h2><table>
-<thead>
-<tr>
-<th>钩子函数</th>
-<th>触发时机</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>componentWillUnmount</td>
-<td>组件卸载（从页面中消失）</td>
-<td>执行清理工作（比如：清理定时器等）</td>
-</tr>
-</tbody></table>
+        <h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>组件就是把图形、非图形的各种逻辑均抽象为一个统一的概念（组件）来实现开发的模式，在<code>Vue</code>中每一个<code>.vue</code>文件都可以视为一个组件 。</p>
+<p><strong>组件优势:</strong></p>
+<ul>
+<li>降低整个系统的耦合度，在保持接口不变的情况下，我们可以替换不同的组件快速完成需求，例如输入框，可以替换为日历、时间、范围等组件作具体的实现</li>
+<li>调试方便，由于整个系统是通过组件组合起来的，在出现问题的时候，可以用排除法直接移除组件，或者根据报错的组件快速定位问题，之所以能够快速定位，是因为每个组件之间低耦合，职责单一，所以逻辑会比分析整个系统要简单</li>
+<li>提高可维护性，由于每个组件的职责单一，并且组件在系统中是被复用的，所以对代码进行优化可获得系统的整体升级</li>
+</ul>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>插件通常用来为 <code>Vue</code> 添加全局功能。插件的功能范围没有严格的限制。</p>
+<ul>
+<li>添加全局方法或者属性。如: <code>vue-custom-element</code></li>
+<li>添加全局资源：指令&#x2F;过滤器&#x2F;过渡等。如 <code>vue-touch</code></li>
+<li>通过全局混入来添加一些组件选项。如<code> vue-router</code></li>
+<li>添加 <code>Vue</code> 实例方法，通过把它们添加到 <code>Vue.prototype</code> 上实现</li>
+<li>一个库，提供自己的 <code>API</code>，同时提供上面提到的一个或多个功能。如<code> vue-router</code></li>
+</ul>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>主要区别以下三点:</p>
+<ul>
+<li>编写形式</li>
+<li>注册形式</li>
+<li>使用场景</li>
+</ul>
+<h3 id="编写形式"><a href="#编写形式" class="headerlink" title="编写形式"></a>编写形式</h3><p><strong>组件</strong></p>
+<p>编写一个组件，可以有很多方式，我们最常见的就是<code>vue</code>单文件的这种格式，每一个<code>.vue</code>文件我们都可以看成是一个组件 </p>
+<pre><code class="vue">// vue文件标准格式
+
+&lt;template&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default&#123; 
+    ...
+&#125;
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;
+</code></pre>
+<p><strong>插件</strong></p>
+<p><code>vue</code>插件的实现应该暴露一个 <code>install</code> 方法。这个方法的第一个参数是 <code>Vue</code> 构造器，第二个参数是一个可选的选项对象 </p>
+<pre><code class="vue">MyPlugin.install = function (Vue, options) &#123;
+  // 1. 添加全局方法或 property
+  Vue.myGlobalMethod = function () &#123;
+    // 逻辑...
+  &#125;
+
+  // 2. 添加全局资源
+  Vue.directive(&#39;my-directive&#39;, &#123;
+    bind (el, binding, vnode, oldVnode) &#123;
+      // 逻辑...
+    &#125;
+    ...
+  &#125;)
+
+  // 3. 注入组件选项
+  Vue.mixin(&#123;
+    created: function () &#123;
+      // 逻辑...
+    &#125;
+    ...
+  &#125;)
+
+  // 4. 添加实例方法
+  Vue.prototype.$myMethod = function (methodOptions) &#123;
+    // 逻辑...
+  &#125;
+&#125;
+</code></pre>
+<h3 id="注册形式"><a href="#注册形式" class="headerlink" title="注册形式"></a>注册形式</h3><p><strong>组件注册</strong></p>
+<p><code>vue</code>组件注册主要分为全局注册与局部注册</p>
+<p>全局注册通过<code>Vue.component</code>方法，第一个参数为组件的名称，第二个参数为传入的配置项</p>
+<pre><code class="vue">Vue.component(&#39;my-component-name&#39;, &#123; /* ... */ &#125;)
+</code></pre>
+<p>局部注册只需在用到的地方通过<code>components</code>属性注册一个组件 </p>
+<pre><code class="vue">const component1 = &#123;...&#125; // 定义一个组件
+
+export default &#123;
+    components:&#123;
+        component1   // 局部注册
+    &#125;
+&#125;
+</code></pre>
+<p><strong>插件注册</strong></p>
+<p>插件的注册通过<code>Vue.use()</code>的方式进行注册（安装），第一个参数为插件的名字，第二个参数是可选择的配置项 </p>
+<pre><code class="vue">Vue.use(插件名字,&#123; /* ... */&#125; )
+</code></pre>
+<p><font color=red>注册插件的时候，需要在调用 <code>new Vue()</code> 启动应用之前完成<code>Vue.use</code>会自动阻止多次注册相同插件，只会注册一次</font></p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
+<li><p>组件 <code>(Component)</code> 是用来构成你的 <code>App</code> 的业务模块，它的目标是 <code>App.vue</code></p>
+</li>
+<li><p>插件 <code>(Plugin)</code> 是用来增强你的技术栈的功能模块，它的目标是 <code>Vue</code> 本身</p>
+</li>
+<li><p>插件就是指对<code>Vue</code>的功能的增强或补充</p>
+</li>
+</ul>
 
     </div>
 
