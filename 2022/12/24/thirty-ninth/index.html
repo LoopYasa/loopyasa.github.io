@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Vue使用Element-UI中的$message反复弹窗问题 | Cheshire
+            Axios封装 | Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -140,22 +140,22 @@
                         
 <div class="article">
     <div>
-        <h1>Vue使用Element-UI中的$message反复弹窗问题 </h1>
+        <h1>Axios封装 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/15
+            2022/12/24
         </span>
         
         <span class="category">
-            <a href="/categories/问题/">
+            <a href="/categories/笔记/">
                 <span class="icon">
                     <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
                 </span>
-                问题
+                笔记
             </a>
         </span>
         
@@ -167,15 +167,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #00a596">
+                <a href="/tags/前端/" style="color: #ffa2c4">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Vue/" style="color: #ff7d73">
-                    Vue
+                <a href="/tags/axios/" style="color: #03a9f4">
+                    axios
                 </a>
             </span>
             
@@ -183,40 +183,156 @@
         
     </div>
     <div class="content" v-pre>
-        <h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>操作过程中连续点击按钮弹出很多错误提示或者函数执行多次产生很多错误提示弹窗不友好</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
-<li><strong>在util里新建一个resetMessage.js 文件</strong></li>
+        <h2 id="如何封装"><a href="#如何封装" class="headerlink" title="如何封装"></a>如何封装</h2><p>设置接口请求前缀：根据开发、测试、生产环境的不同，前缀需要加以区分</p>
+<ul>
+<li><p>请求头 : 来实现一些具体的业务，必须携带一些参数才可以请求(例如：会员业务)</p>
+</li>
+<li><p>状态码: 根据接口返回的不同<code>status</code> ， 来执行不同的业务，这块需要和后端约定好</p>
+</li>
+<li><p>请求方法：根据<code>get</code>、<code>post</code>等方法进行一个再次封装，使用起来更为方便</p>
+</li>
+<li><p>请求拦截器: 根据请求的请求头设定，来决定哪些请求可以访问</p>
+</li>
+<li><p>响应拦截器： 这块就是根据 后端&#96;返回来的状态码判定执行不同业务</p>
+</li>
 </ul>
-<pre><code class="vue">import &#123; Message &#125; from &quot;element-ui&quot;;
-let messageInstance = null;
-let mainMessage = function DoneMessage(options) &#123;
-  //如果弹窗已存在先关闭
-  if (messageInstance) &#123;
-    messageInstance.close();
-  &#125;
-  messageInstance = Message(options);
+<h2 id="设置接口请求前缀"><a href="#设置接口请求前缀" class="headerlink" title="设置接口请求前缀"></a>设置接口请求前缀</h2><p>利用<code>node</code>环境变量来作判断，用来区分开发、测试、生产环境 </p>
+<pre><code class="js">if (process.env.NODE_ENV === &#39;development&#39;) &#123;
+  axios.defaults.baseURL = &#39;http://dev.xxx.com&#39;
+&#125; else if (process.env.NODE_ENV === &#39;production&#39;) &#123;
+  axios.defaults.baseURL = &#39;http://prod.xxx.com&#39;
 &#125;
-let arr = [&#39;success&#39;, &#39;warning&#39;, &#39;info&#39;, &#39;error&#39;];
-arr.forEach(function (type) &#123;
-  mainMessage[type] = function (options) &#123;
-    if (typeof options === &#39;string&#39;) &#123;
-      options = &#123;
-        message: options
-      &#125;;
+</code></pre>
+<p>在本地调试的时候，还需要在<code>vue.config.js</code>文件中配置<code>devServer</code>实现代理转发，从而实现跨域 </p>
+<pre><code class="js">devServer: &#123;
+    proxy: &#123;
+      &#39;/proxyApi&#39;: &#123;
+        target: &#39;http://dev.xxx.com&#39;,
+        changeOrigin: true,
+        pathRewrite: &#123;
+          &#39;/proxyApi&#39;: &#39;&#39;
+        &#125;
+      &#125;
     &#125;
-    options.type = type;
-    return mainMessage(options);
-  &#125;;
-&#125;);
-export const message = mainMessage;
+  &#125;
+</code></pre>
+<h2 id="设置请求头与超时时间"><a href="#设置请求头与超时时间" class="headerlink" title="设置请求头与超时时间"></a>设置请求头与超时时间</h2><p>大部分情况下，请求头都是固定的，只有少部分情况下，会需要一些特殊的请求头，这里将普适性的请求头作为基础配置。当需要特殊请求头时，将特殊请求头作为参数传入，覆盖基础配置 </p>
+<pre><code class="js">const service = axios.create(&#123;
+    ...
+    timeout: 30000,  // 请求 30s 超时
+      headers: &#123;
+        get: &#123;
+          &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded;charset=utf-8&#39;
+          // 在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来
+        &#125;,
+        post: &#123;
+          &#39;Content-Type&#39;: &#39;application/json;charset=utf-8&#39;
+          // 在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来
+        &#125;
+  &#125;,
+&#125;)
+</code></pre>
+<h2 id="封装请求方法"><a href="#封装请求方法" class="headerlink" title="封装请求方法"></a>封装请求方法</h2><p>先引入封装好的方法，在要调用的接口重新封装成一个方法暴露出去 </p>
+<pre><code class="js">// get 请求
+export function httpGet(&#123;
+  url,
+  params = &#123;&#125;
+&#125;) &#123;
+  return new Promise((resolve, reject) =&gt; &#123;
+    axios.get(url, &#123;
+      params
+    &#125;).then((res) =&gt; &#123;
+      resolve(res.data)
+    &#125;).catch(err =&gt; &#123;
+      reject(err)
+    &#125;)
+  &#125;)
+&#125;
+
+// post
+// post请求
+export function httpPost(&#123;
+  url,
+  data = &#123;&#125;,
+  params = &#123;&#125;
+&#125;) &#123;
+  return new Promise((resolve, reject) =&gt; &#123;
+    axios(&#123;
+      url,
+      method: &#39;post&#39;,
+      transformRequest: [function (data) &#123;
+        let ret = &#39;&#39;
+        for (let it in data) &#123;
+          ret += encodeURIComponent(it) + &#39;=&#39; + encodeURIComponent(data[it]) + &#39;&amp;&#39;
+        &#125;
+        return ret
+      &#125;],
+      // 发送的数据
+      data,
+      // �url参数
+      params
+
+    &#125;).then(res =&gt; &#123;
+      resolve(res.data)
+    &#125;)
+  &#125;)
+&#125;
+</code></pre>
+<p>把封装的方法放在一个<code>api.js</code>文件中 </p>
+<pre><code class="js">import &#123; httpGet, httpPost &#125; from &#39;./http&#39;
+export const getorglist = (params = &#123;&#125;) =&gt; httpGet(&#123; url: &#39;apps/api/org/list&#39;, params &#125;)
+</code></pre>
+<p>页面中就能直接调用 </p>
+<pre><code class="js">// .vue
+import &#123; getorglist &#125; from &#39;@/assets/js/api&#39;
+
+getorglist(&#123; id: 200 &#125;).then(res =&gt; &#123;
+  console.log(res)
+&#125;)
+</code></pre>
+<p>这样可以把<code>api</code>统一管理起来，以后维护修改只需要在<code>api.js</code>文件操作即可 </p>
+<h2 id="请求拦截器"><a href="#请求拦截器" class="headerlink" title="请求拦截器"></a>请求拦截器</h2><p>请求拦截器可以在每个请求里加上token，做了统一处理后维护起来也方便 </p>
+<pre><code class="js">// 请求拦截器
+axios.interceptors.request.use(
+  config =&gt; &#123;
+    // 每次发送请求之前判断是否存在token
+    // 如果存在，则统一在http请求的header都加上token，这样后台根据token判断你的登录情况，此处token一般是用户完成登录后储存到localstorage里的
+    token &amp;&amp; (config.headers.Authorization = token)
+    return config
+  &#125;,
+  error =&gt; &#123;
+    return Promise.error(error)
+  &#125;)
+</code></pre>
+<h2 id="相应拦截器"><a href="#相应拦截器" class="headerlink" title="相应拦截器"></a>相应拦截器</h2><p>响应拦截器可以在接收到响应后先做一层操作，如根据状态码判断登录状态、授权 </p>
+<pre><code class="js">// 响应拦截器
+axios.interceptors.response.use(response =&gt; &#123;
+  // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
+  // 否则的话抛出错误
+  if (response.status === 200) &#123;
+    if (response.data.code === 511) &#123;
+      // 未授权调取授权接口
+    &#125; else if (response.data.code === 510) &#123;
+      // 未登录跳转登录页
+    &#125; else &#123;
+      return Promise.resolve(response)
+    &#125;
+  &#125; else &#123;
+    return Promise.reject(response)
+  &#125;
+&#125;, error =&gt; &#123;
+  // 我们可以在这里对异常状态作统一处理
+  if (error.response.status) &#123;
+    // 处理请求失败的情况
+    // 对不同返回码对相应处理
+    return Promise.reject(error.response)
+  &#125;
+&#125;)
 </code></pre>
 <ul>
-<li><strong>在main.js引用</strong></li>
+<li>封装是编程中很有意义的手段，简单的<code>axios</code>封装，就可以让我们可以领略到它的魅力</li>
+<li>封装 <code>axios</code> 没有一个绝对的标准，只要你的封装可以满足你的项目需求，并且用起来方便，那就是一个好的封装方案</li>
 </ul>
-<pre><code class="vue">import &#123; message &#125; from &#39;./utils/message&#39;
-Vue.use(ElementUI)
-Vue.prototype.$message = message;
-</code></pre>
 
     </div>
 
