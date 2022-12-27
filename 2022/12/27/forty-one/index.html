@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Vue3 Teleport | Cheshire
+            Typeof和instanceof | Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>Vue3 Teleport </h1>
+        <h1>Typeof和instanceof </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/9
+            2022/12/27
         </span>
         
         <span class="category">
@@ -167,15 +167,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #ff7d73">
+                <a href="/tags/前端/" style="color: #00bcd4">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Vue3/" style="color: #00a596">
-                    Vue3
+                <a href="/tags/JavaScript/" style="color: #00bcd4">
+                    JavaScript
                 </a>
             </span>
             
@@ -183,49 +183,69 @@
         
     </div>
     <div class="content" v-pre>
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><code>&lt;Teleport&gt;</code> 是一个内置组件，它可以将一个组件内部的一部分模板“传送”到该组件的 DOM 结构外层的位置去。 </p>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>这类场景最常见的例子就是全屏的模态框。理想情况下，我们希望触发模态框的按钮和模态框本身是在同一个组件中，因为它们都与组件的开关状态有关。但这意味着该模态框将与按钮一起渲染在应用 DOM 结构里很深的地方。这会导致该模态框的 CSS 布局代码很难写。 </p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><ul>
-<li><p>外层</p>
-<pre><code class="html">&lt;body&gt;
-    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
-    //等会将会传送到这里哈
-    &lt;div id=&quot;myapp&quot;&gt;&lt;/div&gt;
- &lt;/body&gt;
+        <h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><p><code>typeof</code> 操作符返回一个字符串，表示未经计算的操作数的类型 </p>
+<p>使用方法如下： </p>
+<pre><code class="js">typeof operand
+typeof(operand)
 </code></pre>
-</li>
-<li><p>传送组件</p>
-<pre><code class="vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;a-button type=&quot;primary&quot; @click=&quot;openHander&quot;&gt;open&lt;/a-button&gt;
-    &lt;!-- 将内容区域的代码移动到id=myapp下 --&gt;
-    &lt;teleport to=&#39;#myapp&#39;&gt;
-        &lt;div class=&quot;mask&quot; v-if=&quot;showFlag&quot;&gt;
-            &lt;h1&gt;对话框组件&lt;/h1&gt;
-            &lt;div&gt;
-                我是内容哈哈
-            &lt;/div&gt;
-            &lt;a-button  @click=&quot;openHander&quot;&gt;关闭&lt;/a-button&gt;
-        &lt;/div&gt;
-    &lt;/teleport&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-&lt;script&gt;
-import &#123; ref &#125; from &#39;@vue/reactivity&#39;
-export default &#123;
-  setup () &#123;
-    let showFlag=ref(false)
-    const openHander=()=&gt;&#123;
-        showFlag.value=!showFlag.value
-    &#125;
-    return &#123;showFlag,openHander&#125;
-  &#125;
+<p><code>operand</code>表示对象或原始值的表达式，其类型将被返回 </p>
+<pre><code class="js">typeof 1 // &#39;number&#39;
+typeof &#39;1&#39; // &#39;string&#39;
+typeof undefined // &#39;undefined&#39;
+typeof true // &#39;boolean&#39;
+typeof Symbol() // &#39;symbol&#39;
+typeof null // &#39;object&#39;
+typeof [] // &#39;object&#39;
+typeof &#123;&#125; // &#39;object&#39;
+typeof console // &#39;object&#39;
+typeof console.log // &#39;function&#39;
+</code></pre>
+<p>从上面例子，前6个都是基础数据类型。虽然<code>typeof null</code>为<code>object</code>，但这只是<code> JavaScript</code> 存在的一个悠久 <code>Bug</code>，不代表<code>null </code>就是引用数据类型，并且<code>null </code>本身也不是对象</p>
+<p>所以，<code>null </code>在 <code>typeof </code>之后返回的是有问题的结果，不能作为判断<code>null</code>的方法。如果你需要在 <code>if</code> 语句中判断是否为 <code>null</code>，直接通过<code>===null</code>来判断就好</p>
+<p>同时，可以发现引用类型数据，用<code>typeof</code>来判断的话，除了<code>function</code>会被识别出来之外，其余的都输出<code>object</code></p>
+<p>如果我们想要判断一个变量是否存在，可以使用<code>typeof</code>：(不能使用<code>if(a)</code>， 若<code>a</code>未声明，则报错)</p>
+<pre><code class="js">if(typeof a != &#39;undefined&#39;)&#123;
+    //变量存在
 &#125;
-&lt;/script&gt;
 </code></pre>
-</li>
+<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><p><code>instanceof</code> 运算符用于检测构造函数的 <code>prototype</code> 属性是否出现在某个实例对象的原型链上 </p>
+<p>使用如下： </p>
+<pre><code class="js">object instanceof constructor
+</code></pre>
+<p><code>object</code>为实例对象，<code>constructor</code>为构造函数</p>
+<p>构造函数通过<code>new</code>可以实例对象，<code>instanceof </code>能判断这个对象是否是之前那个构造函数生成的对象</p>
+<pre><code class="js">// 定义构建函数
+let Car = function() &#123;&#125;
+let benz = new Car()
+benz instanceof Car // true
+let car = new String(&#39;xxx&#39;)
+car instanceof String // true
+let str = &#39;xxx&#39;
+str instanceof String // false
+</code></pre>
+<h2 id="两者的区别"><a href="#两者的区别" class="headerlink" title="两者的区别"></a>两者的区别</h2><p><code>typeof</code>与<code>instanceof</code>都是判断数据类型的方法，区别如下：</p>
+<ul>
+<li><code>typeof</code>会返回一个变量的基本类型，<code>instanceof</code>返回的是一个布尔值</li>
+<li><code>instanceof</code> 可以准确地判断复杂引用数据类型，但是不能正确判断基础数据类型</li>
+<li>而<code> typeof</code> 也存在弊端，它虽然可以判断基础数据类型（<code>null</code> 除外），但是引用数据类型中，除了<code> function</code> 类型以外，其他的也无法判断</li>
 </ul>
-<p>在自己使用上比较常见的是弹窗组件，可以直接挂载到最外层进行弹窗。</p>
+<h2 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h2><p>可以看到，<code>typeof</code>与<code>instanceof</code>都有弊端，并不能满足所有场景的需求</p>
+<p>如果需要通用检测数据类型，可以采用<code>Object.prototype.toString</code>，调用该方法，统一返回格式<code>“[object Xxx]” </code>的字符串</p>
+<p>如下</p>
+<pre><code class="js">Object.prototype.toString(&#123;&#125;)       // &quot;[object Object]&quot;
+Object.prototype.toString.call(&#123;&#125;)  // 同上结果，加上call也ok
+Object.prototype.toString.call(1)    // &quot;[object Number]&quot;
+Object.prototype.toString.call(&#39;1&#39;)  // &quot;[object String]&quot;
+Object.prototype.toString.call(true)  // &quot;[object Boolean]&quot;
+Object.prototype.toString.call(function()&#123;&#125;)  // &quot;[object Function]&quot;
+Object.prototype.toString.call(null)   //&quot;[object Null]&quot;
+Object.prototype.toString.call(undefined) //&quot;[object Undefined]&quot;
+Object.prototype.toString.call(/123/g)    //&quot;[object RegExp]&quot;
+Object.prototype.toString.call(new Date()) //&quot;[object Date]&quot;
+Object.prototype.toString.call([])       //&quot;[object Array]&quot;
+Object.prototype.toString.call(document)  //&quot;[object HTMLDocument]&quot;
+Object.prototype.toString.call(window)   //&quot;[object Window]&quot;
+</code></pre>
 
     </div>
 
