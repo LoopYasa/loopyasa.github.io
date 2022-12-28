@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Vue3 自定义指令 | Cheshire
+            Git Rebase和git Merge | Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>Vue3 自定义指令 </h1>
+        <h1>Git Rebase和git Merge </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/5
+            2022/12/28
         </span>
         
         <span class="category">
@@ -167,15 +167,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #03a9f4">
+                <a href="/tags/前端/" style="color: #00a596">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Vue3/" style="color: #03a9f4">
-                    Vue3
+                <a href="/tags/Git/" style="color: #03a9f4">
+                    Git
                 </a>
             </span>
             
@@ -183,66 +183,25 @@
         
     </div>
     <div class="content" v-pre>
-        <h2 id="自定义指令directive"><a href="#自定义指令directive" class="headerlink" title="自定义指令directive"></a>自定义指令directive</h2><p>在Vue中除了像v-model 和 v-show这样的默认内置的指令外， Vue 也允许注册自定义指令。自定义指令用于对DOM 元素进行底层操作。 </p>
-<h2 id="局部自定义指令"><a href="#局部自定义指令" class="headerlink" title="局部自定义指令"></a>局部自定义指令</h2><p>局部自定义指令类似局部组件，组件使用directives进行引用 </p>
-<p><strong>定义</strong></p>
-<pre><code class="vue">
-const vMoveDirective: Directive = &#123;
-  created: () =&gt; &#123;
-    console.log(&quot;初始化====&gt;&quot;);
-  &#125;,
-  beforeMount(...args: Array&lt;any&gt;) &#123;
-    // 在元素上做些操作
-    console.log(&quot;初始化一次=======&gt;&quot;);
-  &#125;,
-  mounted(el: any, dir: DirectiveBinding&lt;Value&gt;) &#123;
-    el.style.background = dir.value.background;
-    console.log(&quot;初始化========&gt;&quot;);
-  &#125;,
-  beforeUpdate() &#123;
-    console.log(&quot;更新之前&quot;);
-  &#125;,
-  updated() &#123;
-    console.log(&quot;更新结束&quot;);
-  &#125;,
-  beforeUnmount(...args: Array&lt;any&gt;) &#123;
-    console.log(args);
-    console.log(&quot;======&gt;卸载之前&quot;);
-  &#125;,
-  unmounted(...args: Array&lt;any&gt;) &#123;
-    console.log(args);
-    console.log(&quot;======&gt;卸载完成&quot;);
-  &#125;,
-</code></pre>
-<p><strong>使用</strong></p>
-<pre><code class="vue">&lt;template&gt;
-  &lt;button @click=&quot;show = !show&quot;&gt;开关&#123;&#123;show&#125;&#125; ----- &#123;&#123;title&#125;&#125;&lt;/button&gt;
-  &lt;Dialog  v-move-directive=&quot;&#123;background:&#39;green&#39;,flag:show&#125;&quot;&gt;&lt;/Dialog&gt;
-&lt;/template&gt;
-</code></pre>
-<h2 id="全局自定义指令"><a href="#全局自定义指令" class="headerlink" title="全局自定义指令"></a>全局自定义指令</h2><ul>
-<li>在main.js中添加全局directive </li>
-<li>在3.0中创建vue实例的方式不再是new Vue，而是使用<code>createApp</code>方法进行创建</li>
+        <h2 id="介绍与使用"><a href="#介绍与使用" class="headerlink" title="介绍与使用"></a>介绍与使用</h2><p>在使用 <code>git</code> 进行版本管理的项目中，当完成一个特性的开发并将其合并到 <code>master</code> 分支时，会有两种方式： </p>
+<ul>
+<li>git merge</li>
+<li>git rebase</li>
 </ul>
-<p><strong>创建</strong></p>
-<pre><code class="vue">import &#123; createApp &#125; from &#39;vue&#39;
-import App from &#39;./App.vue&#39;
-
-const app = createApp(App)
-
-app.directive(&#39;focus&#39;, &#123;
-    mounted(el) &#123;
-        console.log(el);
-        el.focus()
-    &#125;
-&#125;)
-app.mount(&#39;#app&#39;)
+<p><code>git rebase</code> 与 <code>git merge</code>都有相同的作用，都是将一个分支的提交合并到另一分支上，但是在原理上却不相同 </p>
+<p>以下是用法:</p>
+<h3 id="git-merge"><a href="#git-merge" class="headerlink" title="git merge"></a><strong>git merge</strong></h3><p>将当前分支合并到指定分支，命令用法如下： </p>
+<pre><code class="git">git merge xxx
 </code></pre>
-<p><strong>其它组件内使用</strong></p>
-<pre><code class="vue">&lt;template&gt;
-    &lt;input v-focus&gt;
-&lt;/template&gt;
+<h3 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a><strong>git rebase</strong></h3><p>将当前分支移植到指定分支或指定<code>commit</code>之上，用法如下： </p>
+<pre><code class="git">git rebase -i &lt;commit&gt;
 </code></pre>
+<p>常见的参数有<code>--continue</code>，用于解决冲突之后，继续执行<code>rebase</code> </p>
+<pre><code class="git">git rebase --continue
+</code></pre>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p><code>merge</code>和<code>rebasea</code>都是合并历史记录，但是各自特性不同。</p>
+<h3 id="git-merge-1"><a href="#git-merge-1" class="headerlink" title="git merge"></a><strong>git merge</strong></h3><p>通过<code>merge</code>合并分支会新增一个<code>merge commit</code>，然后将两个分支的历史联系起来，其实是一种非破坏性的操作，对现有分支不会以任何方式被更改，但是会导致历史记录相对复杂。</p>
+<h3 id="git-rebase-1"><a href="#git-rebase-1" class="headerlink" title="git rebase"></a><strong>git rebase</strong></h3><p><code>rebase </code>会将整个分支移动到另一个分支上，有效地整合了所有分支上的提交，主要的好处是历史记录更加清晰，是在原有提交的基础上将差异内容反映进去，消除了 <code>git merge</code>所需的不必要的合并提交。</p>
 
     </div>
 

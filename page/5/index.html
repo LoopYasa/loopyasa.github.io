@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Vue3 自定义指令 | Cheshire
+            Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -137,18 +137,35 @@
 </nav>
                     </div>
                     <div id="main">
-                        
-<div class="article">
-    <div>
-        <h1>Vue3 自定义指令 </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/12/5
+                        <div id="home-head">
+    <div id="home-background" style="background-image: url(/img/backgroundimg.png)"></div>
+    
+    <div id="home-info" class="home-info" @click="home_click">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>Cheshire</h1>
+                <h3></h3>
+                <h5>Failure always throughout one&#39;s life</h5>
+            </div>
         </span>
+    </div>
+    
+</div>
+
+<div id="home-posts-wrap" class="">
+    <div id="home-posts">
+        <div id="posts">
+            
+
+<div class="post">
+    <a href="/2022/11/21/second/">
+        <h2 class="post-title">React脚手架</h2>
+    </a>
+    <div class="category-and-date">
         
         <span class="category">
             <a href="/categories/笔记/">
@@ -159,99 +176,142 @@
             </a>
         </span>
         
-        
-        <span class="tags">
+        <span class="date">
             <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
+            2022/11/21
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
             
-            <span class="tag">
-                
-                <a href="/tags/前端/" style="color: #03a9f4">
-                    前端
-                </a>
-            </span>
+            <p>开始重新搭配React18复习React相关知识</p>
+
             
-            <span class="tag">
-                
-                <a href="/tags/Vue3/" style="color: #03a9f4">
-                    Vue3
-                </a>
-            </span>
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
             
+            <a href="/tags/前端/" style="color: #ffa2c4">
+                前端
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/React/" style="color: #ff7d73">
+                React
+            </a>
         </span>
         
     </div>
-    <div class="content" v-pre>
-        <h2 id="自定义指令directive"><a href="#自定义指令directive" class="headerlink" title="自定义指令directive"></a>自定义指令directive</h2><p>在Vue中除了像v-model 和 v-show这样的默认内置的指令外， Vue 也允许注册自定义指令。自定义指令用于对DOM 元素进行底层操作。 </p>
-<h2 id="局部自定义指令"><a href="#局部自定义指令" class="headerlink" title="局部自定义指令"></a>局部自定义指令</h2><p>局部自定义指令类似局部组件，组件使用directives进行引用 </p>
-<p><strong>定义</strong></p>
-<pre><code class="vue">
-const vMoveDirective: Directive = &#123;
-  created: () =&gt; &#123;
-    console.log(&quot;初始化====&gt;&quot;);
-  &#125;,
-  beforeMount(...args: Array&lt;any&gt;) &#123;
-    // 在元素上做些操作
-    console.log(&quot;初始化一次=======&gt;&quot;);
-  &#125;,
-  mounted(el: any, dir: DirectiveBinding&lt;Value&gt;) &#123;
-    el.style.background = dir.value.background;
-    console.log(&quot;初始化========&gt;&quot;);
-  &#125;,
-  beforeUpdate() &#123;
-    console.log(&quot;更新之前&quot;);
-  &#125;,
-  updated() &#123;
-    console.log(&quot;更新结束&quot;);
-  &#125;,
-  beforeUnmount(...args: Array&lt;any&gt;) &#123;
-    console.log(args);
-    console.log(&quot;======&gt;卸载之前&quot;);
-  &#125;,
-  unmounted(...args: Array&lt;any&gt;) &#123;
-    console.log(args);
-    console.log(&quot;======&gt;卸载完成&quot;);
-  &#125;,
-</code></pre>
-<p><strong>使用</strong></p>
-<pre><code class="vue">&lt;template&gt;
-  &lt;button @click=&quot;show = !show&quot;&gt;开关&#123;&#123;show&#125;&#125; ----- &#123;&#123;title&#125;&#125;&lt;/button&gt;
-  &lt;Dialog  v-move-directive=&quot;&#123;background:&#39;green&#39;,flag:show&#125;&quot;&gt;&lt;/Dialog&gt;
-&lt;/template&gt;
-</code></pre>
-<h2 id="全局自定义指令"><a href="#全局自定义指令" class="headerlink" title="全局自定义指令"></a>全局自定义指令</h2><ul>
-<li>在main.js中添加全局directive </li>
-<li>在3.0中创建vue实例的方式不再是new Vue，而是使用<code>createApp</code>方法进行创建</li>
-</ul>
-<p><strong>创建</strong></p>
-<pre><code class="vue">import &#123; createApp &#125; from &#39;vue&#39;
-import App from &#39;./App.vue&#39;
+    <a href="/2022/11/21/second/" class="go-post">阅读全文</a>
+</div>
 
-const app = createApp(App)
-
-app.directive(&#39;focus&#39;, &#123;
-    mounted(el) &#123;
-        console.log(el);
-        el.focus()
-    &#125;
-&#125;)
-app.mount(&#39;#app&#39;)
-</code></pre>
-<p><strong>其它组件内使用</strong></p>
-<pre><code class="vue">&lt;template&gt;
-    &lt;input v-focus&gt;
-&lt;/template&gt;
-</code></pre>
-
+             
+<div class="page-current">
+    <div class="prev">
+        
+        <a href="/page/4/">
+            <span class="page-num">
+                <i class="fa-solid fa-caret-left fa-fw"></i>
+            </span>
+        </a>
+        
     </div>
-
-    
-    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
-    <div id="comment">
-        <div id="gitalk-container"></div>
+    <div class="page-index">
+        
+        <span>
+            
+            <a href="/"><span class="page-num">1</span></a>
+            <span class="page-omit">...</span>
+            
+            
+                
+                
+                <a href="/page/3">
+                    <span class="page-num">
+                        3
+                    </span>
+                </a>
+                
+            
+            <a href="/page/4/">
+                <span class="page-num">
+                    4
+                </span>
+            </a>
+        </span>
+        
+        <span class="current">
+            5
+        </span>
+        
+    </div>
+    <div class="next">
+        
+    </div>
+</div>
+        </div>
     </div>
     
+    <div id="home-card">
+        <div id="card-div">
+    <div class="card-style" style="width: 300px">
+        <div class="avatar">
+            <img src="/img/avatar.png " alt="avatar">
+        </div>
+        <div class="name">
+            Cheshire
+        </div>
+        <div class="descriptions">
+            
+            <div class="description">
+                羔羊所到处 必有恶狼随行
+            </div>
+            
+        </div>
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://github.com/LoopYasa">
+                    <i class="fa-brands fa-github fa-fw"></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://twitter.com/LoopYasa">
+                    <i class="fa-brands fa-twitter fa-fw"></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://space.bilibili.com/23466473">
+                    <i class="fa-brands fa-bilibili fa-fw"></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://www.cnblogs.com/MaGnet/">
+                    <i class="fa-brands fa-blogger fa-fw"></i>
+                </a>
+            </span>
+            
+        </div>
+        <div class="friend-links">
+            
+        </div>
+    </div>
+</div>
+    </div>
     
 </div>
                             
@@ -288,24 +348,6 @@ app.mount(&#39;#app&#39;)
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
-<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
-<script>
-    var clientID = "b24e195c215ccacd8464", clientSecret = "9cddc5346c1e791e15e5ab787da2667bb056d46b";
-    
-    const gitalk = new Gitalk({
-        clientID: clientID,
-        clientSecret: clientSecret,
-        repo: "myblogtalk",
-        owner: "LoopYasa",
-        admin: ["LoopYasa"],
-        language: "zh-CN",
-        id: location.pathname,
-        distractionFreeMode: false,
-        
-    })
-    gitalk.render("gitalk-container")
-</script>
-
 
     </body>
 
