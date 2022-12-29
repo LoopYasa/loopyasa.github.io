@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Background-Size：cover和contain以及100% | Cheshire
+            Vue中的过滤器 | Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>Background-Size：cover和contain以及100% </h1>
+        <h1>Vue中的过滤器 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/16
+            2022/12/29
         </span>
         
         <span class="category">
@@ -174,8 +174,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/CSS/" style="color: #00bcd4">
-                    CSS
+                <a href="/tags/Vue/" style="color: #03a9f4">
+                    Vue
                 </a>
             </span>
             
@@ -183,12 +183,69 @@
         
     </div>
     <div class="content" v-pre>
-        <h2 id="contain"><a href="#contain" class="headerlink" title="contain"></a>contain</h2><p><strong>图片放大至满足背景区域的最小边即止</strong>，当背景区域与背景图片的宽高比不一致的情况下，<strong>背景区域可能会长边下有空白覆盖不全</strong>。</p>
-<h2 id="cover"><a href="#cover" class="headerlink" title="cover"></a>cover</h2><p><strong>图片放大至能满足最大变时为止</strong>，当背景区域与背景图片的宽高比不一致时，<strong>背景图片会在短边下有裁切，显示不全</strong>。 </p>
-<h2 id="百分比"><a href="#百分比" class="headerlink" title="百分比"></a>百分比</h2><p>可以设置两个值</p>
+        <h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p>过滤器（<code>filter</code>）是输送介质管道上不可缺少的一种装置</p>
+<p>大白话，就是把一些不必要的东西过滤掉</p>
+<p>过滤器实质不改变原始数据，只是对数据进行加工处理后返回过滤后的数据再进行调用处理，我们也可以理解其为一个纯函数</p>
+<p><code>Vue</code> 允许你自定义过滤器，可被用于一些常见的文本格式化</p>
+<p><font color=red>Vue3中已废弃filter</font></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="定义filter"><a href="#定义filter" class="headerlink" title="定义filter"></a>定义filter</h3><ul>
+<li>在组件的选项中定义本地的过滤器</li>
+</ul>
+<pre><code class="vue">filters: &#123;
+  capitalize: function (value) &#123;
+    if (!value) return &#39;&#39;
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  &#125;
+&#125;
+</code></pre>
 <ul>
-<li>第一个设置宽度，第二个设置高度</li>
-<li>如果只设置了一个值，那么第二个值默认会被设置为<code>auto</code></li>
+<li>定义全局过滤器</li>
+</ul>
+<pre><code class="vue">Vue.filter(&#39;capitalize&#39;, function (value) &#123;
+  if (!value) return &#39;&#39;
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+&#125;)
+
+new Vue(&#123;
+  // ...
+&#125;)
+</code></pre>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p><code>vue</code>中的过滤器可以用在两个地方：双花括号插值和 <code>v-bind</code> 表达式，过滤器应该被添加在 <code>JavaScript </code>表达式的尾部，由“管道”符号指示： </p>
+<pre><code class="vue">&lt;!-- 在双花括号中 --&gt;
+&#123;&#123; message | capitalize &#125;&#125;
+
+&lt;!-- 在 `v-bind` 中 --&gt;
+&lt;div v-bind:id=&quot;rawId | formatId&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h2 id="知识补充"><a href="#知识补充" class="headerlink" title="知识补充"></a>知识补充</h2><p>当全局过滤器和局部过滤器重名时，会采用局部过滤器</p>
+<p>过滤器函数总接收表达式的值 (之前的操作链的结果) 作为第一个参数。在上述例子中，<code>capitalize</code> 过滤器函数将会收到 <code>message</code> 的值作为第一个参数</p>
+<p>过滤器可以串联 </p>
+<pre><code class="vue">&#123;&#123; message | filterA | filterB &#125;&#125;
+</code></pre>
+<p>在上面这个语句中， <code>filterA</code> 被定义为接收单个参数的过滤器函数，表达式 <code>message</code> 的值将作为参数传入到函数中。然后继续调用同样被定义为接收单个参数的过滤器函数 <code>filterB</code>，将 <code>filterA</code> 的结果传递到 <code>filterB</code> 中。 </p>
+<p>过滤器是 <code>JavaScript </code>函数，因此可以接收参数 </p>
+<pre><code class="vue">&#123;&#123; message | filterA('arg1', arg2) &#125;&#125;
+</code></pre>
+<p>这里，<code>filterA</code> 被定义为接收三个参数的过滤器函数。</p>
+<p>其中 <code>message</code> 的值作为第一个参数，普通字符串 <code>&#39;arg1&#39;</code> 作为第二个参数，表达式 <code>arg2</code> 的值作为第三个参数</p>
+<p>如下:</p>
+<pre><code class="vue">&lt;div id=&quot;app&quot;&gt;
+    &lt;p&gt;&#123;&#123; msg | msgFormat('疯狂','--')&#125;&#125;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // 定义一个 Vue 全局的过滤器，名字叫做  msgFormat
+    Vue.filter(&#39;msgFormat&#39;, function(msg, arg, arg2) &#123;
+        // 字符串的  replace 方法，第一个参数，除了可写一个 字符串之外，还可以定义一个正则
+        return msg.replace(/单纯/g, arg+arg2)
+    &#125;)
+&lt;/script&gt;
+</code></pre>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li>部过滤器优先于全局过滤器被调用</li>
+<li>一个表达式可以使用多个过滤器。过滤器之间需要用管道符“|”隔开。其执行顺序从左往右</li>
 </ul>
 
     </div>
