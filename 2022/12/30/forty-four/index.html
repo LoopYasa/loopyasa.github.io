@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            Vue3 路由传参 | Cheshire
+            State和props的区别 | Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>Vue3 路由传参 </h1>
+        <h1>State和props的区别 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/14
+            2022/12/30
         </span>
         
         <span class="category">
@@ -167,15 +167,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #00a596">
+                <a href="/tags/前端/" style="color: #03a9f4">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Vue3/" style="color: #00bcd4">
-                    Vue3
+                <a href="/tags/React/" style="color: #00a596">
+                    React
                 </a>
             </span>
             
@@ -183,119 +183,62 @@
         
     </div>
     <div class="content" v-pre>
-        <h2 id="query"><a href="#query" class="headerlink" title="query"></a>query</h2><p>编程式导航 使用<code>router.push</code> 或者 <code>router.replace</code> 的时候，改为对象形式新增<code>query</code> 必须传入一个对象 </p>
+        <h2 id="state"><a href="#state" class="headerlink" title="state"></a>state</h2><p>一个组件的显示形态可以由数据状态和外部参数所决定，而数据状态就是<code>state</code>，一般在 <code>constructor</code> 中初始化</p>
+<p>当需要修改里面的值的状态需要通过调用<code>setState</code>来改变，从而达到更新组件内部数据的作用，并且重新调用组件<code>render</code>方法，如下面的例子：</p>
+<pre><code class="react">class Button extends React.Component &#123;
+    constructor() &#123;
+        super();
+        this.state = &#123;
+            count: 0,
+        &#125;;
+    &#125;
+
+    updateCount() &#123;
+        this.setState((prevState, props) =&gt; &#123;
+            return &#123; count: prevState.count + 1 &#125;
+        &#125;);
+    &#125;
+
+    render() &#123;
+        return (&lt;button
+                    onClick=&#123;() =&gt; this.updateCount()&#125;
+                    &gt;
+                Clicked &#123;this.state.count&#125; times
+            &lt;/button&gt;);
+    &#125;
+&#125;
+</code></pre>
+<p><code>setState</code>还可以接受第二个参数，它是一个函数，会在<code>setState</code>调用完成并且组件开始重新渲染时被调用，可以用来监听渲染是否完成。</p>
+<pre><code class="react">this.setState(&#123;
+  name:&#39;test
+&#125;,()=&gt;console.log(&#39;setState finished&#39;))
+</code></pre>
+<h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><p><code>React</code>的核心思想就是组件化思想，页面会被切分成一些独立的、可复用的组件</p>
+<p>组件从概念上看就是一个函数，可以接受一个参数作为输入值，这个参数就是<code>props</code>，所以可以把<code>props</code>理解为从外部传入组件内部的数据</p>
+<p><code>react</code>具有单向数据流的特性，所以他的主要作用是从父组件向子组件中传递数据</p>
+<p><code>props</code>除了可以传字符串，数字，还可以传递对象，数组甚至是回调函数，如下：</p>
+<pre><code class="react">class Welcome extends React.Component &#123;
+  render() &#123;
+    return &lt;h1&gt;Hello &#123;this.props.name&#125;&lt;/h1&gt;;
+  &#125;
+&#125;
+
+const element = &lt;Welcome name=&quot;Sara&quot; onNameChanged=&#123;this.handleName&#125; /&gt;;
+</code></pre>
+<p>上述<code>name</code>属性与<code>onNameChanged</code>方法都能在子组件的<code>props</code>变量中访问</p>
+<p>在子组件中，<code>props</code>在内部不可变的，如果想要改变它看，只能通过外部组件传入新的<code>props</code>来重新渲染子组件，否则子组件的<code>props</code>和展示形式不会改变。</p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>相同点：</p>
 <ul>
-<li>与path配合完成</li>
-<li>刷新后页面参数不丢失</li>
+<li>两者都是 JavaScript 对象</li>
+<li>两者都是用于保存信息</li>
+<li>props 和 state 都能触发渲染更新</li>
 </ul>
-<pre><code class="vue">// 传参页面
-import &#123; useRouter &#125; from &#39;vue-router&#39;;
-...
-const router = useRouter()
-const toDetail = (item: Item) =&gt; &#123;
-    router.push(&#123;
-        path: &#39;/info&#39;,
-        query: item
-    &#125;)
-&#125;
-
-// 接参页面
-&lt;template&gt;
-    &lt;div&gt;
-        &lt;div&gt;ID：&#123;&#123;route.query?.id&#125;&#125;&lt;/div&gt;
-        &lt;div&gt;名称：&#123;&#123;route.query?.name&#125;&#125;&lt;/div&gt;
-        &lt;div&gt;价格：&#123;&#123;route.query?.price&#125;&#125;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
- 
-&lt;script setup lang=&#39;ts&#39;&gt;
-import &#123; useRoute &#125; from &#39;vue-router&#39;;
-
-const route = useRoute()
-</code></pre>
-<h2 id="params"><a href="#params" class="headerlink" title="params"></a>params</h2><p>编程式导航 使用<code>router.push</code> 或者 <code>router.replace</code> 的时候，改为对象形式并且只能使用<code>name</code>，path无效，然后传入<code>params</code> </p>
+<p>区别：</p>
 <ul>
-<li>与name配合完成</li>
-<li>刷新后页面参数回丢失</li>
+<li>props 是外部传递给组件的，而 state 是在组件内被组件自己管理的，一般在 constructor 中初始化</li>
+<li>props 在组件内部是不可修改的，但 state 在组件内部可以进行修改</li>
+<li>state 是多变的、可以修改</li>
 </ul>
-<pre><code class="vue">// 传参页面
-import &#123; useRouter &#125; from &#39;vue-router&#39;;
-
-const router = useRouter()
-const toDetail = (item: Item) =&gt; &#123;
-    router.push(&#123;
-        name: &#39;Info&#39;,
-        params: item
-    &#125;)
-&#125;
-
-// 接参页面
-&lt;template&gt;
-    &lt;div&gt;
-        &lt;div&gt;ID：&#123;&#123;route.params?.id&#125;&#125;&lt;/div&gt;
-        &lt;div&gt;名称：&#123;&#123;route.params?.name&#125;&#125;&lt;/div&gt;
-        &lt;div&gt;价格：&#123;&#123;route.params?.price&#125;&#125;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
- 
-&lt;script setup lang=&#39;ts&#39;&gt;
-import &#123; useRoute &#125; from &#39;vue-router&#39;;
-const route = useRoute()
- 
-&lt;/script&gt;
-</code></pre>
-<h2 id="动态传参"><a href="#动态传参" class="headerlink" title="动态传参"></a>动态传参</h2><pre><code class="typescript">// router.ts
-import &#123; createRouter, createWebHistory, RouteRecordRaw &#125; from &quot;vue-router&quot;;
- 
-const routes: Array&lt;RouteRecordRaw&gt; = [&#123;
-    path: &#39;/&#39;,
-    name: &#39;table&#39;,
-    component: () =&gt; import(&#39;@/view/Table/index.vue&#39;)
-&#125;, &#123;
-    path: &#39;/info/:id&#39;,
-    name: &#39;Info&#39;,
-    component: () =&gt; import(&#39;@/view/Table/info.vue&#39;)
-&#125;,
-...
-]
- 
-const router = createRouter(&#123;
-    history: createWebHistory(),
-    routes
-&#125;)
- 
-export default router
-
-// 传参页面
-import &#123; useRouter &#125; from &#39;vue-router&#39;;
-
-const router = useRouter()
-const toDetail = (item: Item) =&gt; &#123;
-    router.push(&#123;
-        name: &#39;Info&#39;,
-        params: &#123;id: item.id&#125;
-    &#125;)
-&#125;
-</code></pre>
-<pre><code class="vue">// 接收参数页面
-&lt;template&gt;
-    &lt;div&gt;
-        &lt;div&gt;ID：&#123;&#123; item?.id &#125;&#125;&lt;/div&gt;
-        &lt;div&gt;名称：&#123;&#123; item?.name &#125;&#125;&lt;/div&gt;
-        &lt;div&gt;价格：&#123;&#123; item?.price &#125;&#125;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
- 
-&lt;script setup lang=&#39;ts&#39;&gt;
-import &#123; useRoute &#125; from &#39;vue-router&#39;;
-import &#123; data &#125; from &#39;./data.json&#39;
-
-const route = useRoute()
-// 模拟根据id获取数据
-const item = data.find(v =&gt; v.id === Number(route.params.id))
- 
-&lt;/script&gt;
-</code></pre>
 
     </div>
 
