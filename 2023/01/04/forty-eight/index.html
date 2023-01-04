@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            State和props的区别 | Cheshire
+            React引入css的几种方式 | Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>State和props的区别 </h1>
+        <h1>React引入css的几种方式 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/30
+            2023/1/4
         </span>
         
         <span class="category">
@@ -167,14 +167,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #ffa2c4">
+                <a href="/tags/前端/" style="color: #00a596">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/React/" style="color: #00bcd4">
+                <a href="/tags/React/" style="color: #03a9f4">
                     React
                 </a>
             </span>
@@ -183,61 +183,184 @@
         
     </div>
     <div class="content" v-pre>
-        <h2 id="state"><a href="#state" class="headerlink" title="state"></a>state</h2><p>一个组件的显示形态可以由数据状态和外部参数所决定，而数据状态就是<code>state</code>，一般在 <code>constructor</code> 中初始化</p>
-<p>当需要修改里面的值的状态需要通过调用<code>setState</code>来改变，从而达到更新组件内部数据的作用，并且重新调用组件<code>render</code>方法，如下面的例子：</p>
-<pre><code class="react">class Button extends React.Component &#123;
-    constructor() &#123;
-        super();
-        this.state = &#123;
-            count: 0,
-        &#125;;
-    &#125;
+        <h2 id="开发时css解决方案"><a href="#开发时css解决方案" class="headerlink" title="开发时css解决方案"></a>开发时css解决方案</h2><p>通常会遵循以下规则： </p>
+<ul>
+<li>可以编写局部css，不会随意污染其他组件内的原生；</li>
+<li>可以编写动态的css，可以获取当前组件的一些状态，根据状态的变化生成不同的css样式；</li>
+<li>支持所有的css特性：伪类、动画、媒体查询等；</li>
+<li>编写起来简洁方便、最好符合一贯的css风格特点</li>
+</ul>
+<p>在<code>vue</code>使用<code>css</code> 主要方式</p>
+<ul>
+<li>通过 style 标签编写样式</li>
+<li>scoped 属性决定编写的样式是否局部有效</li>
+<li>lang 属性设置预处理器</li>
+<li>内联样式风格的方式来根据最新状态设置和改变css</li>
+</ul>
+<p>在<code>react</code>使用<code>css</code>主要方式</p>
+<ul>
+<li>在组件内直接使用</li>
+<li>组件中引入 .css 文件</li>
+<li>组件中引入 .module.css 文件</li>
+<li>CSS in JS</li>
+</ul>
+<h2 id="在组件内直接使用"><a href="#在组件内直接使用" class="headerlink" title="在组件内直接使用"></a>在组件内直接使用</h2><p>直接在组件中书写<code>css</code>样式，通过<code>style</code>属性直接引入，如下： </p>
+<pre><code class="react">import React, &#123; Component &#125; from &quot;react&quot;;
 
-    updateCount() &#123;
-        this.setState((prevState, props) =&gt; &#123;
-            return &#123; count: prevState.count + 1 &#125;
-        &#125;);
-    &#125;
+const div1 = &#123;
+  width: &quot;300px&quot;,
+  margin: &quot;30px auto&quot;,
+  backgroundColor: &quot;#44014C&quot;,  //驼峰法
+  minHeight: &quot;200px&quot;,
+  boxSizing: &quot;border-box&quot;
+&#125;;
 
-    render() &#123;
-        return (&lt;button
-                    onClick=&#123;() =&gt; this.updateCount()&#125;
-                    &gt;
-                Clicked &#123;this.state.count&#125; times
-            &lt;/button&gt;);
-    &#125;
-&#125;
-</code></pre>
-<p><code>setState</code>还可以接受第二个参数，它是一个函数，会在<code>setState</code>调用完成并且组件开始重新渲染时被调用，可以用来监听渲染是否完成。</p>
-<pre><code class="react">this.setState(&#123;
-  name:&#39;test
-&#125;,()=&gt;console.log(&#39;setState finished&#39;))
-</code></pre>
-<h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><p><code>React</code>的核心思想就是组件化思想，页面会被切分成一些独立的、可复用的组件</p>
-<p>组件从概念上看就是一个函数，可以接受一个参数作为输入值，这个参数就是<code>props</code>，所以可以把<code>props</code>理解为从外部传入组件内部的数据</p>
-<p><code>react</code>具有单向数据流的特性，所以他的主要作用是从父组件向子组件中传递数据</p>
-<p><code>props</code>除了可以传字符串，数字，还可以传递对象，数组甚至是回调函数，如下：</p>
-<pre><code class="react">class Welcome extends React.Component &#123;
+class Test extends Component &#123;
+  constructor(props, context) &#123;
+    super(props);
+  &#125;
+ 
   render() &#123;
-    return &lt;h1&gt;Hello &#123;this.props.name&#125;&lt;/h1&gt;;
+    return (
+     &lt;div&gt;
+       &lt;div style=&#123;div1&#125;&gt;123&lt;/div&gt;
+       &lt;div style=&#123;&#123;backgroundColor:"red"&#125;&#125;&gt;
+     &lt;/div&gt;
+    );
   &#125;
 &#125;
 
-const element = &lt;Welcome name=&quot;Sara&quot; onNameChanged=&#123;this.handleName&#125; /&gt;;
+export default Test;
 </code></pre>
-<p>上述<code>name</code>属性与<code>onNameChanged</code>方法都能在子组件的<code>props</code>变量中访问</p>
-<p>在子组件中，<code>props</code>在内部不可变的，如果想要改变它看，只能通过外部组件传入新的<code>props</code>来重新渲染子组件，否则子组件的<code>props</code>和展示形式不会改变。</p>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>相同点：</p>
+<p>以上 <code>css</code>属性需要转换成驼峰写法 </p>
+<p>该方法优点</p>
 <ul>
-<li>两者都是 JavaScript 对象</li>
-<li>两者都是用于保存信息</li>
-<li>props 和 state 都能触发渲染更新</li>
+<li>内联样式, 样式之间不会有冲突</li>
+<li>可以动态获取当前state中的状态</li>
 </ul>
-<p>区别：</p>
+<p>该方法缺点</p>
 <ul>
-<li>props 是外部传递给组件的，而 state 是在组件内被组件自己管理的，一般在 constructor 中初始化</li>
-<li>props 在组件内部是不可修改的，但 state 在组件内部可以进行修改</li>
-<li>state 是多变的、可以修改</li>
+<li>写法上都需要使用驼峰标识</li>
+<li>某些样式没有提示</li>
+<li>大量的样式, 代码混乱</li>
+<li>某些样式无法编写(比如伪类&#x2F;伪元素)</li>
+</ul>
+<h2 id="组件中引入css"><a href="#组件中引入css" class="headerlink" title="组件中引入css"></a>组件中引入css</h2><p>将<code>css</code>单独写在一个<code>css</code>文件中，然后在组件中直接引入 </p>
+<p><code>App.css</code>文件： </p>
+<pre><code class="css">.title &#123;
+  color: red;
+  font-size: 20px;
+&#125;
+
+.desc &#123;
+  color: green;
+  text-decoration: underline;
+&#125;
+</code></pre>
+<p>组件中引入： </p>
+<pre><code class="react">import React, &#123; PureComponent &#125; from &#39;react&#39;;
+
+import Home from &#39;./Home&#39;;
+
+import &#39;./App.css&#39;;
+
+export default class App extends PureComponent &#123;
+  render() &#123;
+    return (
+      &lt;div className=&quot;app&quot;&gt;
+        &lt;h2 className=&quot;title&quot;&gt;我是App的标题&lt;/h2&gt;
+        &lt;p className=&quot;desc&quot;&gt;我是App中的一段文字描述&lt;/p &gt;
+        &lt;Home/&gt;
+      &lt;/div&gt;
+    )
+  &#125;
+&#125;
+</code></pre>
+<p>这种方式存在不好的地方在于样式是全局生效，样式之间会互相影响 </p>
+<h2 id="组件中引入-module-css"><a href="#组件中引入-module-css" class="headerlink" title="组件中引入.module.css"></a>组件中引入.module.css</h2><p>将<code>css</code>文件作为一个模块引入，这个模块中的所有<code>css</code>，只作用于当前组件。不会影响当前组件的后代组件</p>
+<p>这种方式是<code>webpack</code>特工的方案，只需要配置<code>webpack</code>配置文件中<code>modules:true</code>即可</p>
+<pre><code class="react">import React, &#123; PureComponent &#125; from &#39;react&#39;;
+
+import Home from &#39;./Home&#39;;
+
+import &#39;./App.module.css&#39;;
+
+export default class App extends PureComponent &#123;
+  render() &#123;
+    return (
+      &lt;div className=&quot;app&quot;&gt;
+        &lt;h2 className=&quot;title&quot;&gt;我是App的标题&lt;/h2&gt;
+        &lt;p className=&quot;desc&quot;&gt;我是App中的一段文字描述&lt;/p &gt;
+        &lt;Home/&gt;
+      &lt;/div&gt;
+    )
+  &#125;
+&#125;
+</code></pre>
+<p>这种方式能够解决局部作用域问题，但也有一定的缺陷：</p>
+<ul>
+<li>引用的类名，不能使用连接符(.xxx-xx)，在 JavaScript 中是不识别的</li>
+<li>所有的 className 都必须使用 {style.className} 的形式来编写</li>
+<li>不方便动态来修改某些样式，依然需要使用内联样式的方式</li>
+</ul>
+<h2 id="css-in-JS"><a href="#css-in-JS" class="headerlink" title="css in JS"></a>css in JS</h2><p>CSS-in-JS， 是指一种模式，其中<code>CSS</code>由 <code>JavaScript </code>生成而不是在外部文件中定义</p>
+<p>此功能并不是 React 的一部分，而是由第三方库提供，例如：</p>
+<ul>
+<li>styled-components</li>
+<li>emotion</li>
+<li>glamorous</li>
+</ul>
+<p>下面主要看看<code>styled-components</code>的基本使用</p>
+<p>本质是通过函数的调用，最终创建出一个组件：</p>
+<ul>
+<li>这个组件会被自动添加上一个不重复的class</li>
+<li>styled-components会给该class添加相关的样式</li>
+</ul>
+<p>基本使用如下：</p>
+<p>创建一个<code>style.js</code>文件用于存放样式组件：</p>
+<pre><code class="react">export const SelfLink = styled.div`
+  height: 50px;
+  border: 1px solid red;
+  color: yellow;
+`;
+
+export const SelfButton = styled.div`
+  height: 150px;
+  width: 150px;
+  color: $&#123;props =&gt; props.color&#125;;
+  background-image: url($&#123;props =&gt; props.src&#125;);
+  background-size: 150px 150px;
+`;
+</code></pre>
+<p>引入样式组件也很简单： </p>
+<pre><code class="react">import React, &#123; Component &#125; from &quot;react&quot;;
+
+import &#123; SelfLink, SelfButton &#125; from &quot;./style&quot;;
+
+class Test extends Component &#123;
+  constructor(props, context) &#123;
+    super(props);
+  &#125;  
+ 
+  render() &#123;
+    return (
+     &lt;div&gt;
+       &lt;SelfLink title=&quot;People&#39;s Republic of China&quot;&gt;app.js&lt;/SelfLink&gt;
+       &lt;SelfButton color=&quot;palevioletred&quot; style=&#123;&#123; color: "pink" &#125;&#125; src=&#123;fist&#125;&gt;
+          SelfButton
+        &lt;/SelfButton&gt;
+     &lt;/div&gt;
+    );
+  &#125;
+&#125;
+
+export default Test;
+</code></pre>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul>
+<li>在组件内直接使用<code>css</code>该方式编写方便，容易能够根据状态修改样式属性，但是大量的演示编写容易导致代码混乱</li>
+<li>组件中引入 .css 文件符合我们日常的编写习惯，但是作用域是全局的，样式之间会层叠</li>
+<li>引入.module.css 文件能够解决局部作用域问题，但是不方便动态修改样式，需要使用内联的方式进行样式的编写</li>
+<li>通过css in js 这种方法，可以满足大部分场景的应用，可以类似于预处理器一样样式嵌套、定义、修改状态等</li>
 </ul>
 
     </div>
