@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            localStorage 设置过期时间 | Cheshire
+            Git Pull 和 Git Fetch 的用法与区别 | Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>localStorage 设置过期时间 </h1>
+        <h1>Git Pull 和 Git Fetch 的用法与区别 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/20
+            2023/1/5
         </span>
         
         <span class="category">
@@ -167,15 +167,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #03a9f4">
+                <a href="/tags/前端/" style="color: #ff7d73">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/HTML5/" style="color: #ffa2c4">
-                    HTML5
+                <a href="/tags/Git/" style="color: #00bcd4">
+                    Git
                 </a>
             </span>
             
@@ -183,75 +183,33 @@
         
     </div>
     <div class="content" v-pre>
-        <h2 id="localStorage"><a href="#localStorage" class="headerlink" title="localStorage"></a>localStorage</h2><p>Storage 本身是不支持过期时间设置的，要支持设置过期时间，可以效仿 Cookie 的做法，<code>setStorage(key,value,expire)</code> 方法，接收三个参数，第三个参数就是设置过期时间的，用相对时间，单位秒，要对所传参数进行类型检查。可以设置统一的过期时间，也可以对单个值得过期时间进行单独配置。两种方式按需配置。 </p>
-<h3 id="设置-setStorage"><a href="#设置-setStorage" class="headerlink" title="设置 setStorage"></a>设置 setStorage</h3><pre><code class="js">export const setStorage = (key,value,expire=0) =&gt; &#123;
-    if (value === &#39;&#39; || value === null || value === undefined) &#123;
-        value = null;
-    &#125;
-
-    if (isNaN(expire) || expire &lt; 1) throw new Error(&quot;Expire must be a number&quot;);
-
-    expire = (expire?expire:config.expire) * 60000;
-    let data = &#123;
-        value: value, // 存储值
-        time: Date.now(), //存值时间戳
-        expire: expire // 过期时间
-    &#125;
-
-    window[config.type].setItem(key, JSON.stringify(data));
-&#125;
+        <h2 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h2><p>git fetch 命令用于从另一个存储库下载对象和引用</p>
+<p>用法如下： </p>
+<pre><code class="git">git fetch &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;
 </code></pre>
-<h3 id="获取-getStorage"><a href="#获取-getStorage" class="headerlink" title="获取 getStorage"></a>获取 getStorage</h3><p>首先要对 <code>key</code> 是否存在进行判断，防止获取不存在的值而报错。对获取方法进一步扩展，只要在有效期内获取 <code>Storage</code> 值，就对过期时间进行续期，如果过期则直接删除该值。并返回 <code>null</code> </p>
-<pre><code class="js">export const getStorage = (key) =&gt; &#123;
-    // key 不存在判断
-    if (!window[config.type].getItem(key) || JSON.stringify(window[config.type].getItem(key)) === &#39;null&#39;)&#123;
-        return null;
-    &#125;
-
-    // 优化 持续使用中续期
-    const storage = JSON.parse(window[config.type].getItem(key));
-    console.log(storage)
-    let nowTime = Date.now();
-    console.log(config.expire*6000 ,(nowTime - storage.time))
-    // 过期删除
-    if (storage.expire &amp;&amp; config.expire*6000 &lt; (nowTime - storage.time)) &#123;
-        removeStorage(key);
-        return null;
-    &#125; else &#123;
-        // 未过期期间被调用 则自动续期 进行保活
-        setStorage(key,storage.value);
-        return storage.value;
-    &#125;
-&#125;
+<p>例如从远程的<code>origin</code>仓库的<code>master</code>分支下载代码到本地并新建一个<code>temp</code>分支 </p>
+<pre><code class="git">git fetch origin master:temp
 </code></pre>
-<h3 id="获取所有值-getAllStorage"><a href="#获取所有值-getAllStorage" class="headerlink" title="获取所有值  getAllStorage"></a>获取所有值  <em>getAllStorage</em></h3><pre><code class="js">export const getAllStorage = () =&gt; &#123;
-    let len = window[config.type].length // 获取长度
-    let arr = new Array() // 定义数据集
-    for (let i = 0; i &lt; len; i++) &#123;
-        // 获取key 索引从0开始
-        let getKey = window[config.type].key(i)
-        // 获取key对应的值
-        let getVal = window[config.type].getItem(getKey)
-        // 放进数组
-        arr[i] = &#123; &#39;key&#39;: getKey, &#39;val&#39;: getVal, &#125;
-    &#125;
-    return arr
-&#125;
+<p>如果上述没有冒号，则表示将远程<code>origin</code>仓库的<code>master</code>分支拉取下来到本地当前分支</p>
+<p>这里<code>git fetch</code>不会进行合并，执行后需要手动执行<code>git merge</code>合并，如下：</p>
+<pre><code class="git">git merge temp
 </code></pre>
-<h3 id="删除-removeStorage"><a href="#删除-removeStorage" class="headerlink" title="删除 removeStorage"></a>删除 removeStorage</h3><pre><code class="js">const autoAddPrefix = (key) =&gt; &#123;
-    const prefix = config.prefix ? config.prefix + &#39;_&#39; : &#39;&#39;;
-    return  prefix + key;
-&#125;
-
-// 删除 removeStorage
-export const removeStorage = (key) =&gt; &#123;
-    window[config.type].removeItem(autoAddPrefix(key));
-&#125;
+<h2 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h2><p>两者的用法十分相似，<code>pull</code>用法如下： </p>
+<pre><code class="git">git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;
 </code></pre>
-<h3 id="清空-clearStorage"><a href="#清空-clearStorage" class="headerlink" title="清空 clearStorage"></a>清空 clearStorage</h3><pre><code class="js">export const clearStorage = () =&gt; &#123;
-    window[config.type].clear();
-&#125;
+<p>例如将远程主机<code>origin</code>的<code>master</code>分支拉取过来，与本地的<code>branchtest</code>分支合并，命令如下： </p>
+<pre><code class="git">git pull origin master:branchtest
 </code></pre>
+<p>同样如果上述没有冒号，则表示将远程<code>origin</code>仓库的<code>master</code>分支拉取下来与本地当前分支合并 </p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>相同点：</p>
+<ul>
+<li>在作用上他们的功能是大致相同的，都是起到了更新代码的作用</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li>git pull是相当于从远程仓库获取最新版本，然后再与本地分支merge，即git pull &#x3D; git fetch + git merge</li>
+<li>相比起来，git fetch 更安全也更符合实际要求，在 merge 前，我们可以查看更新情况，根据实际情况再决定是否合并</li>
+</ul>
 
     </div>
 
