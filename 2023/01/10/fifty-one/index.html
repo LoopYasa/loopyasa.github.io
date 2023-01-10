@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            localStorage 设置过期时间 | Cheshire
+            Webpack热更新实现 | Cheshire
         </title>
         <meta name="author" content="Cheshire">
         <meta name="description" content="Failure always throughout one's life">
@@ -140,14 +140,14 @@
                         
 <div class="article">
     <div>
-        <h1>localStorage 设置过期时间 </h1>
+        <h1>Webpack热更新实现 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/12/20
+            2023/1/10
         </span>
         
         <span class="category">
@@ -167,15 +167,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/前端/" style="color: #ff7d73">
+                <a href="/tags/前端/" style="color: #ffa2c4">
                     前端
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/HTML5/" style="color: #03a9f4">
-                    HTML5
+                <a href="/tags/webpack/" style="color: #00bcd4">
+                    webpack
                 </a>
             </span>
             
@@ -183,75 +183,64 @@
         
     </div>
     <div class="content" v-pre>
-        <h2 id="localStorage"><a href="#localStorage" class="headerlink" title="localStorage"></a>localStorage</h2><p>Storage 本身是不支持过期时间设置的，要支持设置过期时间，可以效仿 Cookie 的做法，<code>setStorage(key,value,expire)</code> 方法，接收三个参数，第三个参数就是设置过期时间的，用相对时间，单位秒，要对所传参数进行类型检查。可以设置统一的过期时间，也可以对单个值得过期时间进行单独配置。两种方式按需配置。 </p>
-<h3 id="设置-setStorage"><a href="#设置-setStorage" class="headerlink" title="设置 setStorage"></a>设置 setStorage</h3><pre><code class="js">export const setStorage = (key,value,expire=0) =&gt; &#123;
-    if (value === &#39;&#39; || value === null || value === undefined) &#123;
-        value = null;
-    &#125;
-
-    if (isNaN(expire) || expire &lt; 1) throw new Error(&quot;Expire must be a number&quot;);
-
-    expire = (expire?expire:config.expire) * 60000;
-    let data = &#123;
-        value: value, // 存储值
-        time: Date.now(), //存值时间戳
-        expire: expire // 过期时间
-    &#125;
-
-    window[config.type].setItem(key, JSON.stringify(data));
+        <h2 id="热更新"><a href="#热更新" class="headerlink" title="热更新"></a>热更新</h2><p><code>HMR </code>全称 <code>Hot Module Replacement</code>，可以理解为模块热替换，指在应用程序运行过程中，替换、添加、删除模块，而无需重新刷新整个应用</p>
+<p>例如，我们在应用运行过程中修改了某个模块，通过自动刷新会导致整个应用的整体刷新，那页面中的状态信息都会丢失</p>
+<p>如果使用的是 <code>HMR</code>，就可以实现只将修改的模块实时替换至应用中，不必完全刷新整个应用</p>
+<p>在<code>webpack</code>中配置开启热模块也非常的简单，如下代码：</p>
+<pre><code class="js">const webpack = require(&#39;webpack&#39;)
+module.exports = &#123;
+  // ...
+  devServer: &#123;
+    // 开启 HMR 特性
+    hot: true
+    // hotOnly: true
+  &#125;
 &#125;
 </code></pre>
-<h3 id="获取-getStorage"><a href="#获取-getStorage" class="headerlink" title="获取 getStorage"></a>获取 getStorage</h3><p>首先要对 <code>key</code> 是否存在进行判断，防止获取不存在的值而报错。对获取方法进一步扩展，只要在有效期内获取 <code>Storage</code> 值，就对过期时间进行续期，如果过期则直接删除该值。并返回 <code>null</code> </p>
-<pre><code class="js">export const getStorage = (key) =&gt; &#123;
-    // key 不存在判断
-    if (!window[config.type].getItem(key) || JSON.stringify(window[config.type].getItem(key)) === &#39;null&#39;)&#123;
-        return null;
-    &#125;
-
-    // 优化 持续使用中续期
-    const storage = JSON.parse(window[config.type].getItem(key));
-    console.log(storage)
-    let nowTime = Date.now();
-    console.log(config.expire*6000 ,(nowTime - storage.time))
-    // 过期删除
-    if (storage.expire &amp;&amp; config.expire*6000 &lt; (nowTime - storage.time)) &#123;
-        removeStorage(key);
-        return null;
-    &#125; else &#123;
-        // 未过期期间被调用 则自动续期 进行保活
-        setStorage(key,storage.value);
-        return storage.value;
-    &#125;
+<p>通过上述这种配置，如果我们修改并保存<code>css</code>文件，确实能够以不刷新的形式更新到页面中</p>
+<p>但是，当我们修改并保存<code>js</code>文件之后，页面依旧自动刷新了，这里并没有触发热模块</p>
+<p>所以，<code>HMR </code>并不像 <code>Webpack</code> 的其他特性一样可以开箱即用，需要有一些额外的操作</p>
+<p>我们需要去指定哪些模块发生更新时进行<code>HRM</code>，如下代码：</p>
+<pre><code class="js">if(module.hot)&#123;
+    module.hot.accept(&#39;./util.js&#39;,()=&gt;&#123;
+        console.log(&quot;util.js更新了&quot;)
+    &#125;)
 &#125;
 </code></pre>
-<h3 id="获取所有值-getAllStorage"><a href="#获取所有值-getAllStorage" class="headerlink" title="获取所有值  getAllStorage"></a>获取所有值  <em>getAllStorage</em></h3><pre><code class="js">export const getAllStorage = () =&gt; &#123;
-    let len = window[config.type].length // 获取长度
-    let arr = new Array() // 定义数据集
-    for (let i = 0; i &lt; len; i++) &#123;
-        // 获取key 索引从0开始
-        let getKey = window[config.type].key(i)
-        // 获取key对应的值
-        let getVal = window[config.type].getItem(getKey)
-        // 放进数组
-        arr[i] = &#123; &#39;key&#39;: getKey, &#39;val&#39;: getVal, &#125;
-    &#125;
-    return arr
-&#125;
-</code></pre>
-<h3 id="删除-removeStorage"><a href="#删除-removeStorage" class="headerlink" title="删除 removeStorage"></a>删除 removeStorage</h3><pre><code class="js">const autoAddPrefix = (key) =&gt; &#123;
-    const prefix = config.prefix ? config.prefix + &#39;_&#39; : &#39;&#39;;
-    return  prefix + key;
-&#125;
-
-// 删除 removeStorage
-export const removeStorage = (key) =&gt; &#123;
-    window[config.type].removeItem(autoAddPrefix(key));
-&#125;
-</code></pre>
-<h3 id="清空-clearStorage"><a href="#清空-clearStorage" class="headerlink" title="清空 clearStorage"></a>清空 clearStorage</h3><pre><code class="js">export const clearStorage = () =&gt; &#123;
-    window[config.type].clear();
-&#125;
-</code></pre>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p><img src="https://p.sda1.dev/9/16c57aa9f23aa595570e637285a0adb7/GL5V_NZXO5A4UXSDN8@10_6.png"></p>
+<ul>
+<li>Webpack Compile：将 JS 源代码编译成 bundle.js</li>
+<li>HMR Server：用来将热更新的文件输出给 HMR Runtime</li>
+<li>Bundle Server：静态资源文件服务器，提供文件访问路径</li>
+<li>HMR Runtime：socket服务器，会被注入到浏览器，更新文件的变化</li>
+<li>bundle.js：构建输出的文件</li>
+<li>在HMR Runtime 和 HMR Server之间建立 websocket，即图上4号线，用于实时更新文件变化</li>
+</ul>
+<p>上面图中，可以分成两个阶段：</p>
+<ul>
+<li>启动阶段为上图 1 - 2 - A - B</li>
+</ul>
+<p>在编写未经过<code>webpack</code>打包的源代码后，<code>Webpack Compile</code> 将源代码和 <code>HMR Runtime</code> 一起编译成 <code>bundle </code>文件，传输给<code> Bundle Server</code> 静态资源服务器</p>
+<ul>
+<li>更新阶段为上图 1 - 2 - 3 - 4</li>
+</ul>
+<p>当某一个文件或者模块发生变化时，<code>webpack </code>监听到文件变化对文件重新编译打包，编译生成唯一的<code>hash</code>值，这个<code>hash </code>值用来作为下一次热更新的标识</p>
+<p>根据变化的内容生成两个补丁文件：<code>manifest</code>（包含了 <code>hash</code> 和 <code>chundId </code>，用来说明变化的内容）和<code> chunk.js</code> 模块</p>
+<p>由于<code>socket</code>服务器在<code>HMR Runtime</code> 和 <code>HMR Server</code>之间建立 <code>websocket</code>链接，当文件发生改动的时候，服务端会向浏览器推送一条消息，消息包含文件改动后生成的<code>hash</code>值，如下图的<code>h</code>属性，作为下一次热更细的标识</p>
+<p><img src="https://p.sda1.dev/9/cddf0491d69923a899ad9953f447e703/image.png"></p>
+<p>在浏览器接受到这条消息之前，浏览器已经在上一次<code> socket</code> 消息中已经记住了此时的<code> hash</code> 标识，这时候我们会创建一个 <code>ajax</code> 去服务端请求获取到变化内容的 <code>manifest</code> 文件</p>
+<p><code>mainfest</code>文件包含重新<code>build</code>生成的<code>hash</code>值，以及变化的模块，对应上图的<code>c</code>属性</p>
+<p>浏览器根据 <code>manifest</code> 文件获取模块变化的内容，从而触发<code>render</code>流程，实现局部模块更新</p>
+<p><img src="https://p.sda1.dev/9/3a2bfb2703bd35491ec286f938eabe44/F2QFI1A_X~_4C_J8_IDYT2R.png"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>关于<code>webpack</code>热模块更新的总结如下：</p>
+<ul>
+<li>通过<code>webpack-dev-server</code>创建两个服务器：提供静态资源的服务（express）和Socket服务</li>
+<li>express server 负责直接提供静态资源的服务（打包后的资源直接被浏览器请求和解析）</li>
+<li>socket server 是一个 websocket 的长连接，双方可以通信</li>
+<li>当 socket server 监听到对应的模块发生变化时，会生成两个文件.json（manifest文件）和.js文件（update chunk）</li>
+<li>通过长连接，socket server 可以直接将这两个文件主动发送给客户端（浏览器）</li>
+<li>浏览器拿到两个新的文件后，通过HMR runtime机制，加载这两个文件，并且针对修改的模块进行更新</li>
+</ul>
 
     </div>
 
